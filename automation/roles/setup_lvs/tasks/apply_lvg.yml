@@ -1,0 +1,15 @@
+- name: LVG must exist
+  community.general.system.lvg:
+    vg: "{{ lvg.vg_name }}"
+    pvs: "{{ lvg.pv_name }}"
+    state: present
+
+- name: LV must exist
+  community.general.system.lvol:
+    vg: new_vol_group
+    lv: "{{ lv.key }}"
+    size: "{{ lv.value }}"
+    state: present
+  loop: "{{ lvg.lvs | dict2items }}"
+  loop_control:
+    loop_var: lv

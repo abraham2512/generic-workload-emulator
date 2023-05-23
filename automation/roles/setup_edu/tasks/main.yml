@@ -1,0 +1,111 @@
+---
+- name: Create Namespace
+  ansible.builtin.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    state: present
+    src: "{{ files_path }}/{{ ns }}"
+
+- name: Change security pods
+  ansible.builtin.command:
+    cmd: "oc --kubeconfig={{ kubeconfig_path }} apply -f {{ files_path }}/security.yaml"
+
+- name: Add Privileges
+  ansible.builtin.command:
+    cmd: "oc --kubeconfig={{ kubeconfig_path }} adm policy add-scc-to-user privileged system:serviceaccount:test:default"
+
+- name: Create Secrets
+  ansible.builtin.command:
+    cmd: "oc --kubeconfig={{ kubeconfig_path }} create -f {{ files_path }}/{{ secrets }}"
+
+- name: Create ConfigMaps
+  ansible.builtin.command:
+    cmd: "oc --kubeconfig={{ kubeconfig_path }} create -f {{ files_path }}/{{ configmaps }}"
+
+- name: Create Volumes
+  ansible.builtin.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    state: present
+    src: "{{ files_path }}/{{ pv_file }}"
+  loop: "{{ pvs }}"
+  loop_control:
+    loop_var: pv_file
+
+- name: Create PersistentVolumeClaims
+  ansible.builtin.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    state: present
+    src: "{{ files_path  }}/{{ pvc_file }}"
+  loop: "{{ pvcs }}"
+  loop_control:
+    loop_var: pvc_file
+
+- name: Create all elements from Templates
+  block:
+    - name: Create temporary directory
+      tempfile:
+        state: directory
+      register: temp_dir
+
+    - name: create file out of every jinja2 template
+      template:
+        src: "{{ item }}"
+        dest: "{{ temp_dir.path }}/{{ item | basename | regex_replace('.j2$','') }}"
+      with_fileglob: "{{ templates_path }}/*.j2"
+
+    - name: Create templated resources
+      ansible.builtin.k8s:
+        kubeconfig: "{{ kubeconfig_path }}"
+        state: present
+        src: "{{ item }}"
+      loop: "{{ lookup('fileglob', '{{ temp_dir.path }}/*', wantlist=True) }}"
+
+  always:
+    - name: Remove the temporary directories
+      file:
+        path: "{{ temp_dir.path }}"
+        state: absent
+      when: temp_dir.path is defined
+
+- name: Wait for all pods to come up
+  when: 
+    - setup_edu_ansible_verification is defined
+    - setup_edu_ansible_verification == true
+  block:
+    - name: Wait for pods to finish starting up
+      ansible.builtin.k8s_info:
+        kubeconfig: "{{ kubeconfig_path }}"
+        kind: pod
+        namespace: "{{ namespace }}"
+      register: pods
+      until: pods | json_query('resources[].status.phase') | unique == ["Running"]
+      retries: 150
+      delay: 2
+  rescue:
+    - name: Get pod statuses for debugging
+      ansible.builtin.command:
+        cmd: "oc --kubeconfig {{ kubeconfig_path }} get pods -n {{ namespace }} -o wide"
+      register: pod_status
+
+    - name: Get pod details for debugging
+      ansible.builtin.command:
+        cmd: "oc --kubeconfig {{ kubeconfig_path }} describe pods -n {{ namespace }}"
+      register: pod_details
+    
+    - name: Pod statuses
+      ansible.builtin.debug:
+        var: pod_status
+        verbosity: 0
+
+    - name: Pod details
+      ansible.builtin.debug:
+        var: pod_details
+        verbosity: 1
+
+    - name: Fail if the workload did not come up and it is on debug mode
+      fail:
+        msg: |
+          Workload has not come up correctly:
+            {{ pod_status.stdout }}
+      when: 
+        - debug_mode is defined
+        - debug_mode == true

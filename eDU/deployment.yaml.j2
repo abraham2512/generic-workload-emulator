@@ -1,0 +1,4518 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-0
+  name: edu-deployment-0
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-0
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-0
+      annotations:
+        k8s.v1.cni.cncf.io/networks: |-
+          [
+            {"interfaceRequest": "f1c", "name": "networking-f1c", "namespace": "edu-namespace-0", "ips": ["{{ networking['f1c']['ips'][0] }}"], "gateway_ips": ["{{ networking['f1c']['gateway'] }}"]}
+          ]
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '256'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-0"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-0
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+            openshift.io/pci_sriov_net_f1: '1'
+          requests:
+            cpu: 50m
+            memory: 256Mi
+            openshift.io/pci_sriov_net_f1: '1'
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_RAW
+            - NET_ADMIN
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/0da4e1f9-8c13-4370-9033-edeca133b962
+          name: edu-volume-0
+          readOnly: true
+        - mountPath: /tmp/39f6f308-93a3-495d-b587-da8786d6bc2d
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/d20c8b10-fde7-4af1-8e92-f3b9ac8aed36
+          name: edu-volume-9
+        - mountPath: /tmp/90f1a315-47ba-4468-b8b0-86f546b49e31
+          name: edu-volume-11
+        - mountPath: /tmp/cfa3a67b-fc74-40c8-a0f0-ca777b003596
+          name: edu-volume-12
+        - mountPath: /tmp/51293861-063f-4c23-84f8-870fd15e09cd
+          name: edu-volume-13
+        - mountPath: /tmp/db37267e-2e44-47c7-aca1-9312b6ae324b
+          name: edu-volume-15
+        - mountPath: /tmp/cba2364c-5318-4384-bd35-37d1fc7badce
+          name: edu-volume-16
+      - env:
+        - name: MAX_MEM
+          value: '5896'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-1"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-1
+        resources:
+          limits:
+            cpu: 1700m
+            memory: 6280Mi
+          requests:
+            cpu: 600m
+            memory: 5896Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - DAC_OVERRIDE
+            - KILL
+            - SYS_NICE
+            - NET_RAW
+            - NET_ADMIN
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/aace4105-bd3a-4264-b136-001391b7c4df
+          name: edu-volume-5
+        - mountPath: /tmp/5ef1305c-6f10-4965-a18d-53bc1bb7444d
+          name: edu-volume-6
+        - mountPath: /tmp/ff600c12-7824-4ca4-8cf0-d19468ceeec8
+          name: edu-volume-10
+        - mountPath: /tmp/6c636dd4-d8ad-467f-af1b-c5d4a360b05e
+          name: edu-volume-0
+          readOnly: true
+        - mountPath: /tmp/650b89c0-d91f-48b1-aa04-b9f088ba6769
+          name: edu-volume-2
+        - mountPath: /tmp/8d3c3d10-339e-469d-8c75-86d903f7d89f
+          name: edu-volume-8
+        - mountPath: /tmp/aa7d9063-1f5d-4735-a945-55d17f5d9ed5
+          name: edu-volume-7
+        - mountPath: /tmp/9b0d6153-4bc7-4ba2-acfb-5ac4b670ca7e
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/af11d67a-1ccd-4b96-b744-f96f5e493a3a
+          name: edu-volume-3
+        - mountPath: /tmp/575d96ce-d5fa-4556-ac16-39c96f2ab490
+          name: edu-volume-4
+      - env:
+        - name: MAX_MEM
+          value: '64'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-2"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-2
+        resources:
+          limits:
+            cpu: 100m
+            memory: 64Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_ADMIN
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/d71a8d8f-0254-4592-bace-b3280ea7a787
+          name: edu-volume-14
+      - env:
+        - name: MAX_MEM
+          value: '1024'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-3"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 180
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        name: edu-container-3
+        resources:
+          limits:
+            cpu: 400m
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 1Gi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SETUID
+            - SETGID
+            - NET_RAW
+            - CHOWN
+            - FOWNER
+            - DAC_OVERRIDE
+            - NET_ADMIN
+            - NET_BIND_SERVICE
+            - SYS_NICE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/aa5eaf9e-8ce6-4036-a1e3-d0759b757a0f
+          name: edu-volume-17
+        - mountPath: /tmp/cbbadbb4-eee1-4c0e-9293-dda92d144d72
+          name: edu-volume-2
+        - mountPath: /tmp/71821061-d065-4a11-b628-566da22fc64a
+          name: edu-volume-20
+        - mountPath: /tmp/edf5c97d-20c7-4284-bf85-ffe43955e943
+          name: edu-volume-21
+        - mountPath: /tmp/d77bdb32-2bae-42dc-ac13-14b3db247b1b
+          name: edu-volume-22
+        - mountPath: /tmp/13b19994-7fea-4fa7-9456-609308ebbe22
+          name: edu-volume-18
+        - mountPath: /tmp/d78bb17c-b161-4845-82ae-d2afe9006da6
+          name: edu-volume-19
+        - mountPath: /tmp/0f33368f-cdd7-49a1-8f8b-22eafc7e84ec
+          name: edu-volume-1
+          readOnly: true
+      volumes:
+      - emptyDir: {}
+        name: edu-volume-0
+      - configMap:
+          name: edu-configmap-0
+        name: edu-volume-1
+      - configMap:
+          name: edu-configmap-1
+        name: edu-volume-2
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-3
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-4
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 2508Mi
+        name: edu-volume-5
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1144Mi
+        name: edu-volume-6
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-7
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-8
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-9
+      - name: edu-volume-10
+        persistentVolumeClaim:
+          claimName: edu-pvc-0
+      - emptyDir: {}
+        name: edu-volume-11
+      - emptyDir: {}
+        name: edu-volume-12
+      - emptyDir: {}
+        name: edu-volume-13
+      - emptyDir: {}
+        name: edu-volume-14
+      - emptyDir: {}
+        name: edu-volume-15
+      - emptyDir:
+          sizeLimit: 1500Mi
+        name: edu-volume-16
+      - name: edu-volume-17
+        secret:
+          secretName: edu-secret-0
+      - configMap:
+          name: edu-configmap-3
+        name: edu-volume-18
+      - configMap:
+          name: edu-configmap-3
+        name: edu-volume-19
+      - emptyDir: {}
+        name: edu-volume-20
+      - emptyDir: {}
+        name: edu-volume-21
+      - emptyDir: {}
+        name: edu-volume-22
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-1
+  name: edu-deployment-1
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-1
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-1
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '128'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-4"] | default(spammer_per_mem_default) }}'
+        - name: LISTEN_PORT
+          value: '50056'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /probe/liveness
+            port: 50056
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-4
+        ports:
+        - containerPort: 50056
+          protocol: TCP
+        - containerPort: 50057
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+        volumeMounts:
+        - mountPath: /tmp/a72c8f49-6bbd-4077-8cac-311cbd15eb84
+          name: edu-volume-2
+        - mountPath: /tmp/5d995740-7520-4ed9-a701-2ef30dc0b373
+          name: edu-volume-23
+        - mountPath: /tmp/48beb641-8b86-46c7-a99e-52abea9b2db0
+          name: edu-volume-23
+        - mountPath: /tmp/41d4202d-2613-4ee5-91bc-233d73d67efb
+          name: edu-volume-24
+        - mountPath: /tmp/432ba47a-679d-4b5e-aa67-3055136d98b1
+          name: edu-volume-25
+          readOnly: true
+      volumes:
+      - configMap:
+          name: edu-configmap-4
+        name: edu-volume-2
+      - name: edu-volume-23
+        persistentVolumeClaim:
+          claimName: edu-pvc-1
+      - emptyDir: {}
+        name: edu-volume-24
+      - name: edu-volume-25
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-2
+  name: edu-deployment-2
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-2
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-2
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '128'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-5"] | default(spammer_per_mem_default) }}'
+        - name: LISTEN_PORT
+          value: '8082'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /alive
+            port: 8082
+            scheme: HTTP
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-5
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/f232e16b-f8e7-4edb-a7b7-30896a8d8580
+          name: edu-volume-24
+        - mountPath: /tmp/c4bf8a18-43c8-44b0-97b2-26cb4c0045f8
+          name: edu-volume-26
+          readOnly: true
+      volumes:
+      - emptyDir: {}
+        name: edu-volume-24
+      - name: edu-volume-26
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-3
+  name: edu-deployment-3
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-3
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-3
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '384'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-6"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 20
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-6
+        resources:
+          limits:
+            cpu: '1'
+            memory: 384Mi
+          requests:
+            cpu: 50m
+            memory: 384Mi
+        securityContext:
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/223b9ca0-09e3-4798-89a2-dd8f5e2a8f79
+          name: edu-volume-27
+        - mountPath: /tmp/7516f4dc-d281-416a-b77f-0bcf68580f68
+          name: edu-volume-28
+        - mountPath: /tmp/8b1b3482-80c0-4da2-b0aa-17478deefb04
+          name: edu-volume-24
+      - env:
+        - name: MAX_MEM
+          value: '128'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-7"] | default(spammer_per_mem_default) }}'
+        - name: LISTEN_PORT
+          value: '50108'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /alive
+            port: 50108
+            scheme: HTTP
+          initialDelaySeconds: 20
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-7
+        resources:
+          limits:
+            cpu: '1'
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        securityContext:
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/f9663784-4bb0-4b42-876d-4f53ca628d3a
+          name: edu-volume-27
+        - mountPath: /tmp/ae0b82d5-d63c-4aa5-adbe-32c9ddbd2636
+          name: edu-volume-28
+        - mountPath: /tmp/85f389df-a755-42dc-b518-d68c697ccb78
+          name: edu-volume-24
+      volumes:
+      - emptyDir: {}
+        name: edu-volume-24
+      - name: edu-volume-27
+        persistentVolumeClaim:
+          claimName: edu-pvc-2
+      - name: edu-volume-28
+        persistentVolumeClaim:
+          claimName: edu-pvc-3
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-4
+  name: edu-deployment-4
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-4
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-4
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '128'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-8"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-8
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/a769a4a9-49d8-4296-bdce-5cfd8fef1b59
+          name: edu-volume-29
+        - mountPath: /tmp/6e5d97d0-9938-4387-8800-37a266dc6c54
+          name: edu-volume-24
+      volumes:
+      - configMap:
+          name: edu-configmap-5
+        name: edu-volume-29
+      - emptyDir: {}
+        name: edu-volume-24
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-5
+  name: edu-deployment-5
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-5
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-5
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '4096'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-9"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-9
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 50016
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 1400m
+            memory: 4Gi
+          requests:
+            cpu: 160m
+            memory: 4Gi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SYS_NICE
+            - KILL
+            - DAC_OVERRIDE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/41a1e937-416f-4d6b-96f9-bfcfecf6c889
+          name: edu-volume-2
+        - mountPath: /tmp/9373adcf-bf90-4ef6-bb11-58b67fe9162f
+          name: edu-volume-35
+        - mountPath: /tmp/17f2d7d3-fea9-4a00-a267-a6ed1a1df5ee
+          name: edu-volume-34
+        - mountPath: /tmp/c49c51fa-248c-4112-ad14-b671e3942fd8
+          name: edu-volume-33
+        - mountPath: /tmp/9cccbf5a-9268-4b27-b56d-94085a19898d
+          name: edu-volume-32
+        - mountPath: /tmp/a0448e65-3322-4ab5-aa85-0863c3a929bc
+          name: edu-volume-30
+        - mountPath: /tmp/5022a3af-ddb5-40ad-98c5-d3d61c5877cb
+          name: edu-volume-31
+        - mountPath: /tmp/443f8971-e943-465e-8c6d-927b81289e02
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/3ddc84cf-bfa3-452c-af85-e93f79971411
+          name: edu-volume-3
+        - mountPath: /tmp/e353d3df-d8b9-4b8c-a816-ebb70f03fd07
+          name: edu-volume-4
+        - mountPath: /tmp/8a4e97be-559d-4ee5-a5cd-ad6e2deac5a3
+          name: edu-volume-41
+        - mountPath: /tmp/afb88514-e291-42b5-932c-c7fb69cfad7d
+          name: edu-volume-42
+        - mountPath: /tmp/f7f3de95-a1df-4e26-9128-baedc71c3d8e
+          name: edu-volume-43
+          readOnly: true
+      - env:
+        - name: MAX_MEM
+          value: '4744'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-10"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-10
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 50016
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 900m
+            memory: 4744Mi
+          requests:
+            cpu: 150m
+            memory: 4744Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SYS_NICE
+            - KILL
+            - DAC_OVERRIDE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/9704c5be-2594-4ddb-9300-c15d87d68d95
+          name: edu-volume-2
+        - mountPath: /tmp/155279c0-694c-4a5e-87c6-8dbaedde2428
+          name: edu-volume-39
+        - mountPath: /tmp/fbaded28-d3b5-4989-87f6-99b52b634a0e
+          name: edu-volume-38
+        - mountPath: /tmp/07316c21-e571-4af7-a198-4f6698fe41e2
+          name: edu-volume-37
+        - mountPath: /tmp/eccc71a2-8f7c-4548-9d06-9154a3bdf799
+          name: edu-volume-36
+        - mountPath: /tmp/7b1bd8b3-2cd1-4a30-9ba1-83b22d6ad49c
+          name: edu-volume-30
+        - mountPath: /tmp/a136215d-56ae-4be8-bcf8-75bf419ea969
+          name: edu-volume-31
+        - mountPath: /tmp/c3583e33-2dcd-45a5-af5e-396364f15a95
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/c41a4f64-402c-4c2a-be87-e9cd52708676
+          name: edu-volume-3
+        - mountPath: /tmp/ff924c5e-527e-4cac-ab67-79ec379624d7
+          name: edu-volume-4
+        - mountPath: /tmp/711b22da-5f56-4a5a-8519-4c3d6c3a350b
+          name: edu-volume-40
+        - mountPath: /tmp/9f741974-8229-42d5-98cf-0fefe488733d
+          name: edu-volume-42
+        - mountPath: /tmp/b2d81526-3a63-4d83-a1b4-194bc0b1da1b
+          name: edu-volume-43
+          readOnly: true
+      volumes:
+      - configMap:
+          name: edu-configmap-6
+        name: edu-volume-2
+      - name: edu-volume-30
+        persistentVolumeClaim:
+          claimName: edu-pvc-0
+      - name: edu-volume-31
+        persistentVolumeClaim:
+          claimName: edu-pvc-4
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-32
+      - name: edu-volume-33
+        persistentVolumeClaim:
+          claimName: edu-pvc-5
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1144Mi
+        name: edu-volume-34
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 2448Mi
+        name: edu-volume-35
+      - configMap:
+          name: edu-configmap-7
+        name: edu-volume-1
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-36
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-37
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1144Mi
+        name: edu-volume-38
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 2448Mi
+        name: edu-volume-39
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-40
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-41
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-3
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-4
+      - name: edu-volume-42
+        persistentVolumeClaim:
+          claimName: edu-pvc-6
+      - name: edu-volume-43
+        secret:
+          secretName: edu-secret-1
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-9
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-6
+  name: edu-deployment-6
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-6
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-6
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '4048'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-11"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-11
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 50016
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 1700m
+            memory: 4632Mi
+          requests:
+            cpu: 210m
+            memory: 4048Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SYS_NICE
+            - KILL
+            - DAC_OVERRIDE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/503a997e-fc41-452f-9c12-5f112cdb3f36
+          name: edu-volume-2
+        - mountPath: /tmp/3a3142a1-5c8e-4a7f-8825-81e2fc34e7a1
+          name: edu-volume-47
+        - mountPath: /tmp/3051201e-396b-4cc2-bfc5-88612add83af
+          name: edu-volume-46
+        - mountPath: /tmp/e197bbff-ce96-4bfd-940f-431885aae9b7
+          name: edu-volume-45
+        - mountPath: /tmp/9bc0d0bc-c2ec-429b-bb54-7c6064f47585
+          name: edu-volume-44
+        - mountPath: /tmp/951425a5-729f-467e-850a-ca09de3c27f0
+          name: edu-volume-30
+        - mountPath: /tmp/70aabea5-9c53-4fa9-973a-49f02da5af10
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/c9f4f467-b5a7-4e92-b26c-90eecca8006a
+          name: edu-volume-48
+        - mountPath: /tmp/4ef315f4-db56-448f-af3c-6597dcc4202d
+          name: edu-volume-3
+        - mountPath: /tmp/5e595f51-65c1-45ea-877b-870427e762c7
+          name: edu-volume-4
+      volumes:
+      - configMap:
+          name: edu-configmap-8
+        name: edu-volume-2
+      - configMap:
+          name: edu-configmap-9
+        name: edu-volume-1
+      - name: edu-volume-30
+        persistentVolumeClaim:
+          claimName: edu-pvc-0
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-44
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-45
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1144Mi
+        name: edu-volume-46
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 2448Mi
+        name: edu-volume-47
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-9
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-48
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-3
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-4
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-7
+  name: edu-deployment-7
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-7
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-7
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '256'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-0"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-0
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_ADMIN
+            - NET_RAW
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/f59bcc01-fdd9-41fc-9173-1317a0a3323c
+          name: edu-volume-51
+          readOnly: true
+        - mountPath: /tmp/066fb245-f218-4033-969c-a1a268483514
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/aa44424f-ac4b-4f5d-ab52-3b3110a7d4c7
+          name: edu-volume-55
+        - mountPath: /tmp/166391c7-7388-4992-9c96-ed356fdf6829
+          name: edu-volume-11
+        - mountPath: /tmp/f0ccd6ba-ed03-41b0-b696-c3f05976640e
+          name: edu-volume-12
+        - mountPath: /tmp/66f5c024-c1ac-4cd4-b463-bfb3544125a1
+          name: edu-volume-13
+        - mountPath: /tmp/14ec778a-2c2f-4c93-9e8c-2be0e214d92f
+          name: edu-volume-15
+        - mountPath: /tmp/8afee071-8bf4-46d0-898b-b38051d02044
+          name: edu-volume-16
+      - env:
+        - name: MAX_MEM
+          value: '4872'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-12"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-12
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 50016
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 700m
+            memory: 5256Mi
+          requests:
+            cpu: 400m
+            memory: 4872Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SYS_NICE
+            - KILL
+            - DAC_OVERRIDE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/7a6206ef-2dce-4d1c-a5c8-1502d6fe3e08
+          name: edu-volume-2
+        - mountPath: /tmp/27a768dc-dbeb-453a-b5d3-07b69107f710
+          name: edu-volume-50
+        - mountPath: /tmp/4571be8f-b0a2-49cb-8573-ade1198a3468
+          name: edu-volume-49
+        - mountPath: /tmp/e565e93b-129d-477c-ad7e-c961e55c0ba0
+          name: edu-volume-53
+        - mountPath: /tmp/c3de46b8-cf53-49b3-b6f6-7bc1dc824526
+          name: edu-volume-52
+        - mountPath: /tmp/85e245a7-e88e-4c24-bdaf-46171d3b6bde
+          name: edu-volume-10
+        - mountPath: /tmp/1551c21e-c34e-4b5b-a859-33f9035bd103
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/d44246e8-a528-45c4-99c7-a6d3ff0cbe5a
+          name: edu-volume-3
+        - mountPath: /tmp/5f82228d-e73e-4ed6-b16a-6c91ab9ca92d
+          name: edu-volume-4
+        - mountPath: /tmp/564318c0-04b0-40f3-8e80-cbfbe3c06f37
+          name: edu-volume-17
+        - mountPath: /tmp/22ee1f45-2767-49c0-8b85-dad8d83e1f33
+          name: edu-volume-54
+      volumes:
+      - name: edu-volume-10
+        persistentVolumeClaim:
+          claimName: edu-pvc-0
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1656Mi
+        name: edu-volume-49
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 2448Mi
+        name: edu-volume-50
+      - configMap:
+          name: edu-configmap-10
+        name: edu-volume-2
+      - emptyDir: {}
+        name: edu-volume-51
+      - emptyDir: {}
+        name: edu-volume-11
+      - emptyDir: {}
+        name: edu-volume-12
+      - emptyDir: {}
+        name: edu-volume-13
+      - emptyDir: {}
+        name: edu-volume-15
+      - emptyDir:
+          sizeLimit: 1500Mi
+        name: edu-volume-16
+      - configMap:
+          name: edu-configmap-11
+        name: edu-volume-1
+      - name: edu-volume-17
+        secret:
+          secretName: edu-secret-0
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-52
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-53
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-54
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-55
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-3
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-4
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-8
+  name: edu-deployment-8
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-8
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-8
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '4872'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-13"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-13
+        resources:
+          limits:
+            cpu: 700m
+            memory: 4872Mi
+          requests:
+            cpu: 100m
+            memory: 4872Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - DAC_OVERRIDE
+            - KILL
+            - SYS_NICE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/e5b64c50-3dbf-4cf9-b5fd-d2e9fecf2fbf
+          name: edu-volume-56
+        - mountPath: /tmp/fc93f9a6-178e-4f65-8c77-b9c1e4ba4078
+          name: edu-volume-57
+        - mountPath: /tmp/788b4094-31ce-4d1f-a700-1111e082fe19
+          name: edu-volume-10
+        - mountPath: /tmp/cef37e52-2a68-4010-8353-9644be74d991
+          name: edu-volume-2
+        - mountPath: /tmp/481692ab-98a3-4c97-93c1-c5bc9c739cbb
+          name: edu-volume-58
+        - mountPath: /tmp/5bf0bb57-5df5-4832-a31d-91002cea20f3
+          name: edu-volume-59
+        - mountPath: /tmp/bf0ac845-c14c-4ccc-bc4d-f339a99035c9
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/9217630c-f55e-4493-b192-8deb28f3c4de
+          name: edu-volume-60
+        - mountPath: /tmp/dbdb2b82-a896-41eb-9dda-404cbdeb935e
+          name: edu-volume-3
+        - mountPath: /tmp/560a99c6-d5a2-46ad-835b-67280b045e50
+          name: edu-volume-4
+      volumes:
+      - configMap:
+          name: edu-configmap-12
+        name: edu-volume-2
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-9
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 2448Mi
+        name: edu-volume-56
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1144Mi
+        name: edu-volume-57
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-58
+      - name: edu-volume-10
+        persistentVolumeClaim:
+          claimName: edu-pvc-0
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-59
+      - emptyDir: {}
+        name: edu-volume-60
+      - configMap:
+          name: edu-configmap-13
+        name: edu-volume-1
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-3
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-4
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-9
+  name: edu-deployment-9
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-9
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-9
+      annotations:
+        k8s.v1.cni.cncf.io/networks: |-
+          [
+            {"interfaceRequest": "oam", "name": "networking-oam", "namespace": "edu-namespace-0", "ips": ["{{ networking['oam']['ips'][0] }}"], "gateway_ips": ["{{ networking['oam']['gateway'] }}"]},
+            {"interfaceRequest": "tracing", "name": "networking-oam", "namespace": "edu-namespace-0", "ips": ["{{ networking['oam']['ips'][1] }}"], "gateway_ips": ["{{ networking['oam']['gateway'] }}"]}
+          ]
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '256'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-0"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-0
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+            openshift.io/pci_sriov_net_oam: '2'
+          requests:
+            cpu: 50m
+            memory: 256Mi
+            openshift.io/pci_sriov_net_oam: '2'
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_ADMIN
+            - NET_RAW
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/9d169044-3565-4cb9-ad53-91a5c581ba33
+          name: edu-volume-51
+          readOnly: true
+        - mountPath: /tmp/3d39df08-a696-467b-bc56-ef9755cebf16
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/157a2412-6d2a-4915-bacd-c7e9fa73e158
+          name: edu-volume-75
+          readOnly: true
+        - mountPath: /tmp/311ee873-2b87-438d-8409-44edf3a0a359
+          name: edu-volume-9
+        - mountPath: /tmp/5477554f-78d8-49ad-a40e-6bb144007367
+          name: edu-volume-11
+        - mountPath: /tmp/45573caa-3714-437f-a7fb-25fb02e71337
+          name: edu-volume-12
+        - mountPath: /tmp/07b0ce2d-e013-40ec-a7e0-9cac391500a2
+          name: edu-volume-13
+        - mountPath: /tmp/1690ac20-c26d-4bf4-b5e1-6704a7d934ad
+          name: edu-volume-15
+        - mountPath: /tmp/bd9540c6-b341-47c7-87b1-ed449f74564b
+          name: edu-volume-16
+      - env:
+        - name: MAX_MEM
+          value: '64'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-2"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-2
+        resources:
+          limits:
+            cpu: 100m
+            memory: 64Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_ADMIN
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/5c2ef0cd-882e-4daa-8101-f04aa739e878
+          name: edu-volume-14
+      - env:
+        - name: MAX_MEM
+          value: '256'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-14"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 9
+        name: edu-container-14
+        resources:
+          limits:
+            cpu: 250m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_BIND_SERVICE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+        startupProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 10
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        volumeMounts:
+        - mountPath: /tmp/d00a3607-8b77-4707-a648-79efd369ac3d
+          name: edu-volume-17
+        - mountPath: /tmp/b7ad515e-4801-4dff-8b4c-60428a312c62
+          name: edu-volume-91
+        - mountPath: /tmp/7b15faf0-e5ac-4bd5-b099-9c9962bc5d97
+          name: edu-volume-3
+        - mountPath: /tmp/2a276d75-8cca-4e6e-98b7-5bf16ca6fe24
+          name: edu-volume-4
+      - env:
+        - name: MAX_MEM
+          value: '256'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-15"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-15
+        readinessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 250m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        startupProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 10
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        volumeMounts:
+        - mountPath: /tmp/62907e11-fe1d-4056-a79a-e783a86e221e
+          name: edu-volume-79
+        - mountPath: /tmp/9c751c66-e181-4691-8c26-0c8c27def456
+          name: edu-volume-93
+        - mountPath: /tmp/b5735dea-6244-4772-9fb9-49f50a541726
+          name: edu-volume-3
+        - mountPath: /tmp/a55aa4ce-7da3-420e-848e-3e2f74a986b0
+          name: edu-volume-4
+        - mountPath: /tmp/effbae58-d8ef-4cf9-9d75-6899c952052e
+          name: edu-volume-94
+        - mountPath: /tmp/b0195058-d1e3-4ec3-b1e0-17ad9bc4e012
+          name: edu-volume-95
+        - mountPath: /tmp/d15d7541-bfca-4faa-ad4d-811cb49948d0
+          name: edu-volume-96
+        - mountPath: /tmp/3213ed3f-eb75-4ca7-8be1-63cb63597a41
+          name: edu-volume-97
+        - mountPath: /tmp/5b3af37f-6bf6-4ece-b707-6f722110254e
+          name: edu-volume-98
+        - mountPath: /tmp/33e10916-81c5-43e7-95d9-7117fc749066
+          name: edu-volume-99
+        - mountPath: /tmp/551884f7-f163-4c07-a1ab-2538f77abd1c
+          name: edu-volume-100
+        - mountPath: /tmp/e30e4f91-01c5-4b0b-8987-cc9b49d96dd5
+          name: edu-volume-101
+        - mountPath: /tmp/b6315d66-dc6d-43e5-a56c-ca814381cb9f
+          name: edu-volume-102
+        - mountPath: /tmp/b98d2ae2-6a8c-495f-9f1a-8505239a5065
+          name: edu-volume-103
+      - env:
+        - name: MAX_MEM
+          value: '1024'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-16"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: edu-container-16
+        readinessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 50m
+            memory: 1Gi
+          requests:
+            cpu: 10m
+            memory: 1Gi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        startupProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 300
+          periodSeconds: 2
+          successThreshold: 1
+          timeoutSeconds: 5
+        volumeMounts:
+        - mountPath: /tmp/79b5c6ee-6344-454a-8fea-8b055eb66b87
+          name: edu-volume-84
+        - mountPath: /tmp/7bf7dd21-05e7-489e-9ed7-915b9db7c15f
+          name: edu-volume-17
+        - mountPath: /tmp/586dfe56-86f5-49a8-8084-a0607df92f76
+          name: edu-volume-76
+        - mountPath: /tmp/fde7fcb7-e0e8-4c16-be67-8d08c415fc7e
+          name: edu-volume-78
+        - mountPath: /tmp/e8fb2d26-7933-4abb-9f8c-4042ff130acf
+          name: edu-volume-85
+        - mountPath: /tmp/ac177c43-f0e5-4f64-8df0-b6bfdbbc5fe3
+          name: edu-volume-86
+      - env:
+        - name: MAX_MEM
+          value: '256'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-17"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-17
+        resources:
+          limits:
+            cpu: 100m
+            memory: 512Mi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/53b8d409-0146-47aa-81a6-95e8a4a06906
+          name: edu-volume-17
+        - mountPath: /tmp/8da0ebd7-2e99-47c9-906b-584018163938
+          name: edu-volume-92
+          readOnly: true
+        - mountPath: /tmp/f7b70ae3-cc92-4a63-8352-0c2d1054fec6
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/0dcac9d7-d1b6-4b0e-ac58-7c3646f3afe8
+          name: edu-volume-89
+        - mountPath: /tmp/1468b343-a382-41d9-88a1-93b5e2c6159e
+          name: edu-volume-90
+      - env:
+        - name: MAX_MEM
+          value: '4872'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-18"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-18
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 50016
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 5256Mi
+          requests:
+            cpu: 200m
+            memory: 4872Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SYS_NICE
+            - KILL
+            - DAC_OVERRIDE
+            - SYS_RESOURCE
+            - SYS_TIME
+            - IPC_OWNER
+            - NET_BIND_SERVICE
+            - SETUID
+            - SETGID
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/e68db893-b633-4f74-ab75-7916cb5a33d7
+          name: edu-volume-65
+        - mountPath: /tmp/7910a664-ca17-48c4-8ded-48bce6821915
+          name: edu-volume-66
+        - mountPath: /tmp/9fc3efd4-f888-45bc-8f75-4e37d198e6a8
+          name: edu-volume-64
+        - mountPath: /tmp/12e24aac-6ef5-4798-9a80-9ed6724559f6
+          name: edu-volume-63
+        - mountPath: /tmp/a24dd1d1-706d-4592-a651-4afa91ff0b66
+          name: edu-volume-2
+        - mountPath: /tmp/169e7167-1fdd-4ca9-89c2-7bba35482b3c
+          name: edu-volume-51
+          readOnly: true
+        - mountPath: /tmp/571195d1-0fbc-4760-96a4-d57ed3b121d1
+          name: edu-volume-30
+        - mountPath: /tmp/6ca315ea-6ef8-4ac8-a733-7f7d10963d61
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/55385eaf-1fe6-4ebc-a4da-5bc1a8609406
+          name: edu-volume-3
+        - mountPath: /tmp/ce3da7c8-4803-466b-baaf-d39b531acf4d
+          name: edu-volume-4
+        - mountPath: /tmp/c4b01351-8939-4a3e-b2c6-7c08f2d6fff5
+          name: edu-volume-73
+      - env:
+        - name: MAX_MEM
+          value: '1024'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-19"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-19
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 50016
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 1200m
+            memory: 1Gi
+          requests:
+            cpu: 350m
+            memory: 1Gi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SYS_NICE
+            - KILL
+            - DAC_OVERRIDE
+            - SYS_RESOURCE
+            - SYS_TIME
+            - IPC_OWNER
+            - SETUID
+            - IPC_LOCK
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/da77e43b-b2e1-4947-a2db-a141dafd974e
+          name: edu-volume-17
+        - mountPath: /tmp/bc1d0d42-01e3-41cd-b80c-0cc51d04d03f
+          name: edu-volume-70
+        - mountPath: /tmp/40f9c515-d010-40cd-b08c-db9e39d85c8f
+          name: edu-volume-71
+        - mountPath: /tmp/bc5fc441-fd3b-4cb1-809c-be5f55b6a59a
+          name: edu-volume-69
+        - mountPath: /tmp/90a7d869-766b-42d5-9f40-eba9c66ed1d5
+          name: edu-volume-68
+        - mountPath: /tmp/bc9a0e61-0516-4819-bda9-9bd0d000e32e
+          name: edu-volume-2
+        - mountPath: /tmp/3192e23f-12fb-4097-b6c9-d195995b95a7
+          name: edu-volume-51
+          readOnly: true
+        - mountPath: /tmp/94ef78c5-0ba7-4002-ab14-91a1def1e301
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/6d004088-b47c-41ce-9fe9-1f5cb9605109
+          name: edu-volume-74
+        - mountPath: /tmp/0b1356a9-dcb4-4313-b2b2-8a98c434fd85
+          name: edu-volume-3
+        - mountPath: /tmp/b148302f-504f-482e-ad5f-1b84eaa5dae5
+          name: edu-volume-4
+        - mountPath: /tmp/bd8104f2-3cbc-41cb-b0cd-e6e3b9b7fbc6
+          name: edu-volume-72
+      - env:
+        - name: MAX_MEM
+          value: '2765'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-20"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-20
+        ports:
+        - containerPort: 8443
+          protocol: TCP
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 50505
+          protocol: TCP
+        - containerPort: 50016
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 3584Mi
+          requests:
+            cpu: 200m
+            memory: 2765Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/88d4c24b-c515-49dc-9ca0-070cf68d6805
+          name: edu-volume-83
+        - mountPath: /tmp/128ecbfd-381c-41b7-8bda-bc54a1efbf9f
+          name: edu-volume-77
+        - mountPath: /tmp/2625f325-f44b-4049-a11e-839208c61748
+          name: edu-volume-67
+        - mountPath: /tmp/fa96c8da-8115-4a14-8359-c48ac1be5449
+          name: edu-volume-88
+        - mountPath: /tmp/6b96f02c-5d42-44da-b2b4-411ebf8883d1
+          name: edu-volume-87
+        - mountPath: /tmp/42b5fbfe-29cf-4523-b8a9-7f9b0dfbad2e
+          name: edu-volume-17
+        - mountPath: /tmp/59f8b9df-67d1-453f-ab7e-2ab1e96c24b7
+          name: edu-volume-61
+        - mountPath: /tmp/9116e802-de7e-4b15-a8bf-e8a54ad5a8be
+          name: edu-volume-62
+        - mountPath: /tmp/a14f6ecc-c6be-4fa7-9bb1-f059f2dd2dc5
+          name: edu-volume-92
+          readOnly: true
+        - mountPath: /tmp/84d053ec-4f07-447b-b41c-e6154c6de8b9
+          name: edu-volume-4
+          readOnly: true
+      - env:
+        - name: MAX_MEM
+          value: '1024'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-3"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 180
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        name: edu-container-3
+        resources:
+          limits:
+            cpu: 400m
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 1Gi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SETUID
+            - SETGID
+            - NET_RAW
+            - CHOWN
+            - FOWNER
+            - DAC_OVERRIDE
+            - NET_ADMIN
+            - NET_BIND_SERVICE
+            - SYS_NICE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/d031b331-7c58-42bb-a77a-ba0091e3c5fa
+          name: edu-volume-17
+        - mountPath: /tmp/fe19d650-33bf-46da-964a-d7681ed8aa7c
+          name: edu-volume-2
+        - mountPath: /tmp/55079857-b0eb-4c51-8fd4-4c785f656d69
+          name: edu-volume-20
+        - mountPath: /tmp/0ca96abd-1a8c-4140-945d-b025f6c0eb28
+          name: edu-volume-18
+        - mountPath: /tmp/40f06a8b-4c03-41fb-9952-b989032059d3
+          name: edu-volume-19
+        - mountPath: /tmp/60d43eb0-4aad-4307-8c32-b51ec973c06e
+          name: edu-volume-21
+        - mountPath: /tmp/24e9ebb0-1d44-4a8a-87af-fb5d442c4af0
+          name: edu-volume-22
+        - mountPath: /tmp/d639b9f6-eef0-402b-849d-1970d2e6eaa9
+          name: edu-volume-1
+          readOnly: true
+      - env:
+        - name: MAX_MEM
+          value: '128'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-21"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 2
+        name: edu-container-21
+        resources:
+          limits:
+            cpu: 50m
+            memory: 128Mi
+          requests:
+            cpu: 5m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/59be4b2a-cc3e-4b73-88bd-dc1b30e50f51
+          name: edu-volume-17
+        - mountPath: /tmp/25f1dbe4-153a-426c-a059-9d799bef32ee
+          name: edu-volume-80
+          readOnly: true
+        - mountPath: /tmp/1d45cc8f-0e9a-4a36-ab0b-0f218e619837
+          name: edu-volume-81
+        - mountPath: /tmp/665efe1a-4f81-4636-9cc7-1b00dd4a0c45
+          name: edu-volume-82
+      - env:
+        - name: MAX_MEM
+          value: '256'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-22"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-22
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/64030ebc-5af4-4e24-8924-fb88fecfd589
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/8400780e-74ea-43f7-a2a8-574efacf17a8
+          name: edu-volume-3
+        - mountPath: /tmp/fe546c3a-b7bd-42e7-9dfb-730216d0c4cc
+          name: edu-volume-4
+        - mountPath: /tmp/801b8399-b1d2-4192-a794-f36f8c803643
+          name: edu-volume-104
+      - env:
+        - name: MAX_MEM
+          value: '256'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-23"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-23
+        resources:
+          limits:
+            cpu: 500m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/825c5502-a272-416e-a504-de4bf1ba48dd
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/bacd5c9d-aa2d-45df-979d-e4217ba1cda3
+          name: edu-volume-3
+      - env:
+        - name: MAX_MEM
+          value: '3294'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-24"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-24
+        ports:
+        - containerPort: 50017
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 3584Mi
+          requests:
+            cpu: 200m
+            memory: 3294Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SYS_NICE
+            - KILL
+            - DAC_OVERRIDE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/9e83dc7a-e560-4a0b-8e2c-b2948f549812
+          name: edu-volume-2
+        - mountPath: /tmp/808a1446-74c1-4d9d-9d56-51039979ccf0
+          name: edu-volume-30
+        - mountPath: /tmp/ee83aae7-2a4c-4436-8ffa-eb593d586bcf
+          name: edu-volume-105
+        - mountPath: /tmp/6141dd3f-3a65-408c-b60b-757e491847ca
+          name: edu-volume-106
+        - mountPath: /tmp/2d8d2b8d-0b84-45d0-920c-f48904d4aad8
+          name: edu-volume-107
+        - mountPath: /tmp/a155e9c2-e201-4683-98f1-79fbbd29bf24
+          name: edu-volume-108
+        - mountPath: /tmp/8d8ba86f-1879-4110-9450-4ab7b3fab27a
+          name: edu-volume-17
+        - mountPath: /tmp/71c8248e-6a30-48f2-b47a-4c36e1ddba66
+          name: edu-volume-92
+          readOnly: true
+        - mountPath: /tmp/0013b2b7-a85a-415a-932e-d574869f4e4c
+          name: edu-volume-4
+          readOnly: true
+        - mountPath: /tmp/80a35470-63ee-42db-aab4-353a53516e29
+          name: edu-volume-72
+      volumes:
+      - emptyDir: {}
+        name: edu-volume-24
+      - emptyDir: {}
+        name: edu-volume-61
+      - emptyDir: {}
+        name: edu-volume-62
+      - emptyDir: {}
+        name: edu-volume-14
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-63
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-64
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 2448Mi
+        name: edu-volume-65
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1144Mi
+        name: edu-volume-66
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1Gi
+        name: edu-volume-67
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-68
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-69
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 410Mi
+        name: edu-volume-70
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 128Mi
+        name: edu-volume-71
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 15Mi
+        name: edu-volume-72
+      - configMap:
+          name: edu-configmap-14
+        name: edu-volume-2
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-73
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-74
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-9
+      - emptyDir: {}
+        name: edu-volume-51
+      - emptyDir: {}
+        name: edu-volume-11
+      - emptyDir: {}
+        name: edu-volume-12
+      - emptyDir: {}
+        name: edu-volume-13
+      - emptyDir: {}
+        name: edu-volume-15
+      - emptyDir:
+          sizeLimit: 1500Mi
+        name: edu-volume-16
+      - configMap:
+          name: edu-configmap-15
+        name: edu-volume-1
+      - configMap:
+          name: edu-configmap-16
+        name: edu-volume-75
+      - emptyDir: {}
+        name: edu-volume-76
+      - emptyDir: {}
+        name: edu-volume-77
+      - emptyDir: {}
+        name: edu-volume-78
+      - name: edu-volume-30
+        persistentVolumeClaim:
+          claimName: edu-pvc-0
+      - name: edu-volume-79
+        persistentVolumeClaim:
+          claimName: edu-pvc-7
+      - name: edu-volume-80
+        secret:
+          secretName: edu-secret-2
+      - name: edu-volume-81
+        persistentVolumeClaim:
+          claimName: edu-pvc-8
+      - emptyDir: {}
+        name: edu-volume-82
+      - name: edu-volume-17
+        secret:
+          secretName: edu-secret-0
+      - name: edu-volume-83
+        persistentVolumeClaim:
+          claimName: edu-pvc-9
+      - name: edu-volume-84
+        persistentVolumeClaim:
+          claimName: edu-pvc-10
+      - emptyDir: {}
+        name: edu-volume-85
+      - emptyDir: {}
+        name: edu-volume-86
+      - emptyDir: {}
+        name: edu-volume-87
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1288490188800m
+        name: edu-volume-88
+      - name: edu-volume-89
+        persistentVolumeClaim:
+          claimName: edu-pvc-11
+      - emptyDir:
+          sizeLimit: 1Mi
+        name: edu-volume-90
+      - emptyDir: {}
+        name: edu-volume-91
+      - name: edu-volume-92
+        secret:
+          secretName: edu-secret-3
+      - emptyDir: {}
+        name: edu-volume-93
+      - emptyDir: {}
+        name: edu-volume-20
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-3
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-4
+      - configMap:
+          name: edu-configmap-17
+        name: edu-volume-94
+      - configMap:
+          name: edu-configmap-18
+        name: edu-volume-95
+      - configMap:
+          name: edu-configmap-19
+        name: edu-volume-96
+      - configMap:
+          name: edu-configmap-20
+        name: edu-volume-97
+      - configMap:
+          name: edu-configmap-21
+        name: edu-volume-98
+      - configMap:
+          name: edu-configmap-22
+        name: edu-volume-99
+      - configMap:
+          name: edu-configmap-23
+        name: edu-volume-100
+      - configMap:
+          name: edu-configmap-24
+        name: edu-volume-101
+      - configMap:
+          name: edu-configmap-25
+        name: edu-volume-102
+      - configMap:
+          name: edu-configmap-26
+        name: edu-volume-103
+      - configMap:
+          name: edu-configmap-27
+        name: edu-volume-104
+      - configMap:
+          name: edu-configmap-28
+        name: edu-volume-18
+      - configMap:
+          name: edu-configmap-28
+        name: edu-volume-19
+      - emptyDir: {}
+        name: edu-volume-21
+      - emptyDir: {}
+        name: edu-volume-22
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 410Mi
+        name: edu-volume-105
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 3Gi
+        name: edu-volume-106
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 128Mi
+        name: edu-volume-107
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-108
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-10
+  name: edu-deployment-10
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-10
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-10
+      annotations:
+        k8s.v1.cni.cncf.io/networks: |-
+          [
+            {"interfaceRequest": "fhm", "name":"networking-fgci", "namespace":"edu-namespace-0", "ips":["{{ networking['fhm']['ips'][0] }}"], "gateway_ips":["{{ networking['fhm']['gateway'] }}"]}
+          ]
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '256'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-0"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-0
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+            openshift.io/pci_sriov_net_fgci: '1'
+          requests:
+            cpu: 50m
+            memory: 256Mi
+            openshift.io/pci_sriov_net_fgci: '1'
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_RAW
+            - NET_ADMIN
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/0e21e2b2-14ab-43b7-8630-2d12126275c1
+          name: edu-volume-11
+        - mountPath: /tmp/78320197-1cc7-432c-ac56-afc27d74bee0
+          name: edu-volume-12
+        - mountPath: /tmp/d8b99f55-de95-40f3-90db-a21743435b05
+          name: edu-volume-13
+        - mountPath: /tmp/b76b8c3a-7059-405e-a111-5ca73657067f
+          name: edu-volume-51
+          readOnly: true
+        - mountPath: /tmp/d7c55944-4885-4903-97a2-0aa8a19820ff
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/30aa6235-3f09-49c5-9229-2666c2e00536
+          name: edu-volume-9
+        - mountPath: /tmp/77dc59e0-c26c-464f-8b6a-6b6f2f2e00e1
+          name: edu-volume-15
+        - mountPath: /tmp/ee238398-4709-47bc-b94d-ce2ab8ca08a6
+          name: edu-volume-16
+      - env:
+        - name: MAX_MEM
+          value: '4872'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-25"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-25
+        resources:
+          limits:
+            cpu: 800m
+            memory: 5256Mi
+          requests:
+            cpu: 500m
+            memory: 4872Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - DAC_OVERRIDE
+            - KILL
+            - SYS_NICE
+            - NET_RAW
+            - NET_ADMIN
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/9ef832a5-44cf-41b1-a011-ee2a763163ce
+          name: edu-volume-111
+        - mountPath: /tmp/d8dd06ac-e909-4566-83bd-4e78a7341e1b
+          name: edu-volume-112
+        - mountPath: /tmp/93cadd3e-a319-43b8-b3ec-f7377c0f2f17
+          name: edu-volume-10
+        - mountPath: /tmp/95f189dc-d686-407a-aaa8-2d82d1344f9a
+          name: edu-volume-51
+          readOnly: true
+        - mountPath: /tmp/dc0312cf-fbca-4309-965e-b03809dde464
+          name: edu-volume-109
+        - mountPath: /tmp/aa0e5610-1f7a-4fd8-8e9f-bffc356bb21f
+          name: edu-volume-110
+        - mountPath: /tmp/1af57686-83fb-4919-9dab-7e78353f9775
+          name: edu-volume-2
+        - mountPath: /tmp/af95f07a-8e1d-4d6f-a830-d227152bd9ba
+          name: edu-volume-114
+        - mountPath: /tmp/6f42908d-2e03-47c8-973e-4430c6d103be
+          name: edu-volume-113
+        - mountPath: /tmp/78a556da-8f14-4003-9073-788f8995e102
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/91602d9d-d9dd-418b-8641-a475063f68be
+          name: edu-volume-3
+        - mountPath: /tmp/a01be81b-2ff4-4726-966e-906b4dea02c0
+          name: edu-volume-4
+      - env:
+        - name: MAX_MEM
+          value: '64'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-26"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-26
+        resources:
+          limits:
+            cpu: 50m
+            memory: 64Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_RAW
+            - NET_BIND_SERVICE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/fda1e7fb-2025-40b0-8d93-6562736630ba
+          name: edu-volume-115
+        - mountPath: /tmp/6db7c297-efdf-488b-a7ca-821fbbc859a3
+          name: edu-volume-116
+        - mountPath: /tmp/e1360020-2774-4fe3-a29d-14ce079d0789
+          name: edu-volume-117
+        - mountPath: /tmp/267308f0-f56c-4fbf-a2d3-656e5581f10e
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/ce9f1706-3c8c-443e-82c8-b306c2a750a3
+          name: edu-volume-118
+        - mountPath: /tmp/2699306b-61d6-43d5-9a7f-93a962ae78e3
+          name: edu-volume-119
+        - mountPath: /tmp/8dbc7bcc-7cf0-491d-8ac2-1e38234b5c34
+          name: edu-volume-120
+        - mountPath: /tmp/d5da1b14-985b-49e6-815f-5c033ab4e67d
+          name: edu-volume-121
+        - mountPath: /tmp/92f391c7-4333-4d19-b220-a7b67433a259
+          name: edu-volume-122
+      - env:
+        - name: MAX_MEM
+          value: '128'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-27"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-27
+        resources:
+          limits:
+            cpu: 200m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        securityContext:
+          capabilities:
+            add:
+            - DAC_OVERRIDE
+            - NET_BIND_SERVICE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/a565110f-5a42-4b72-8458-2f6c917ec3eb
+          name: edu-volume-110
+        - mountPath: /tmp/2ce1971a-c847-4274-b41e-2b1b00d998d1
+          name: edu-volume-109
+        - mountPath: /tmp/b57319e6-4665-421e-8bca-23b3c195de08
+          name: edu-volume-2
+      - env:
+        - name: MAX_MEM
+          value: '128'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-2"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-2
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        securityContext:
+          capabilities:
+            add:
+            - NET_ADMIN
+            drop:
+            - all
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/ddccc399-c8c4-4892-b22b-80544f4a9812
+          name: edu-volume-14
+      volumes:
+      - configMap:
+          name: edu-configmap-29
+        name: edu-volume-2
+      - emptyDir: {}
+        name: edu-volume-51
+      - emptyDir: {}
+        name: edu-volume-11
+      - emptyDir: {}
+        name: edu-volume-12
+      - emptyDir: {}
+        name: edu-volume-13
+      - configMap:
+          name: edu-configmap-30
+        name: edu-volume-1
+      - name: edu-volume-10
+        persistentVolumeClaim:
+          claimName: edu-pvc-0
+      - emptyDir:
+          sizeLimit: 1536Mi
+        name: edu-volume-109
+      - emptyDir:
+          sizeLimit: 50Mi
+        name: edu-volume-110
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 2448Mi
+        name: edu-volume-111
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1144Mi
+        name: edu-volume-112
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-113
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-114
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-9
+      - configMap:
+          name: edu-configmap-31
+        name: edu-volume-115
+      - configMap:
+          name: edu-configmap-31
+        name: edu-volume-116
+      - configMap:
+          name: edu-configmap-31
+        name: edu-volume-117
+      - emptyDir: {}
+        name: edu-volume-15
+      - emptyDir:
+          sizeLimit: 1500Mi
+        name: edu-volume-16
+      - emptyDir: {}
+        name: edu-volume-118
+      - emptyDir: {}
+        name: edu-volume-119
+      - emptyDir: {}
+        name: edu-volume-120
+      - emptyDir: {}
+        name: edu-volume-121
+      - emptyDir: {}
+        name: edu-volume-14
+      - name: edu-volume-122
+        persistentVolumeClaim:
+          claimName: edu-pvc-12
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-3
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-4
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-11
+  name: edu-deployment-11
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-11
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-11
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '4104'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-28"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-28
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 50016
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 700m
+            memory: 4872Mi
+          requests:
+            cpu: 300m
+            memory: 4104Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SYS_NICE
+            - KILL
+            - DAC_OVERRIDE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/1a40086d-3d18-4f45-b94b-0438248033a6
+          name: edu-volume-2
+        - mountPath: /tmp/06299771-7746-48c2-a219-2c247e936483
+          name: edu-volume-124
+        - mountPath: /tmp/304ae534-cdb4-4781-81c1-fe4925ac6fb1
+          name: edu-volume-123
+        - mountPath: /tmp/796bde55-a9e3-4e20-bd00-6bb2f15b4e81
+          name: edu-volume-126
+        - mountPath: /tmp/f2fe982d-d205-428b-a6fc-26c2725a5128
+          name: edu-volume-125
+        - mountPath: /tmp/018d8451-a322-43cc-92d0-ff405332af4b
+          name: edu-volume-10
+        - mountPath: /tmp/56d8137f-fa1c-4021-8203-f813bc9e2972
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/60d4c4c6-f6cc-4be7-bc9b-48e249e5e317
+          name: edu-volume-127
+        - mountPath: /tmp/b8ff2b0e-c746-4978-b600-b94360a75978
+          name: edu-volume-3
+        - mountPath: /tmp/eaded6f7-2106-42c5-a213-71c42db7116f
+          name: edu-volume-4
+      volumes:
+      - name: edu-volume-10
+        persistentVolumeClaim:
+          claimName: edu-pvc-0
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1144Mi
+        name: edu-volume-123
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 2448Mi
+        name: edu-volume-124
+      - configMap:
+          name: edu-configmap-32
+        name: edu-volume-2
+      - configMap:
+          name: edu-configmap-33
+        name: edu-volume-1
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-125
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-126
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-9
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-127
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-3
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-4
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-12
+  name: edu-deployment-12
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-12
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-12
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '2048'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-29"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-29
+        resources:
+          limits:
+            cpu: '1'
+            memory: 2Gi
+          requests:
+            cpu: 300m
+            memory: 2Gi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SYS_NICE
+            - KILL
+            - DAC_OVERRIDE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/9750b5c8-d8ca-4cd1-bb87-b2c73a81b7c4
+          name: edu-volume-2
+        - mountPath: /tmp/33b86e6e-81eb-4c43-a8d7-9ab3fe3b0ef7
+          name: edu-volume-128
+        - mountPath: /tmp/2037c9a4-b899-4b06-954c-692b7d079004
+          name: edu-volume-129
+        - mountPath: /tmp/61ece46e-9e07-4a1d-b700-87e478a57f4a
+          name: edu-volume-130
+      volumes:
+      - configMap:
+          name: edu-configmap-34
+        name: edu-volume-2
+      - name: edu-volume-128
+        persistentVolumeClaim:
+          claimName: edu-pvc-0
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 410Mi
+        name: edu-volume-129
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 686Mi
+        name: edu-volume-130
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-13
+  name: edu-deployment-13
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-13
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-13
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '3848'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-30"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-30
+        ports:
+        - containerPort: 8080
+          protocol: TCP
+        - containerPort: 50016
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 1200m
+            memory: 4232Mi
+          requests:
+            cpu: 300m
+            memory: 3848Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SYS_NICE
+            - KILL
+            - DAC_OVERRIDE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/8bf11b0c-0e88-4e66-9cd4-3715ba8d4004
+          name: edu-volume-2
+        - mountPath: /tmp/5345052e-b353-487c-a8bb-48415dfc6e6d
+          name: edu-volume-134
+        - mountPath: /tmp/6ddf80e8-6844-4a70-b3fd-22a9a59cb3ae
+          name: edu-volume-133
+        - mountPath: /tmp/4a200a69-ce3a-4505-aaee-0968affa4e2a
+          name: edu-volume-132
+        - mountPath: /tmp/17542285-430c-4bdf-8062-6f213f3128dd
+          name: edu-volume-131
+        - mountPath: /tmp/b045cc4c-3edd-42be-8bfc-e2f94dac1f38
+          name: edu-volume-30
+        - mountPath: /tmp/5f9b203d-bcb5-4711-a4c6-ac80952aed53
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/3030e9cf-c913-435f-92bc-e0de14e9fca6
+          name: edu-volume-135
+        - mountPath: /tmp/f8b50c5e-a64b-483c-beb2-6be9757253b0
+          name: edu-volume-3
+        - mountPath: /tmp/d1882fd9-8aa2-47ac-9d01-d62dd33f4093
+          name: edu-volume-4
+      volumes:
+      - configMap:
+          name: edu-configmap-35
+        name: edu-volume-2
+      - configMap:
+          name: edu-configmap-36
+        name: edu-volume-1
+      - name: edu-volume-30
+        persistentVolumeClaim:
+          claimName: edu-pvc-0
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-131
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-132
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1144Mi
+        name: edu-volume-133
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 2448Mi
+        name: edu-volume-134
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-9
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-135
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-3
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-4
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-14
+  name: edu-deployment-14
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-14
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-14
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '4872'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-31"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-31
+        resources:
+          limits:
+            cpu: 700m
+            memory: 5256Mi
+          requests:
+            cpu: 400m
+            memory: 4872Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SYS_NICE
+            - KILL
+            - DAC_OVERRIDE
+            - SYS_RESOURCE
+            - SYS_TIME
+            - IPC_OWNER
+            - NET_BIND_SERVICE
+            - SETUID
+            - SETGID
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/891b2c0d-e465-4a4d-81e4-5096b3a7abd5
+          name: edu-volume-2
+        - mountPath: /tmp/038be4e9-f047-449f-b830-c9ac687c2e78
+          name: edu-volume-137
+        - mountPath: /tmp/ad7142e2-6957-44e4-b836-e63e53c2b85d
+          name: edu-volume-136
+        - mountPath: /tmp/3052448b-c4e5-4612-b4ab-c1438bf054bf
+          name: edu-volume-139
+        - mountPath: /tmp/4d0ae963-d338-4bc7-81b3-583b6f21dfe5
+          name: edu-volume-138
+        - mountPath: /tmp/21a0a651-5e36-457e-9797-2d0c3d73bfd3
+          name: edu-volume-10
+        - mountPath: /tmp/185a5c37-5b95-4eae-8e7c-8277eaf9c03b
+          name: edu-volume-3
+        - mountPath: /tmp/5b87f986-3093-404a-a13c-1e97a7e6f61c
+          name: edu-volume-4
+        - mountPath: /tmp/288f1427-5cd3-4c04-9f7d-acb1bed0af2e
+          name: edu-volume-17
+        - mountPath: /tmp/90ade0c0-db8a-4c9f-9141-d1b7327db417
+          name: edu-volume-140
+      volumes:
+      - name: edu-volume-10
+        persistentVolumeClaim:
+          claimName: edu-pvc-0
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1656Mi
+        name: edu-volume-136
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 2448Mi
+        name: edu-volume-137
+      - configMap:
+          name: edu-configmap-37
+        name: edu-volume-2
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-138
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-139
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-140
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-3
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-4
+      - name: edu-volume-17
+        secret:
+          secretName: edu-secret-0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-15
+  name: edu-deployment-15
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-15
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-15
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '200'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-32"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-32
+        ports:
+        - containerPort: 50003
+          protocol: TCP
+        - containerPort: 50004
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 300m
+            memory: 200Mi
+          requests:
+            cpu: 50m
+            memory: 200Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/ca6a0e97-476c-4b0c-b3cd-60e19649b682
+          name: edu-volume-141
+        - mountPath: /tmp/4e21839c-6f4a-4592-aa5e-0e0de2be1b1f
+          name: edu-volume-141
+        - mountPath: /tmp/73353ca4-a15a-43b9-96bc-51aea9c90a64
+          name: edu-volume-142
+        - mountPath: /tmp/41b7b049-0fef-408e-b7f3-141c192033d9
+          name: edu-volume-142
+        - mountPath: /tmp/8f7a3e20-f944-4e27-9041-a360eec7d054
+          name: edu-volume-142
+        - mountPath: /tmp/c427bccc-43f6-4480-87ba-bcd0cd058817
+          name: edu-volume-143
+        - mountPath: /tmp/77af3a4d-0035-462c-a2e3-4047b57d101c
+          name: edu-volume-143
+        - mountPath: /tmp/47fe2819-69d3-4b26-91ab-7f9d165dc114
+          name: edu-volume-144
+      - env:
+        - name: MAX_MEM
+          value: '100'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-33"] | default(spammer_per_mem_default) }}'
+        - name: LISTEN_PORT
+          value: '50106'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /api/rcp-pm/v1/measurements/liveness-probe
+            port: 50106
+            scheme: HTTP
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-33
+        ports:
+        - containerPort: 50106
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 50m
+            memory: 100Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/c29d4c5d-7637-4658-a9d3-6e766253bce6
+          name: edu-volume-142
+        - mountPath: /tmp/864e054b-4161-4aae-871e-f24f9705d264
+          name: edu-volume-142
+        - mountPath: /tmp/df511f1e-1e0f-4cbc-8ca4-a4c8d1e485d5
+          name: edu-volume-143
+        - mountPath: /tmp/536adb66-f665-401a-8d72-126840ab536d
+          name: edu-volume-143
+        - mountPath: /tmp/41ded2a1-1c6f-4347-aba5-5b2eafcfec83
+          name: edu-volume-144
+      volumes:
+      - configMap:
+          name: edu-configmap-38
+        name: edu-volume-141
+      - name: edu-volume-142
+        persistentVolumeClaim:
+          claimName: edu-pvc-13
+      - name: edu-volume-143
+        persistentVolumeClaim:
+          claimName: edu-pvc-14
+      - emptyDir: {}
+        name: edu-volume-144
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-16
+  name: edu-deployment-16
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-16
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-16
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '512'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-34"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-34
+        resources:
+          limits:
+            cpu: 100m
+            memory: 512Mi
+          requests:
+            cpu: 50m
+            memory: 512Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_BIND_SERVICE
+            drop:
+            - ALL
+          privileged: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/a9265438-c973-4b35-9693-ab84f38a13ea
+          name: edu-volume-145
+        - mountPath: /tmp/5b0944ba-77f6-4841-8934-39d89ce1c785
+          name: edu-volume-145
+        - mountPath: /tmp/6dd207e8-fd8e-4f78-bede-221a6f02b2f6
+          name: edu-volume-145
+        - mountPath: /tmp/ea3492ee-7610-4a86-9df6-fe2bfea73010
+          name: edu-volume-145
+        - mountPath: /tmp/e4386093-a480-4d85-b43a-127ffa3d2c72
+          name: edu-volume-145
+        - mountPath: /tmp/40e44652-47ad-48eb-89ae-091b9add8c09
+          name: edu-volume-146
+        - mountPath: /tmp/4c4b95e3-b6ab-4ef3-9aa3-f64491235485
+          name: edu-volume-147
+        - mountPath: /tmp/0eb6c511-bd4d-43eb-aedb-fb1aa93ea0f8
+          name: edu-volume-148
+        - mountPath: /tmp/49f0c748-a190-4326-bdc4-30d230f8a052
+          name: edu-volume-148
+      volumes:
+      - emptyDir: {}
+        name: edu-volume-145
+      - emptyDir: {}
+        name: edu-volume-146
+      - emptyDir: {}
+        name: edu-volume-147
+      - name: edu-volume-148
+        persistentVolumeClaim:
+          claimName: edu-pvc-15
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-17
+  name: edu-deployment-17
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-17
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-17
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '2048'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-35"] | default(spammer_per_mem_default) }}'
+        - name: LISTEN_PORT
+          value: '6379'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 2
+          successThreshold: 1
+          timeoutSeconds: 5
+        name: edu-container-35
+        ports:
+        - containerPort: 6379
+          name: redis
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 6
+          initialDelaySeconds: 1
+          periodSeconds: 1
+          successThreshold: 1
+          tcpSocket:
+            port: 6379
+          timeoutSeconds: 5
+        resources:
+          limits:
+            cpu: 200m
+            memory: 2Gi
+          requests:
+            cpu: 50m
+            memory: 2Gi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/cadd39d7-651b-4e49-98b8-fdde2587ad24
+          name: edu-volume-150
+        - mountPath: /tmp/b098a2b8-4469-4829-b335-dd461e3a9fbe
+          name: edu-volume-151
+        - mountPath: /tmp/7874a7bc-e262-4ceb-864a-453f34dfb577
+          name: edu-volume-152
+        - mountPath: /tmp/315ecfbd-e16b-4ed9-8949-f57b13939d09
+          name: edu-volume-153
+        - mountPath: /tmp/efa62553-7226-4113-afd3-4983ad9c8215
+          name: edu-volume-154
+      volumes:
+      - configMap:
+          name: edu-configmap-39
+        name: edu-volume-149
+      - emptyDir: {}
+        name: edu-volume-150
+      - emptyDir: {}
+        name: edu-volume-151
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1Mi
+        name: edu-volume-152
+      - emptyDir:
+          medium: Memory
+        name: edu-volume-153
+      - emptyDir: {}
+        name: edu-volume-154
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-18
+  name: edu-deployment-18
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-18
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-18
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '100'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-36"] | default(spammer_per_mem_default) }}'
+        - name: LISTEN_PORT
+          value: '50507'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /health
+            port: 50507
+            scheme: HTTP
+          initialDelaySeconds: 3
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-36
+        resources:
+          limits:
+            cpu: 100m
+            memory: 100Mi
+          requests:
+            cpu: 10m
+            memory: 100Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/27bfd228-f87d-4e9c-825f-34f9681946d6
+          name: edu-volume-155
+        - mountPath: /tmp/897d4677-1998-40e4-9813-bcc8aaac67cf
+          name: edu-volume-156
+        - mountPath: /tmp/06e8ccda-ea91-4c90-b42f-d5e97b066039
+          name: edu-volume-157
+        - mountPath: /tmp/c263c167-b2e0-4744-8ba3-866cdf8a1885
+          name: edu-volume-158
+      volumes:
+      - name: edu-volume-155
+        persistentVolumeClaim:
+          claimName: edu-pvc-16
+      - emptyDir: {}
+        name: edu-volume-156
+      - emptyDir: {}
+        name: edu-volume-157
+      - emptyDir: {}
+        name: edu-volume-158
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-19
+  name: edu-deployment-19
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-19
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-19
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '128'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-37"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        name: edu-container-37
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 10m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/d0f221b8-7ca9-46c3-a8a2-f92acdea7e55
+          name: edu-volume-174
+        - mountPath: /tmp/9de2f390-4b6a-420b-8d27-ac392945b96f
+          name: edu-volume-176
+      - env:
+        - name: MAX_MEM
+          value: '256'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-38"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: edu-container-38
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 10m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/e2e1c135-77b7-45c3-a97f-968e79603db4
+          name: edu-volume-160
+        - mountPath: /tmp/31a1a937-958c-49a5-88ac-ecfd8d20b9fc
+          name: edu-volume-172
+      - env:
+        - name: MAX_MEM
+          value: '256'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-39"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-39
+        readinessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: '1'
+            memory: 512Mi
+          requests:
+            cpu: 10m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        startupProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 300
+          periodSeconds: 2
+          successThreshold: 1
+          timeoutSeconds: 1
+        volumeMounts:
+        - mountPath: /tmp/cde87e45-2ca4-4070-a4df-9bde2a66338b
+          name: edu-volume-159
+        - mountPath: /tmp/61866227-bf52-4f95-8378-683b4393641d
+          name: edu-volume-173
+        - mountPath: /tmp/3b71b258-223f-40f6-af2c-88709731820f
+          name: edu-volume-175
+        - mountPath: /tmp/6cec3dc3-2309-4260-a472-021ba2dbd3ea
+          name: edu-volume-17
+      volumes:
+      - name: edu-volume-159
+        persistentVolumeClaim:
+          claimName: edu-pvc-17
+      - name: edu-volume-160
+        persistentVolumeClaim:
+          claimName: edu-pvc-18
+      - name: edu-volume-161
+        secret:
+          secretName: edu-secret-4
+      - name: edu-volume-162
+        secret:
+          secretName: edu-secret-5
+      - name: edu-volume-163
+        secret:
+          secretName: edu-secret-6
+      - name: edu-volume-164
+        secret:
+          secretName: edu-secret-7
+      - name: edu-volume-165
+        secret:
+          secretName: edu-secret-8
+      - name: edu-volume-166
+        secret:
+          secretName: edu-secret-9
+      - name: edu-volume-167
+        secret:
+          secretName: edu-secret-10
+      - name: edu-volume-168
+        secret:
+          secretName: edu-secret-11
+      - name: edu-volume-169
+        secret:
+          secretName: edu-secret-12
+      - name: edu-volume-170
+        secret:
+          secretName: edu-secret-13
+      - name: edu-volume-171
+        secret:
+          secretName: edu-secret-14
+      - name: edu-volume-17
+        secret:
+          secretName: edu-secret-0
+      - emptyDir: {}
+        name: edu-volume-172
+      - emptyDir: {}
+        name: edu-volume-173
+      - emptyDir: {}
+        name: edu-volume-174
+      - emptyDir: {}
+        name: edu-volume-175
+      - emptyDir: {}
+        name: edu-volume-176
+      - emptyDir: {}
+        name: edu-volume-177
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-20
+  name: edu-deployment-20
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-20
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-20
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '128'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-40"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 6
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-40
+        ports:
+        - containerPort: 6513
+          name: netconf-tls
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/6af3c80f-9f51-4e74-8e68-5a96fd95782f
+          name: edu-volume-178
+        - mountPath: /tmp/a7410c21-bf0f-4dbe-a7e7-f1967be96b67
+          name: edu-volume-179
+        - mountPath: /tmp/4383e1ca-77d6-426d-a8a9-015446c0e6c9
+          name: edu-volume-180
+        - mountPath: /tmp/0f246b8d-1341-4e2f-a5d2-09713f1829b5
+          name: edu-volume-24
+      volumes:
+      - configMap:
+          name: edu-configmap-40
+        name: edu-volume-178
+      - configMap:
+          name: edu-configmap-40
+        name: edu-volume-179
+      - emptyDir:
+          medium: Memory
+        name: edu-volume-180
+      - emptyDir:
+          sizeLimit: 1Mi
+        name: edu-volume-24
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-21
+  name: edu-deployment-21
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-21
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-21
+      annotations:
+        k8s.v1.cni.cncf.io/networks: |-
+          [
+            {"interfaceRequest": "twamp", "name": "networking-e5l", "namespace": "edu-namespace-0", "ips": ["{{ networking['twamp']['ips'][0] }}"], "gateway_ips": ["{{ networking['twamp']['gateway'] }}"]}
+          ]
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '256'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-0"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-0
+        resources:
+          limits:
+            cpu: 300m
+            memory: 256Mi
+          requests:
+            cpu: 50m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_ADMIN
+            - NET_RAW
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/665f2f77-eda8-4146-bc62-4d921c199abe
+          name: edu-volume-51
+          readOnly: true
+        - mountPath: /tmp/13491888-bd3e-44b3-b051-3c74751a6e49
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/3356a461-50bd-48ad-bce5-84fc29cb3a2d
+          name: edu-volume-9
+        - mountPath: /tmp/39c34ad5-2247-44cd-8de5-11e7801ae35d
+          name: edu-volume-11
+        - mountPath: /tmp/627e6bbd-93eb-4b1f-bbbb-8f34ec053a58
+          name: edu-volume-12
+        - mountPath: /tmp/3abba19a-6fb6-473f-a271-a33a6b738cfb
+          name: edu-volume-13
+        - mountPath: /tmp/09f8607b-c067-4bfe-8905-be097e8759b7
+          name: edu-volume-15
+        - mountPath: /tmp/563a97e0-d767-4734-b457-4d57ea5b46d8
+          name: edu-volume-16
+      - env:
+        - name: MAX_MEM
+          value: '64'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-2"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-2
+        resources:
+          limits:
+            cpu: 300m
+            memory: 64Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_ADMIN
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/8d75f420-07fe-458b-9610-fae087ff5f78
+          name: edu-volume-14
+      - env:
+        - name: MAX_MEM
+          value: '128'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-41"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-41
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_RAW
+            - NET_BIND_SERVICE
+            - SYS_NICE
+            - NET_ADMIN
+            - SYS_ADMIN
+            - DAC_OVERRIDE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/45f532a7-5d05-4f75-acd6-18312c6187aa
+          name: edu-volume-11
+        - mountPath: /tmp/150058ec-be77-4f41-8e5f-f6c5e3904b12
+          name: edu-volume-1
+          readOnly: true
+      - env:
+        - name: MAX_MEM
+          value: '128'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-42"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-42
+        resources:
+          limits:
+            cpu: 500m
+            memory: 128Mi
+            openshift.io/pci_sriov_net_e5l: '1'
+          requests:
+            cpu: 100m
+            memory: 128Mi
+            openshift.io/pci_sriov_net_e5l: '1'
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_RAW
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/f7d225ec-bb73-4fb5-90bf-bd04e44cb40f
+          name: edu-volume-11
+      volumes:
+      - emptyDir: {}
+        name: edu-volume-51
+      - emptyDir: {}
+        name: edu-volume-11
+      - emptyDir: {}
+        name: edu-volume-12
+      - emptyDir: {}
+        name: edu-volume-13
+      - emptyDir: {}
+        name: edu-volume-15
+      - emptyDir:
+          sizeLimit: 1500Mi
+        name: edu-volume-16
+      - configMap:
+          name: edu-configmap-41
+        name: edu-volume-1
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-9
+      - emptyDir: {}
+        name: edu-volume-14
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-22
+  name: edu-deployment-22
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-22
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-22
+      annotations:
+        k8s.v1.cni.cncf.io/networks: |-
+          [
+            {"interfaceRequest": "l1bipl1", "name": "networking-llscm", "namespace": "edu-namespace-0", "ips": ["{{ networking['l1bipl1']['ips'][0] }}"], "gateway_ips": ["{{ networking['l1bipl1']['gateway'] }}"]},
+            {"interfaceRequest": "l2biphi", "name": "networking-llscm", "namespace": "edu-namespace-0", "ips": ["{{ networking['l2biphi']['ips'][0] }}"], "gateway_ips": ["{{ networking['l2biphi']['gateway'] }}"]},
+            {"interfaceRequest": "l1biprt", "name": "networking-llscu", "namespace": "edu-namespace-0", "ips": ["{{ networking['l1biprt']['ips'][0] }}"], "gateway_ips": ["{{ networking['l1biprt']['gateway'] }}"]},
+            {"interfaceRequest": "l2biprt", "name": "networking-llscu", "namespace": "edu-namespace-0", "ips": ["{{ networking['l2biprt']['ips'][0] }}"], "gateway_ips": ["{{ networking['l2biprt']['gateway'] }}"]},
+            {"interfaceRequest": "f1", "name": "networking-f1c", "namespace": "edu-namespace-0", "ips": ["{{ networking['f1']['ips'][0] }}"], "gateway_ips": ["{{ networking['f1']['gateway'] }}"]},
+            {"interfaceRequest": "fhuc", "name": "networking-f1u", "namespace": "edu-namespace-0", "ips": ["{{ networking['fhuc']['ips'][0] }}"], "gateway_ips": ["{{ networking['fhuc']['gateway'] }}"]}
+          ]
+    spec:
+      containers:
+      - env:
+        - name: MAX_MEM
+          value: '256'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-0"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-0
+        resources:
+          limits:
+            cpu: 100m
+            memory: 256Mi
+          requests:
+            cpu: 100m
+            memory: 256Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_RAW
+            - NET_ADMIN
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/a10e4230-b7cb-44a6-9dba-b43ef18c5b3d
+          name: edu-volume-0
+          readOnly: true
+        - mountPath: /tmp/2fd33fb8-7676-4af3-b76a-82d2c571cfe1
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/f166c854-6310-44c1-88f5-d799f2f0ea45
+          name: edu-volume-55
+        - mountPath: /tmp/f2e9b428-93d3-4b82-850e-9e987aa06ae2
+          name: edu-volume-11
+        - mountPath: /tmp/0c9a4037-1b3a-401c-9d9d-0e549511ff13
+          name: edu-volume-12
+        - mountPath: /tmp/c0cd31da-17ba-4158-9c7b-4801683818b0
+          name: edu-volume-13
+        - mountPath: /tmp/df59c812-835f-4e86-99c8-e4ad4db01c08
+          name: edu-volume-15
+        - mountPath: /tmp/ce765a30-c009-43d9-811e-c4ba317cfdf3
+          name: edu-volume-16
+      - env:
+        - name: MAX_MEM
+          value: '11460'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-43"] | default(spammer_per_mem_default) }}'
+        - name: LISTEN_PORT
+          value: '49211'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 49211
+            scheme: HTTP
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-43
+        resources:
+          limits:
+            cpu: '12'
+            hugepages-1Gi: 5Gi
+            memory: 11460Mi
+            openshift.io/pci_sriov_net_llscu: '2'
+          requests:
+            cpu: '12'
+            hugepages-1Gi: 5Gi
+            memory: 11460Mi
+            openshift.io/pci_sriov_net_llscu: '2'
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - DAC_OVERRIDE
+            - KILL
+            - NET_ADMIN
+            - NET_RAW
+            - IPC_LOCK
+            - SYS_RAWIO
+            - SYS_NICE
+            - FOWNER
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        startupProbe:
+          failureThreshold: 40
+          httpGet:
+            path: /
+            port: 49211
+            scheme: HTTP
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 1
+        volumeMounts:
+        - mountPath: /tmp/95e52db3-3693-43aa-b78e-ce4c514deec7
+          name: edu-volume-185
+        - mountPath: /tmp/88b8b1cf-31e0-4fda-b7cb-8e77aef8c03e
+          name: edu-volume-184
+        - mountPath: /tmp/473fef56-6475-4798-a4fe-9a36f0071463
+          name: edu-volume-198
+        - mountPath: /tmp/e3645b9b-d94f-412a-a36f-8b609f434bb2
+          name: edu-volume-188
+        - mountPath: /tmp/f9c37ecc-3574-4bfe-89a0-db921b5010b0
+          name: edu-volume-189
+        - mountPath: /tmp/7ed83b4e-37f8-437e-a05b-e07cb8b5b580
+          name: edu-volume-190
+        - mountPath: /tmp/0e5e8fd1-37f8-420f-9b61-bb46cff06230
+          name: edu-volume-183
+        - mountPath: /tmp/c4bc3f51-6ee6-45d9-a783-f5a765226bbc
+          name: edu-volume-199
+          readOnly: true
+        - mountPath: /tmp/2579840a-abd1-4eda-9f6f-e9f5c8ed6032
+          name: edu-volume-2
+        - mountPath: /tmp/3e8dd0f8-a865-49a8-8f19-338b86594059
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/4df7656b-33c6-4a47-832f-6cda4990e205
+          name: edu-volume-0
+        - mountPath: /tmp/51a60562-6263-4ea1-9373-ff9075f97f37
+          name: edu-volume-201
+        - mountPath: /tmp/91fc4711-0444-4294-8b30-1d6b2429f42c
+          name: edu-volume-202
+        - mountPath: /tmp/ce8ea761-e913-43bb-b60b-c4e0bcdff094
+          name: edu-volume-3
+        - mountPath: /tmp/81f6e5a7-647a-4e9e-924e-71c6489366a0
+          name: edu-volume-4
+      - env:
+        - name: MAX_MEM
+          value: '11772'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-44"] | default(spammer_per_mem_default) }}'
+        - name: LISTEN_PORT
+          value: '49212'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 49212
+            scheme: HTTP
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-44
+        resources:
+          limits:
+            cpu: '12'
+            hugepages-1Gi: 8Gi
+            memory: 11772Mi
+            openshift.io/pci_sriov_net_llscm: '2'
+          requests:
+            cpu: '12'
+            hugepages-1Gi: 8Gi
+            memory: 11772Mi
+            openshift.io/pci_sriov_net_llscm: '2'
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - DAC_OVERRIDE
+            - KILL
+            - NET_ADMIN
+            - SYS_ADMIN
+            - NET_RAW
+            - IPC_LOCK
+            - SYS_RAWIO
+            - SYS_NICE
+            - MKNOD
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        startupProbe:
+          failureThreshold: 40
+          httpGet:
+            path: /
+            port: 49212
+            scheme: HTTP
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 1
+        volumeMounts:
+        - mountPath: /tmp/a0cd5a4a-1eab-429c-9e0b-f119965ab1c4
+          name: edu-volume-187
+        - mountPath: /tmp/e9092625-8ff5-4637-b842-61dd95111c50
+          name: edu-volume-186
+        - mountPath: /tmp/feaff9e6-5e25-425c-82e0-ca53ef27b59f
+          name: edu-volume-198
+        - mountPath: /tmp/919a81c8-4347-46a7-9625-500aedc99267
+          name: edu-volume-191
+        - mountPath: /tmp/c2af5d0d-681e-449c-ac72-136a535250b2
+          name: edu-volume-192
+        - mountPath: /tmp/47bcf559-fb98-4183-9a38-68e0f69571e8
+          name: edu-volume-193
+        - mountPath: /tmp/e165d301-92ae-4d12-b41e-92812e931026
+          name: edu-volume-182
+        - mountPath: /tmp/6519d340-4652-4a8b-9f2f-089d4edf3d53
+          name: edu-volume-200
+          readOnly: true
+        - mountPath: /tmp/685c4458-eeb1-4b55-9727-b400ab484047
+          name: edu-volume-2
+        - mountPath: /tmp/3f757335-cbc4-4362-a099-753dffacbec0
+          name: edu-volume-1
+          readOnly: true
+        - mountPath: /tmp/0552ae6d-644b-44c0-b78c-92580d806080
+          name: edu-volume-0
+        - mountPath: /tmp/e2372afc-f206-4f22-8b90-c58097749e6d
+          name: edu-volume-3
+        - mountPath: /tmp/3c81dd53-c35e-47cf-a129-7545006e968c
+          name: edu-volume-4
+      - env:
+        - name: MAX_MEM
+          value: '8742'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-45"] | default(spammer_per_mem_default) }}'
+        - name: LISTEN_PORT
+          value: '49210'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 49210
+            scheme: HTTP
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-45
+        resources:
+          limits:
+            cpu: '26'
+            hugepages-1Gi: 16Gi
+            intel.com/intel_fec_acc100: '1'
+            memory: 8742Mi
+            openshift.io/pci_sriov_net_f1: '2'
+          requests:
+            cpu: '26'
+            hugepages-1Gi: 16Gi
+            intel.com/intel_fec_acc100: '1'
+            memory: 8742Mi
+            openshift.io/pci_sriov_net_f1: '2'
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - DAC_OVERRIDE
+            - KILL
+            - NET_ADMIN
+            - NET_RAW
+            - IPC_LOCK
+            - SYS_RAWIO
+            - SYS_NICE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            level: s0
+            type: spc_t
+        startupProbe:
+          failureThreshold: 40
+          httpGet:
+            path: /
+            port: 49210
+            scheme: HTTP
+          periodSeconds: 3
+          successThreshold: 1
+          timeoutSeconds: 1
+        volumeMounts:
+        - mountPath: /tmp/976a9de2-6f25-4d44-9197-bae4e9a5e62d
+          name: edu-volume-198
+        - mountPath: /tmp/6c9b9e2f-89ba-40f9-b0d4-3286ef60b34d
+          name: edu-volume-194
+        - mountPath: /tmp/27ef0057-7122-4175-bc9a-6cf6bb6cf9ef
+          name: edu-volume-195
+        - mountPath: /tmp/c0aeff42-6d34-4d50-8c87-ae78b36114f6
+          name: edu-volume-196
+        - mountPath: /tmp/c4a22c6d-8acf-464d-9c9b-5a897952e7cf
+          name: edu-volume-2
+        - mountPath: /tmp/c5809fc9-585a-44c3-a658-05e05931f851
+          name: edu-volume-0
+        - mountPath: /tmp/663d2123-9356-46a8-9cbe-59fe7718a047
+          name: edu-volume-181
+        - mountPath: /tmp/51139206-8af7-45b8-9c1d-20f8a793f8ec
+          name: edu-volume-197
+          readOnly: true
+        - mountPath: /tmp/3dfb8d08-5189-4399-b912-d12f0cc89d8b
+          name: edu-volume-3
+        - mountPath: /tmp/88d059ad-fec4-4d6b-8811-ceeda459a6aa
+          name: edu-volume-4
+      - env:
+        - name: MAX_MEM
+          value: '64'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-2"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: edu-container-2
+        resources:
+          limits:
+            cpu: 100m
+            memory: 64Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - NET_ADMIN
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+        volumeMounts:
+        - mountPath: /tmp/2998d7ff-eaa8-4fb5-81b5-d0a37f0b0eaf
+          name: edu-volume-14
+      - env:
+        - name: MAX_MEM
+          value: '1024'
+        - name: PER_MEM
+          value: '{{ spammer_per_mem["edu-container-3"] | default(spammer_per_mem_default) }}'
+        image: quay.io/cdonato/spammer:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 180
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 2
+        name: edu-container-3
+        resources:
+          limits:
+            cpu: 200m
+            memory: 1Gi
+          requests:
+            cpu: 200m
+            memory: 1Gi
+        securityContext:
+          allowPrivilegeEscalation: true
+          capabilities:
+            add:
+            - SETUID
+            - SETGID
+            - NET_RAW
+            - CHOWN
+            - FOWNER
+            - DAC_OVERRIDE
+            - NET_ADMIN
+            - NET_BIND_SERVICE
+            - SYS_NICE
+            drop:
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          seLinuxOptions:
+            type: spc_t
+        volumeMounts:
+        - mountPath: /tmp/071ffbfe-947c-4bbe-a231-a7fb47a32f3f
+          name: edu-volume-17
+        - mountPath: /tmp/828f1646-e346-4847-8a34-17d5a0ef8c90
+          name: edu-volume-2
+        - mountPath: /tmp/5cd26398-d0dc-45ab-9800-098d357ee0cb
+          name: edu-volume-20
+        - mountPath: /tmp/a1eea7fb-821f-4b12-a76d-abbfe7cc03cd
+          name: edu-volume-21
+        - mountPath: /tmp/7fdc9fd1-732b-4884-86a0-33c1f05c7b28
+          name: edu-volume-22
+        - mountPath: /tmp/35ffc3d0-efd8-418e-9b4e-cb87cffa63b1
+          name: edu-volume-18
+        - mountPath: /tmp/7535afd4-9592-454e-b116-f9ad4b3741dc
+          name: edu-volume-19
+        - mountPath: /tmp/88f67efc-e803-4db7-b873-89c967ee715c
+          name: edu-volume-1
+          readOnly: true
+      volumes:
+      - name: edu-volume-181
+        persistentVolumeClaim:
+          claimName: edu-pvc-19
+      - name: edu-volume-182
+        persistentVolumeClaim:
+          claimName: edu-pvc-20
+      - name: edu-volume-183
+        persistentVolumeClaim:
+          claimName: edu-pvc-21
+      - configMap:
+          name: edu-configmap-42
+        name: edu-volume-2
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-184
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-185
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-186
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 64Mi
+        name: edu-volume-187
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 5320Mi
+        name: edu-volume-188
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1332Mi
+        name: edu-volume-189
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1224Mi
+        name: edu-volume-190
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 5920Mi
+        name: edu-volume-191
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1134Mi
+        name: edu-volume-192
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 2448Mi
+        name: edu-volume-193
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 5320Mi
+        name: edu-volume-194
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1242Mi
+        name: edu-volume-195
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 1224Mi
+        name: edu-volume-196
+      - configMap:
+          name: edu-configmap-43
+        name: edu-volume-197
+      - emptyDir:
+          medium: HugePages
+          sizeLimit: 32Gi
+        name: edu-volume-198
+      - emptyDir: {}
+        name: edu-volume-0
+      - emptyDir:
+          sizeLimit: 64Mi
+        name: edu-volume-55
+      - configMap:
+          name: edu-configmap-44
+        name: edu-volume-1
+      - configMap:
+          name: edu-configmap-45
+        name: edu-volume-199
+      - configMap:
+          name: edu-configmap-46
+        name: edu-volume-200
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 200Mi
+        name: edu-volume-201
+      - emptyDir:
+          sizeLimit: 1Mi
+        name: edu-volume-202
+      - emptyDir: {}
+        name: edu-volume-11
+      - emptyDir: {}
+        name: edu-volume-12
+      - emptyDir: {}
+        name: edu-volume-13
+      - emptyDir: {}
+        name: edu-volume-14
+      - emptyDir: {}
+        name: edu-volume-15
+      - emptyDir:
+          sizeLimit: 1500Mi
+        name: edu-volume-16
+      - name: edu-volume-17
+        secret:
+          secretName: edu-secret-0
+      - emptyDir: {}
+        name: edu-volume-20
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-3
+      - configMap:
+          name: edu-configmap-2
+        name: edu-volume-4
+      - configMap:
+          name: edu-configmap-47
+        name: edu-volume-18
+      - configMap:
+          name: edu-configmap-47
+        name: edu-volume-19
+      - emptyDir: {}
+        name: edu-volume-21
+      - emptyDir: {}
+        name: edu-volume-22

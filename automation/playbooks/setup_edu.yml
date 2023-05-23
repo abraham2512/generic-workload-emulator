@@ -1,0 +1,7 @@
+- name: Install eDU
+  hosts: localhost
+  tasks:
+    - include_role:
+        name: setup_edu
+      vars:
+        kubeconfig_path: "{{ hostvars['cluster'].kubeconfig_path }}"

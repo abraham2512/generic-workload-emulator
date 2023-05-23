@@ -1,0 +1,6 @@
+---
+- name: Apply logical volume configuration
+  include_tasks: "{{ role_path }}/tasks/apply_lvg.yml"
+  loop: "{{ lvgs }}"
+  loop_control:
+    loop_var: lvg

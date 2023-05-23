@@ -1,0 +1,64 @@
+namespace: edu-namespace-0
+debug_mode: false
+setup_edu_ansible_verification: true
+spammer_per_mem_default: 50
+
+## Networking
+networking:
+  f1:
+    vlan: 101
+    ips: ["10.10.101.10/24"]
+    gateway: "10.10.101.1"
+  f1c:
+    vlan: 102
+    ips: ["10.10.102.10/24"]
+    gateway: "10.10.102.1"
+  fhm:
+    vlan: 103
+    ips: ["10.10.103.10/24"]
+    gateway: "10.10.103.1"
+  fhuc:
+    vlan: 104
+    ips: ["10.10.104.10/24"]
+    gateway: "10.10.104.1"
+  l2biphi:
+    vlan: 105
+    ips: ["10.10.105.10/24"]
+    gateway: "10.10.105.1"
+  l2biprt:
+    vlan: 106
+    ips: ["10.10.106.10/24"]
+    gateway: "10.10.106.1"
+  l1bipl1:
+    vlan: 107
+    ips: ["10.10.107.10/24"]
+    gateway: "10.10.107.1"
+  l1biprt:
+    vlan: 108
+    ips: ["10.10.108.10/24"]
+    gateway: "10.10.108.1"
+  oam:
+    vlan: 109
+    ips: ["10.10.109.10/24", "10.10.109.11/24"]
+    gateway: "10.10.109.1"
+  tracing:
+    vlan: 110
+    ips: ["10.10.110.10/24"]
+    gateway: "10.10.101.1"
+  twamp:
+    vlan: 101
+    ips: ["10.10.110.10/24"]
+    gateway: "10.10.101.1"
+
+
+files_path: "{{ role_path }}/files"
+templates_path: "{{ role_path }}/templates"
+
+ns: "namespace.yaml"
+configmaps: "configmap.yaml"
+secrets: "secret.yaml"
+pvs:
+  - "pv.yaml"
+pvcs:
+  - "pvc.yaml"
+deployments: "deployment.yaml.j2"

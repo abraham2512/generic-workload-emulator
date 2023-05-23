@@ -1,0 +1,31 @@
+lvgs:
+  - vg_name: new_vol_group
+    pv_name: /dev/sdb
+    lvs:
+      # lv name: lv size
+      vol1: 10G
+      vol2: 10G
+      vol3: 10G
+      vol4: 10G
+      vol5: 10G
+      vol6: 10G
+      vol7: 10G
+      vol8: 10G
+      vol9: 10G
+      vol10: 10G
+      vol11: 10G
+      vol12: 10G
+      vol13: 10G
+      vol14: 10G
+      vol15: 10G
+      vol16: 10G
+      vol17: 10G
+      vol18: 10G
+      vol19: 10G
+      vol20: 10G
+      vol21: 10G
+      vol22: 10G
+      vol23: 10G
+      vol24: 10G
+      vol25: 10G
+      vol26: 10G

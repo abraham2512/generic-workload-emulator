@@ -1,0 +1,8 @@
+- name: Ensure partitions exist
+  hosts: localhost
+  tasks:
+  - include_role:
+      name: setup_lvs
+      apply:
+        delegate_to: cluster
+        become: true
