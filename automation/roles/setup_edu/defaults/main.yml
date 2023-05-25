@@ -2,6 +2,7 @@ namespace: edu-namespace-0
 debug_mode: false
 setup_edu_ansible_verification: true
 spammer_per_mem_default: 50
+spammer_num_threads_default: 1
 
 ## Networking
 networking:
@@ -44,12 +45,11 @@ networking:
   tracing:
     vlan: 110
     ips: ["10.10.110.10/24"]
-    gateway: "10.10.101.1"
+    gateway: "10.10.110.1"
   twamp:
-    vlan: 101
-    ips: ["10.10.110.10/24"]
-    gateway: "10.10.101.1"
-
+    vlan: 111
+    ips: ["10.10.111.10/24"]
+    gateway: "10.10.111.1"
 
 files_path: "{{ role_path }}/files"
 templates_path: "{{ role_path }}/templates"

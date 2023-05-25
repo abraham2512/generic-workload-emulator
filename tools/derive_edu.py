@@ -189,6 +189,7 @@ for sourcefile in os.listdir(args.sourcedir):
       newcontainer = copy.deepcopy(templates['container'])
       newcontainer['name'] = containerref
       newcontainer['env'] = [
+        {'name': 'NUM_THREADS', 'value': '{{ spammer_num_threads["' + containerref + '"] | default(spammer_num_threads_default) }}'},
         {'name': 'MAX_MEM', 'value': str(mem_in_mb(container['resources']['requests']['memory']))},
         {'name': 'PER_MEM', 'value': '{{ spammer_per_mem["' + containerref + '"] | default(spammer_per_mem_default) }}'}]
 
