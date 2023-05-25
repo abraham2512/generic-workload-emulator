@@ -22,6 +22,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-0"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
@@ -60,25 +62,27 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/0da4e1f9-8c13-4370-9033-edeca133b962
+        - mountPath: /tmp/d0c6b7de-ce87-4ed7-b213-bb68d9b71c90
           name: edu-volume-0
           readOnly: true
-        - mountPath: /tmp/39f6f308-93a3-495d-b587-da8786d6bc2d
+        - mountPath: /tmp/a5248e5c-495a-42d9-9063-2c83339dce81
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/d20c8b10-fde7-4af1-8e92-f3b9ac8aed36
+        - mountPath: /tmp/22154c2a-768b-4821-87da-e65954a3f637
           name: edu-volume-9
-        - mountPath: /tmp/90f1a315-47ba-4468-b8b0-86f546b49e31
+        - mountPath: /tmp/7a1bb20c-121c-4b4a-a91f-e1344e5a00c2
           name: edu-volume-11
-        - mountPath: /tmp/cfa3a67b-fc74-40c8-a0f0-ca777b003596
+        - mountPath: /tmp/60d3cae0-833d-4e8a-8652-a08c7ac7fecf
           name: edu-volume-12
-        - mountPath: /tmp/51293861-063f-4c23-84f8-870fd15e09cd
+        - mountPath: /tmp/2695e9e3-187d-4547-b2d0-ecc14ec4d061
           name: edu-volume-13
-        - mountPath: /tmp/db37267e-2e44-47c7-aca1-9312b6ae324b
+        - mountPath: /tmp/54d4ce77-0fc6-4557-854a-64bad6447e2b
           name: edu-volume-15
-        - mountPath: /tmp/cba2364c-5318-4384-bd35-37d1fc7badce
+        - mountPath: /tmp/98fed793-bea5-49a5-b712-3e8c00e997b3
           name: edu-volume-16
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-1"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '5896'
         - name: PER_MEM
@@ -119,29 +123,31 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/aace4105-bd3a-4264-b136-001391b7c4df
+        - mountPath: /tmp/08c478f1-2dbb-4879-b0cd-5b2a9816742d
           name: edu-volume-5
-        - mountPath: /tmp/5ef1305c-6f10-4965-a18d-53bc1bb7444d
+        - mountPath: /tmp/e7d2d59c-1053-437e-ba66-ef38cf93b0b5
           name: edu-volume-6
-        - mountPath: /tmp/ff600c12-7824-4ca4-8cf0-d19468ceeec8
+        - mountPath: /tmp/a27b9c60-63f1-4e40-bc91-8ffce4caf4aa
           name: edu-volume-10
-        - mountPath: /tmp/6c636dd4-d8ad-467f-af1b-c5d4a360b05e
+        - mountPath: /tmp/0946f9cb-3104-4be3-8d6c-504ff1296de5
           name: edu-volume-0
           readOnly: true
-        - mountPath: /tmp/650b89c0-d91f-48b1-aa04-b9f088ba6769
+        - mountPath: /tmp/6523b1a9-025c-46fb-a7cb-56b1fedb0dc0
           name: edu-volume-2
-        - mountPath: /tmp/8d3c3d10-339e-469d-8c75-86d903f7d89f
+        - mountPath: /tmp/c14d5bc8-fb48-41ee-b5b1-268e16cf097f
           name: edu-volume-8
-        - mountPath: /tmp/aa7d9063-1f5d-4735-a945-55d17f5d9ed5
+        - mountPath: /tmp/a1a0156b-45d5-4bbb-bdd3-db64841eaf19
           name: edu-volume-7
-        - mountPath: /tmp/9b0d6153-4bc7-4ba2-acfb-5ac4b670ca7e
+        - mountPath: /tmp/976e58a9-3211-458c-ab10-5b12c6f65d98
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/af11d67a-1ccd-4b96-b744-f96f5e493a3a
+        - mountPath: /tmp/46f6d658-678f-4f2a-8a77-395857b66b45
           name: edu-volume-3
-        - mountPath: /tmp/575d96ce-d5fa-4556-ac16-39c96f2ab490
+        - mountPath: /tmp/0ab4cc54-b149-4924-ada5-cd2d63ea9535
           name: edu-volume-4
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-2"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '64'
         - name: PER_MEM
@@ -175,9 +181,11 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/d71a8d8f-0254-4592-bace-b3280ea7a787
+        - mountPath: /tmp/a2d32666-1f1a-4f30-b568-c7c86da9589d
           name: edu-volume-14
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-3"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '1024'
         - name: PER_MEM
@@ -221,21 +229,21 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/aa5eaf9e-8ce6-4036-a1e3-d0759b757a0f
+        - mountPath: /tmp/fba9ed98-ee40-4ea8-a79d-5e1269c6a5cb
           name: edu-volume-17
-        - mountPath: /tmp/cbbadbb4-eee1-4c0e-9293-dda92d144d72
+        - mountPath: /tmp/6d1f864b-7748-4777-a4ea-d708b3208ed1
           name: edu-volume-2
-        - mountPath: /tmp/71821061-d065-4a11-b628-566da22fc64a
+        - mountPath: /tmp/85ae2460-fd70-4b47-92c0-4d715c9a92b7
           name: edu-volume-20
-        - mountPath: /tmp/edf5c97d-20c7-4284-bf85-ffe43955e943
+        - mountPath: /tmp/1e213979-9080-4518-b720-94f3c3f9374a
           name: edu-volume-21
-        - mountPath: /tmp/d77bdb32-2bae-42dc-ac13-14b3db247b1b
+        - mountPath: /tmp/5a21c4e4-f180-4eb5-b432-9a71384db3e7
           name: edu-volume-22
-        - mountPath: /tmp/13b19994-7fea-4fa7-9456-609308ebbe22
+        - mountPath: /tmp/94807e46-7f17-495e-9ad0-275393c4b181
           name: edu-volume-18
-        - mountPath: /tmp/d78bb17c-b161-4845-82ae-d2afe9006da6
+        - mountPath: /tmp/1fb64d2f-4962-44cb-8cc9-17d6836d5c65
           name: edu-volume-19
-        - mountPath: /tmp/0f33368f-cdd7-49a1-8f8b-22eafc7e84ec
+        - mountPath: /tmp/911675b2-f757-4eee-878f-e3a403714ce2
           name: edu-volume-1
           readOnly: true
       volumes:
@@ -323,6 +331,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-4"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
@@ -363,15 +373,15 @@ spec:
           seLinuxOptions:
             level: s0
         volumeMounts:
-        - mountPath: /tmp/a72c8f49-6bbd-4077-8cac-311cbd15eb84
+        - mountPath: /tmp/e209917a-29b0-4cbc-8ad4-16633f167479
           name: edu-volume-2
-        - mountPath: /tmp/5d995740-7520-4ed9-a701-2ef30dc0b373
+        - mountPath: /tmp/63d77420-29e5-4ac7-bc94-c7a0586e05f8
           name: edu-volume-23
-        - mountPath: /tmp/48beb641-8b86-46c7-a99e-52abea9b2db0
+        - mountPath: /tmp/2d3f0a47-c491-4f72-96b8-2e1c5fae191b
           name: edu-volume-23
-        - mountPath: /tmp/41d4202d-2613-4ee5-91bc-233d73d67efb
+        - mountPath: /tmp/17822dc1-4a14-4493-b212-46dcf6f997c3
           name: edu-volume-24
-        - mountPath: /tmp/432ba47a-679d-4b5e-aa67-3055136d98b1
+        - mountPath: /tmp/cf90d430-324c-40d3-87e1-abb97a960e75
           name: edu-volume-25
           readOnly: true
       volumes:
@@ -404,6 +414,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-5"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
@@ -437,9 +449,9 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/f232e16b-f8e7-4edb-a7b7-30896a8d8580
+        - mountPath: /tmp/2928b85b-0908-45db-a68b-cf1134a435f9
           name: edu-volume-24
-        - mountPath: /tmp/c4bf8a18-43c8-44b0-97b2-26cb4c0045f8
+        - mountPath: /tmp/f7a5ef7f-9d96-4764-929c-32edac1724c5
           name: edu-volume-26
           readOnly: true
       volumes:
@@ -466,6 +478,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-6"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '384'
         - name: PER_MEM
@@ -494,13 +508,15 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/223b9ca0-09e3-4798-89a2-dd8f5e2a8f79
+        - mountPath: /tmp/70b6ae2d-c662-471b-ae93-238ac3a77d7a
           name: edu-volume-27
-        - mountPath: /tmp/7516f4dc-d281-416a-b77f-0bcf68580f68
+        - mountPath: /tmp/34c71985-7c13-4319-a609-58615e8c8d10
           name: edu-volume-28
-        - mountPath: /tmp/8b1b3482-80c0-4da2-b0aa-17478deefb04
+        - mountPath: /tmp/998f898d-9ffe-4f7b-b24c-5459b0be967f
           name: edu-volume-24
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-7"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
@@ -532,11 +548,11 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/f9663784-4bb0-4b42-876d-4f53ca628d3a
+        - mountPath: /tmp/c368f24b-0414-4023-a42b-2aa17509e9f8
           name: edu-volume-27
-        - mountPath: /tmp/ae0b82d5-d63c-4aa5-adbe-32c9ddbd2636
+        - mountPath: /tmp/52d31db6-b9d3-461f-ad1a-1ac64d49215b
           name: edu-volume-28
-        - mountPath: /tmp/85f389df-a755-42dc-b518-d68c697ccb78
+        - mountPath: /tmp/765ce2c5-e951-4188-828d-0f0eedfb6525
           name: edu-volume-24
       volumes:
       - emptyDir: {}
@@ -567,6 +583,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-8"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
@@ -597,9 +615,9 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/a769a4a9-49d8-4296-bdce-5cfd8fef1b59
+        - mountPath: /tmp/2917d6c5-62ed-48ca-be8b-8bcd3d051d0c
           name: edu-volume-29
-        - mountPath: /tmp/6e5d97d0-9938-4387-8800-37a266dc6c54
+        - mountPath: /tmp/5eee0c84-b30c-4adb-9adc-6ea450b1a057
           name: edu-volume-24
       volumes:
       - configMap:
@@ -627,6 +645,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-9"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '4096'
         - name: PER_MEM
@@ -670,35 +690,37 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/41a1e937-416f-4d6b-96f9-bfcfecf6c889
+        - mountPath: /tmp/b42efee9-243c-4af6-93af-ae679d2e00fe
           name: edu-volume-2
-        - mountPath: /tmp/9373adcf-bf90-4ef6-bb11-58b67fe9162f
+        - mountPath: /tmp/93ebc8eb-81f1-491d-a5e3-4a795a551761
           name: edu-volume-35
-        - mountPath: /tmp/17f2d7d3-fea9-4a00-a267-a6ed1a1df5ee
+        - mountPath: /tmp/d51dad8f-ff96-4c32-8af7-3a2b9923b7c4
           name: edu-volume-34
-        - mountPath: /tmp/c49c51fa-248c-4112-ad14-b671e3942fd8
+        - mountPath: /tmp/f3ece2a1-5700-450d-acf9-62bacde65bbe
           name: edu-volume-33
-        - mountPath: /tmp/9cccbf5a-9268-4b27-b56d-94085a19898d
+        - mountPath: /tmp/c3b4d0cb-2305-4e8e-930f-f81ea29a5a02
           name: edu-volume-32
-        - mountPath: /tmp/a0448e65-3322-4ab5-aa85-0863c3a929bc
+        - mountPath: /tmp/2efc3fd1-d92d-43e3-9e78-772c4bd6ba7d
           name: edu-volume-30
-        - mountPath: /tmp/5022a3af-ddb5-40ad-98c5-d3d61c5877cb
+        - mountPath: /tmp/34cfe3c4-83a6-4ddd-bbda-3389a2d9b8c8
           name: edu-volume-31
-        - mountPath: /tmp/443f8971-e943-465e-8c6d-927b81289e02
+        - mountPath: /tmp/559686a2-ef79-4f3d-ac54-82e919ca231f
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/3ddc84cf-bfa3-452c-af85-e93f79971411
+        - mountPath: /tmp/5ddaa356-08b4-4453-b42c-43f839f1d430
           name: edu-volume-3
-        - mountPath: /tmp/e353d3df-d8b9-4b8c-a816-ebb70f03fd07
+        - mountPath: /tmp/dbed725a-a066-47cc-b537-ae3eb64357b4
           name: edu-volume-4
-        - mountPath: /tmp/8a4e97be-559d-4ee5-a5cd-ad6e2deac5a3
+        - mountPath: /tmp/54279e37-331d-4f66-85c3-814ad36defcc
           name: edu-volume-41
-        - mountPath: /tmp/afb88514-e291-42b5-932c-c7fb69cfad7d
+        - mountPath: /tmp/6ab0f96b-876b-4149-b403-93fdcde3a9e9
           name: edu-volume-42
-        - mountPath: /tmp/f7f3de95-a1df-4e26-9128-baedc71c3d8e
+        - mountPath: /tmp/27183e68-4d64-4e6c-be07-c62c9784c2bd
           name: edu-volume-43
           readOnly: true
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-10"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '4744'
         - name: PER_MEM
@@ -742,32 +764,32 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/9704c5be-2594-4ddb-9300-c15d87d68d95
+        - mountPath: /tmp/5b3188e7-7f73-41d6-84c7-c045ba7a8674
           name: edu-volume-2
-        - mountPath: /tmp/155279c0-694c-4a5e-87c6-8dbaedde2428
+        - mountPath: /tmp/8de8c347-b82a-4c73-a7b1-c4cc83362303
           name: edu-volume-39
-        - mountPath: /tmp/fbaded28-d3b5-4989-87f6-99b52b634a0e
+        - mountPath: /tmp/ece78282-f401-4486-be08-ba8ed3198f43
           name: edu-volume-38
-        - mountPath: /tmp/07316c21-e571-4af7-a198-4f6698fe41e2
+        - mountPath: /tmp/74691f8e-26d3-48bf-bce7-64813a022602
           name: edu-volume-37
-        - mountPath: /tmp/eccc71a2-8f7c-4548-9d06-9154a3bdf799
+        - mountPath: /tmp/17a71213-8bc5-429c-a643-c1efa21177b5
           name: edu-volume-36
-        - mountPath: /tmp/7b1bd8b3-2cd1-4a30-9ba1-83b22d6ad49c
+        - mountPath: /tmp/9ca46ff0-b54f-4fca-8ded-34579d582afb
           name: edu-volume-30
-        - mountPath: /tmp/a136215d-56ae-4be8-bcf8-75bf419ea969
+        - mountPath: /tmp/1b04abbb-0af1-4a27-aa3a-ba4468d95c79
           name: edu-volume-31
-        - mountPath: /tmp/c3583e33-2dcd-45a5-af5e-396364f15a95
+        - mountPath: /tmp/55ea34c9-6d97-47fd-8e01-40b08d9ad669
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/c41a4f64-402c-4c2a-be87-e9cd52708676
+        - mountPath: /tmp/c23bc947-b634-4bc2-b014-2fe2875eda98
           name: edu-volume-3
-        - mountPath: /tmp/ff924c5e-527e-4cac-ab67-79ec379624d7
+        - mountPath: /tmp/a5c6ae95-b152-4434-aef3-5c8d545bfafa
           name: edu-volume-4
-        - mountPath: /tmp/711b22da-5f56-4a5a-8519-4c3d6c3a350b
+        - mountPath: /tmp/57a36bf1-266b-443d-9e4d-117d7be8b598
           name: edu-volume-40
-        - mountPath: /tmp/9f741974-8229-42d5-98cf-0fefe488733d
+        - mountPath: /tmp/98f12409-6db7-4e6c-829e-8a5a7118e5f4
           name: edu-volume-42
-        - mountPath: /tmp/b2d81526-3a63-4d83-a1b4-194bc0b1da1b
+        - mountPath: /tmp/20472e5f-5544-4659-8cfb-22c45a32e981
           name: edu-volume-43
           readOnly: true
       volumes:
@@ -855,6 +877,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-11"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '4048'
         - name: PER_MEM
@@ -898,26 +922,26 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/503a997e-fc41-452f-9c12-5f112cdb3f36
+        - mountPath: /tmp/297ed1f7-1c7c-4e69-8404-1f7a5c91f75a
           name: edu-volume-2
-        - mountPath: /tmp/3a3142a1-5c8e-4a7f-8825-81e2fc34e7a1
+        - mountPath: /tmp/81a89b4e-e6b1-47df-9692-7d42be7a33fd
           name: edu-volume-47
-        - mountPath: /tmp/3051201e-396b-4cc2-bfc5-88612add83af
+        - mountPath: /tmp/3b13c55b-bd19-4f2f-9d92-8b9ed9185886
           name: edu-volume-46
-        - mountPath: /tmp/e197bbff-ce96-4bfd-940f-431885aae9b7
+        - mountPath: /tmp/e3f40c95-6fbe-4987-ad05-6c70f889b5f8
           name: edu-volume-45
-        - mountPath: /tmp/9bc0d0bc-c2ec-429b-bb54-7c6064f47585
+        - mountPath: /tmp/a2605e37-9ac9-4f08-8939-5beeb4125f77
           name: edu-volume-44
-        - mountPath: /tmp/951425a5-729f-467e-850a-ca09de3c27f0
+        - mountPath: /tmp/22ec7608-bb29-4452-a1b0-e742faafbee6
           name: edu-volume-30
-        - mountPath: /tmp/70aabea5-9c53-4fa9-973a-49f02da5af10
+        - mountPath: /tmp/e667648c-00c8-41ca-8244-e4ea2af48c48
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/c9f4f467-b5a7-4e92-b26c-90eecca8006a
+        - mountPath: /tmp/37f52c43-9129-4fec-9631-c376b1b5096a
           name: edu-volume-48
-        - mountPath: /tmp/4ef315f4-db56-448f-af3c-6597dcc4202d
+        - mountPath: /tmp/48f30cb3-9543-4ec8-8866-147d2b08b435
           name: edu-volume-3
-        - mountPath: /tmp/5e595f51-65c1-45ea-877b-870427e762c7
+        - mountPath: /tmp/89157674-20c7-4163-81f4-b3e3386a7ab0
           name: edu-volume-4
       volumes:
       - configMap:
@@ -977,6 +1001,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-0"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
@@ -1013,25 +1039,27 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/f59bcc01-fdd9-41fc-9173-1317a0a3323c
+        - mountPath: /tmp/d4d6e927-4647-4b8e-b9f4-39ece2649b27
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/066fb245-f218-4033-969c-a1a268483514
+        - mountPath: /tmp/d06a714e-53ab-4153-8c17-2b3219e96afd
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/aa44424f-ac4b-4f5d-ab52-3b3110a7d4c7
+        - mountPath: /tmp/43e7788c-90fd-45c4-bbe1-aa0e6a85c384
           name: edu-volume-55
-        - mountPath: /tmp/166391c7-7388-4992-9c96-ed356fdf6829
+        - mountPath: /tmp/8db6643c-6837-485f-b5a0-6041a0dfc8b2
           name: edu-volume-11
-        - mountPath: /tmp/f0ccd6ba-ed03-41b0-b696-c3f05976640e
+        - mountPath: /tmp/40d2346d-7d88-4a79-9ade-2a7e0ae5374a
           name: edu-volume-12
-        - mountPath: /tmp/66f5c024-c1ac-4cd4-b463-bfb3544125a1
+        - mountPath: /tmp/954c3f72-58c2-4cbc-a522-ba00ad900d69
           name: edu-volume-13
-        - mountPath: /tmp/14ec778a-2c2f-4c93-9e8c-2be0e214d92f
+        - mountPath: /tmp/5312b47c-3dba-4db8-8326-27fd07da916b
           name: edu-volume-15
-        - mountPath: /tmp/8afee071-8bf4-46d0-898b-b38051d02044
+        - mountPath: /tmp/3bf49ac2-f617-4a9d-9076-6be595923ae3
           name: edu-volume-16
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-12"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '4872'
         - name: PER_MEM
@@ -1075,28 +1103,28 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/7a6206ef-2dce-4d1c-a5c8-1502d6fe3e08
+        - mountPath: /tmp/8fe92eee-6cd1-4f23-95c5-bf7867f79594
           name: edu-volume-2
-        - mountPath: /tmp/27a768dc-dbeb-453a-b5d3-07b69107f710
+        - mountPath: /tmp/0effb822-70a9-4ed5-9b14-97ff49e2174f
           name: edu-volume-50
-        - mountPath: /tmp/4571be8f-b0a2-49cb-8573-ade1198a3468
+        - mountPath: /tmp/28b423af-403e-489e-ab58-8c85c24a83a1
           name: edu-volume-49
-        - mountPath: /tmp/e565e93b-129d-477c-ad7e-c961e55c0ba0
+        - mountPath: /tmp/57262bac-cab3-48e6-b189-fb295e32a0d8
           name: edu-volume-53
-        - mountPath: /tmp/c3de46b8-cf53-49b3-b6f6-7bc1dc824526
+        - mountPath: /tmp/ca43c7ea-53fd-4a0b-9d78-783ef4d915f3
           name: edu-volume-52
-        - mountPath: /tmp/85e245a7-e88e-4c24-bdaf-46171d3b6bde
+        - mountPath: /tmp/02b9891f-6a07-4763-9b98-ea5dbf8ceae5
           name: edu-volume-10
-        - mountPath: /tmp/1551c21e-c34e-4b5b-a859-33f9035bd103
+        - mountPath: /tmp/fa603b72-cd50-4b90-ab8c-831cbecfb086
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/d44246e8-a528-45c4-99c7-a6d3ff0cbe5a
+        - mountPath: /tmp/aa8fdcb5-8c39-4e67-a3d6-675570cb6d05
           name: edu-volume-3
-        - mountPath: /tmp/5f82228d-e73e-4ed6-b16a-6c91ab9ca92d
+        - mountPath: /tmp/cc18b15e-5247-4369-b906-cf36032ebb34
           name: edu-volume-4
-        - mountPath: /tmp/564318c0-04b0-40f3-8e80-cbfbe3c06f37
+        - mountPath: /tmp/e8abec4b-0a74-4907-90f4-f17787b6a39a
           name: edu-volume-17
-        - mountPath: /tmp/22ee1f45-2767-49c0-8b85-dad8d83e1f33
+        - mountPath: /tmp/8b5bb68f-6ba8-460e-ac4d-08a1c3b4d515
           name: edu-volume-54
       volumes:
       - name: edu-volume-10
@@ -1172,6 +1200,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-13"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '4872'
         - name: PER_MEM
@@ -1210,26 +1240,26 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/e5b64c50-3dbf-4cf9-b5fd-d2e9fecf2fbf
+        - mountPath: /tmp/bf6434d7-94b0-44c7-bca3-87b74c6ad8d5
           name: edu-volume-56
-        - mountPath: /tmp/fc93f9a6-178e-4f65-8c77-b9c1e4ba4078
+        - mountPath: /tmp/fac80956-ab1a-4ef7-9183-b800c32e3622
           name: edu-volume-57
-        - mountPath: /tmp/788b4094-31ce-4d1f-a700-1111e082fe19
+        - mountPath: /tmp/f0e7416d-86d7-4aa3-aa7e-9f3f0921e684
           name: edu-volume-10
-        - mountPath: /tmp/cef37e52-2a68-4010-8353-9644be74d991
+        - mountPath: /tmp/f7b21521-61c1-4ea8-a226-2537011b2bbe
           name: edu-volume-2
-        - mountPath: /tmp/481692ab-98a3-4c97-93c1-c5bc9c739cbb
+        - mountPath: /tmp/75db2d18-1694-4a35-bb00-024682bed89f
           name: edu-volume-58
-        - mountPath: /tmp/5bf0bb57-5df5-4832-a31d-91002cea20f3
+        - mountPath: /tmp/177f3f0f-944e-4b70-9775-98cac90fcd8e
           name: edu-volume-59
-        - mountPath: /tmp/bf0ac845-c14c-4ccc-bc4d-f339a99035c9
+        - mountPath: /tmp/58ed42bd-5c3e-41f2-920c-1c8f44222f3a
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/9217630c-f55e-4493-b192-8deb28f3c4de
+        - mountPath: /tmp/8d97f28a-d716-4d73-a70c-f902d2076579
           name: edu-volume-60
-        - mountPath: /tmp/dbdb2b82-a896-41eb-9dda-404cbdeb935e
+        - mountPath: /tmp/670bc527-7a68-43fa-a273-f8fafa7b3430
           name: edu-volume-3
-        - mountPath: /tmp/560a99c6-d5a2-46ad-835b-67280b045e50
+        - mountPath: /tmp/88225eed-3f9d-4130-bd14-32ca79c83ccd
           name: edu-volume-4
       volumes:
       - configMap:
@@ -1294,6 +1324,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-0"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
@@ -1332,28 +1364,30 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/9d169044-3565-4cb9-ad53-91a5c581ba33
+        - mountPath: /tmp/67f5f215-eb3f-4038-a86d-4e728fe1e24f
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/3d39df08-a696-467b-bc56-ef9755cebf16
+        - mountPath: /tmp/215c8c45-1810-4deb-8282-e4bb92a561ac
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/157a2412-6d2a-4915-bacd-c7e9fa73e158
+        - mountPath: /tmp/db238ba1-1fdd-4066-900d-2f3e273156ac
           name: edu-volume-75
           readOnly: true
-        - mountPath: /tmp/311ee873-2b87-438d-8409-44edf3a0a359
+        - mountPath: /tmp/74ec1b08-8ec2-4d16-9657-37fd54a5ef96
           name: edu-volume-9
-        - mountPath: /tmp/5477554f-78d8-49ad-a40e-6bb144007367
+        - mountPath: /tmp/f61b2837-bbb1-4e9e-ad2d-7dce7dd2cef5
           name: edu-volume-11
-        - mountPath: /tmp/45573caa-3714-437f-a7fb-25fb02e71337
+        - mountPath: /tmp/f2270893-ad7b-41a9-b581-d99b31055bc2
           name: edu-volume-12
-        - mountPath: /tmp/07b0ce2d-e013-40ec-a7e0-9cac391500a2
+        - mountPath: /tmp/afbb6ce5-9a4c-4963-9a96-fbe5e1c902e9
           name: edu-volume-13
-        - mountPath: /tmp/1690ac20-c26d-4bf4-b5e1-6704a7d934ad
+        - mountPath: /tmp/75656bba-f2f1-4b36-859f-e2edafe36988
           name: edu-volume-15
-        - mountPath: /tmp/bd9540c6-b341-47c7-87b1-ed449f74564b
+        - mountPath: /tmp/199544a5-1750-456d-b09b-8230db886818
           name: edu-volume-16
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-2"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '64'
         - name: PER_MEM
@@ -1387,9 +1421,11 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/5c2ef0cd-882e-4daa-8101-f04aa739e878
+        - mountPath: /tmp/9f6e263d-8f90-4ff0-a6c8-5ca4a0381a49
           name: edu-volume-14
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-14"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
@@ -1430,15 +1466,17 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         volumeMounts:
-        - mountPath: /tmp/d00a3607-8b77-4707-a648-79efd369ac3d
+        - mountPath: /tmp/e3f5ea0a-969a-4d37-852b-babd5d028df8
           name: edu-volume-17
-        - mountPath: /tmp/b7ad515e-4801-4dff-8b4c-60428a312c62
+        - mountPath: /tmp/ae6dce76-8724-4739-b457-cf8c5dd30ecc
           name: edu-volume-91
-        - mountPath: /tmp/7b15faf0-e5ac-4bd5-b099-9c9962bc5d97
+        - mountPath: /tmp/61998714-2950-46c3-9fe1-c3044a6c0514
           name: edu-volume-3
-        - mountPath: /tmp/2a276d75-8cca-4e6e-98b7-5bf16ca6fe24
+        - mountPath: /tmp/432be61a-7e08-4ced-aa07-d7870d30eb29
           name: edu-volume-4
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-15"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
@@ -1488,35 +1526,37 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         volumeMounts:
-        - mountPath: /tmp/62907e11-fe1d-4056-a79a-e783a86e221e
+        - mountPath: /tmp/4a681cbe-a350-493d-b69e-4a26fdc12dce
           name: edu-volume-79
-        - mountPath: /tmp/9c751c66-e181-4691-8c26-0c8c27def456
+        - mountPath: /tmp/eb245cc2-d9c4-46fd-9e9f-6ce0f3126881
           name: edu-volume-93
-        - mountPath: /tmp/b5735dea-6244-4772-9fb9-49f50a541726
+        - mountPath: /tmp/4733651d-b3e1-4f41-8beb-aa58de75bddb
           name: edu-volume-3
-        - mountPath: /tmp/a55aa4ce-7da3-420e-848e-3e2f74a986b0
+        - mountPath: /tmp/9a0aabd6-3efa-4452-9f0e-68fcb83a214f
           name: edu-volume-4
-        - mountPath: /tmp/effbae58-d8ef-4cf9-9d75-6899c952052e
+        - mountPath: /tmp/4bc1d1bd-08fc-4778-b0d4-7e1af5575017
           name: edu-volume-94
-        - mountPath: /tmp/b0195058-d1e3-4ec3-b1e0-17ad9bc4e012
+        - mountPath: /tmp/27ae5a0a-784a-407a-b306-e6f028118b33
           name: edu-volume-95
-        - mountPath: /tmp/d15d7541-bfca-4faa-ad4d-811cb49948d0
+        - mountPath: /tmp/29a645a6-16fa-4c91-afc2-92ce523632f0
           name: edu-volume-96
-        - mountPath: /tmp/3213ed3f-eb75-4ca7-8be1-63cb63597a41
+        - mountPath: /tmp/b3588b2f-a475-4572-b50a-3255426a7b77
           name: edu-volume-97
-        - mountPath: /tmp/5b3af37f-6bf6-4ece-b707-6f722110254e
+        - mountPath: /tmp/dd9013bf-94af-403d-aacd-5ed38e5f4275
           name: edu-volume-98
-        - mountPath: /tmp/33e10916-81c5-43e7-95d9-7117fc749066
+        - mountPath: /tmp/494b557a-d97a-405a-9567-0fa374bcde2e
           name: edu-volume-99
-        - mountPath: /tmp/551884f7-f163-4c07-a1ab-2538f77abd1c
+        - mountPath: /tmp/eea2ebfa-6507-4c0b-bf0a-80e524b005f9
           name: edu-volume-100
-        - mountPath: /tmp/e30e4f91-01c5-4b0b-8987-cc9b49d96dd5
+        - mountPath: /tmp/2ef36655-e4d3-4e9d-9ad5-681bba50b04c
           name: edu-volume-101
-        - mountPath: /tmp/b6315d66-dc6d-43e5-a56c-ca814381cb9f
+        - mountPath: /tmp/9d592373-48db-46d9-b244-047d471c66b3
           name: edu-volume-102
-        - mountPath: /tmp/b98d2ae2-6a8c-495f-9f1a-8505239a5065
+        - mountPath: /tmp/91aefc09-be50-4491-94dd-a7e3f263b6e5
           name: edu-volume-103
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-16"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '1024'
         - name: PER_MEM
@@ -1566,19 +1606,21 @@ spec:
           successThreshold: 1
           timeoutSeconds: 5
         volumeMounts:
-        - mountPath: /tmp/79b5c6ee-6344-454a-8fea-8b055eb66b87
+        - mountPath: /tmp/9480c86c-7e1f-4d81-9262-6844f887b2f3
           name: edu-volume-84
-        - mountPath: /tmp/7bf7dd21-05e7-489e-9ed7-915b9db7c15f
+        - mountPath: /tmp/d1e38a12-e3d9-47f6-b6e6-0094186c1e6e
           name: edu-volume-17
-        - mountPath: /tmp/586dfe56-86f5-49a8-8084-a0607df92f76
+        - mountPath: /tmp/803ee37f-3aeb-47ea-89b5-9670d6923d19
           name: edu-volume-76
-        - mountPath: /tmp/fde7fcb7-e0e8-4c16-be67-8d08c415fc7e
+        - mountPath: /tmp/9e4f0a5a-3b04-4e0c-b694-cdc6a61c55fc
           name: edu-volume-78
-        - mountPath: /tmp/e8fb2d26-7933-4abb-9f8c-4042ff130acf
+        - mountPath: /tmp/22bee829-516b-4d70-98d4-e4323af98453
           name: edu-volume-85
-        - mountPath: /tmp/ac177c43-f0e5-4f64-8df0-b6bfdbbc5fe3
+        - mountPath: /tmp/0c0983f5-c907-463a-92d2-a62329f7e347
           name: edu-volume-86
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-17"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
@@ -1612,19 +1654,21 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/53b8d409-0146-47aa-81a6-95e8a4a06906
+        - mountPath: /tmp/1c162f2b-a2b3-4042-b500-f115679d0a10
           name: edu-volume-17
-        - mountPath: /tmp/8da0ebd7-2e99-47c9-906b-584018163938
+        - mountPath: /tmp/590849b6-494e-496d-8803-ce4f06e57f24
           name: edu-volume-92
           readOnly: true
-        - mountPath: /tmp/f7b70ae3-cc92-4a63-8352-0c2d1054fec6
+        - mountPath: /tmp/5616afa4-b820-4d66-a7e3-47a505652e00
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/0dcac9d7-d1b6-4b0e-ac58-7c3646f3afe8
+        - mountPath: /tmp/2549111b-917c-4b45-be26-5e608155b017
           name: edu-volume-89
-        - mountPath: /tmp/1468b343-a382-41d9-88a1-93b5e2c6159e
+        - mountPath: /tmp/12b481fc-e797-4fa1-a713-275d8e921be1
           name: edu-volume-90
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-18"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '4872'
         - name: PER_MEM
@@ -1674,31 +1718,33 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/e68db893-b633-4f74-ab75-7916cb5a33d7
+        - mountPath: /tmp/bb20cd0e-e78c-460f-86ef-028dfebb3f2b
           name: edu-volume-65
-        - mountPath: /tmp/7910a664-ca17-48c4-8ded-48bce6821915
+        - mountPath: /tmp/5d51d730-c406-46bb-ae96-6dcb025c07b9
           name: edu-volume-66
-        - mountPath: /tmp/9fc3efd4-f888-45bc-8f75-4e37d198e6a8
+        - mountPath: /tmp/87494175-8421-4b30-8ba3-c2da89d35fd1
           name: edu-volume-64
-        - mountPath: /tmp/12e24aac-6ef5-4798-9a80-9ed6724559f6
+        - mountPath: /tmp/be1436de-0ee4-4c50-85c6-fcbadaae8bd8
           name: edu-volume-63
-        - mountPath: /tmp/a24dd1d1-706d-4592-a651-4afa91ff0b66
+        - mountPath: /tmp/128a17eb-478e-4ce9-ae3d-957d9d501bef
           name: edu-volume-2
-        - mountPath: /tmp/169e7167-1fdd-4ca9-89c2-7bba35482b3c
+        - mountPath: /tmp/0af6b583-8390-423a-84db-449af4864d99
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/571195d1-0fbc-4760-96a4-d57ed3b121d1
+        - mountPath: /tmp/31ebe7ac-5240-4e99-8f49-e68256e89eb8
           name: edu-volume-30
-        - mountPath: /tmp/6ca315ea-6ef8-4ac8-a733-7f7d10963d61
+        - mountPath: /tmp/c2e996f7-7c3b-4c4a-8281-f6b9e54696b2
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/55385eaf-1fe6-4ebc-a4da-5bc1a8609406
+        - mountPath: /tmp/81f3aaa4-afd7-460c-9aad-4640989dab07
           name: edu-volume-3
-        - mountPath: /tmp/ce3da7c8-4803-466b-baaf-d39b531acf4d
+        - mountPath: /tmp/ff869047-689d-4523-a2f3-f3952a2f3d6e
           name: edu-volume-4
-        - mountPath: /tmp/c4b01351-8939-4a3e-b2c6-7c08f2d6fff5
+        - mountPath: /tmp/45e801db-53ad-4670-b95f-319ba21d276d
           name: edu-volume-73
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-19"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '1024'
         - name: PER_MEM
@@ -1746,33 +1792,35 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/da77e43b-b2e1-4947-a2db-a141dafd974e
+        - mountPath: /tmp/e778262c-3564-4cc9-ae31-21b65c8e7601
           name: edu-volume-17
-        - mountPath: /tmp/bc1d0d42-01e3-41cd-b80c-0cc51d04d03f
+        - mountPath: /tmp/56bbd48b-e8d6-4584-82b5-7fc4bdc347c1
           name: edu-volume-70
-        - mountPath: /tmp/40f9c515-d010-40cd-b08c-db9e39d85c8f
+        - mountPath: /tmp/60ae280c-d515-4d48-b351-2b8d312019ac
           name: edu-volume-71
-        - mountPath: /tmp/bc5fc441-fd3b-4cb1-809c-be5f55b6a59a
+        - mountPath: /tmp/e623bc70-014a-499f-9a1d-e6b50b0c69d1
           name: edu-volume-69
-        - mountPath: /tmp/90a7d869-766b-42d5-9f40-eba9c66ed1d5
+        - mountPath: /tmp/64255323-0919-4125-b39e-f975c35d268a
           name: edu-volume-68
-        - mountPath: /tmp/bc9a0e61-0516-4819-bda9-9bd0d000e32e
+        - mountPath: /tmp/2ee4c09a-855f-4f6f-8a05-2665f6716d1f
           name: edu-volume-2
-        - mountPath: /tmp/3192e23f-12fb-4097-b6c9-d195995b95a7
+        - mountPath: /tmp/891d4925-ee2e-490f-8b56-e31b9443bff9
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/94ef78c5-0ba7-4002-ab14-91a1def1e301
+        - mountPath: /tmp/89c4757f-b9f3-4cf5-8e87-0ee753fa35f4
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/6d004088-b47c-41ce-9fe9-1f5cb9605109
+        - mountPath: /tmp/d52b2ff8-e283-4466-84d4-376a69503667
           name: edu-volume-74
-        - mountPath: /tmp/0b1356a9-dcb4-4313-b2b2-8a98c434fd85
+        - mountPath: /tmp/2757be41-8271-4ed3-916d-a4948a374638
           name: edu-volume-3
-        - mountPath: /tmp/b148302f-504f-482e-ad5f-1b84eaa5dae5
+        - mountPath: /tmp/fcd1d15c-33f8-416f-ab04-8d9e4deb8277
           name: edu-volume-4
-        - mountPath: /tmp/bd8104f2-3cbc-41cb-b0cd-e6e3b9b7fbc6
+        - mountPath: /tmp/68c158ae-673b-479f-b9c2-abe0b8bb9788
           name: edu-volume-72
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-20"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '2765'
         - name: PER_MEM
@@ -1815,29 +1863,31 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/88d4c24b-c515-49dc-9ca0-070cf68d6805
+        - mountPath: /tmp/63cb8390-7530-4246-9c5f-7370e3033f9d
           name: edu-volume-83
-        - mountPath: /tmp/128ecbfd-381c-41b7-8bda-bc54a1efbf9f
+        - mountPath: /tmp/3d2d8107-34fa-4813-ab47-17a3828c502a
           name: edu-volume-77
-        - mountPath: /tmp/2625f325-f44b-4049-a11e-839208c61748
+        - mountPath: /tmp/1fc8f88d-6c07-48b2-8568-4bc03dc9bcb4
           name: edu-volume-67
-        - mountPath: /tmp/fa96c8da-8115-4a14-8359-c48ac1be5449
+        - mountPath: /tmp/65e7526a-766b-46f6-8cb4-7e89de2d1176
           name: edu-volume-88
-        - mountPath: /tmp/6b96f02c-5d42-44da-b2b4-411ebf8883d1
+        - mountPath: /tmp/ae560ef8-b694-4e43-997e-19c44fcec685
           name: edu-volume-87
-        - mountPath: /tmp/42b5fbfe-29cf-4523-b8a9-7f9b0dfbad2e
+        - mountPath: /tmp/1a0ab7c1-fa27-4384-9f8c-0e4ac7af87e2
           name: edu-volume-17
-        - mountPath: /tmp/59f8b9df-67d1-453f-ab7e-2ab1e96c24b7
+        - mountPath: /tmp/3526ac5c-a3a9-4a25-afbf-facce8db249b
           name: edu-volume-61
-        - mountPath: /tmp/9116e802-de7e-4b15-a8bf-e8a54ad5a8be
+        - mountPath: /tmp/8e74953d-15a9-483f-8a15-0868072affb1
           name: edu-volume-62
-        - mountPath: /tmp/a14f6ecc-c6be-4fa7-9bb1-f059f2dd2dc5
+        - mountPath: /tmp/a8c75999-ddbc-45a6-9d41-9a9f413658c9
           name: edu-volume-92
           readOnly: true
-        - mountPath: /tmp/84d053ec-4f07-447b-b41c-e6154c6de8b9
+        - mountPath: /tmp/4a96488e-0b41-4902-a1b2-afb87a9e8fba
           name: edu-volume-4
           readOnly: true
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-3"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '1024'
         - name: PER_MEM
@@ -1881,24 +1931,26 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/d031b331-7c58-42bb-a77a-ba0091e3c5fa
+        - mountPath: /tmp/aeff1b6e-e31e-4fc2-b8d0-bb358a11a600
           name: edu-volume-17
-        - mountPath: /tmp/fe19d650-33bf-46da-964a-d7681ed8aa7c
+        - mountPath: /tmp/6cd2443f-7032-48a0-bd66-858408ffc64e
           name: edu-volume-2
-        - mountPath: /tmp/55079857-b0eb-4c51-8fd4-4c785f656d69
+        - mountPath: /tmp/72479564-df41-4b73-95bd-3fb3a5f62b4b
           name: edu-volume-20
-        - mountPath: /tmp/0ca96abd-1a8c-4140-945d-b025f6c0eb28
+        - mountPath: /tmp/26e39463-d147-43a2-8041-df60d858e3ce
           name: edu-volume-18
-        - mountPath: /tmp/40f06a8b-4c03-41fb-9952-b989032059d3
+        - mountPath: /tmp/3bdae7ec-f365-4c92-9a7a-5d5be64d3718
           name: edu-volume-19
-        - mountPath: /tmp/60d43eb0-4aad-4307-8c32-b51ec973c06e
+        - mountPath: /tmp/11e9c759-112f-4aae-9f50-7c591f890c07
           name: edu-volume-21
-        - mountPath: /tmp/24e9ebb0-1d44-4a8a-87af-fb5d442c4af0
+        - mountPath: /tmp/3b2dd743-44ea-41c8-a671-13c3c97527e6
           name: edu-volume-22
-        - mountPath: /tmp/d639b9f6-eef0-402b-849d-1970d2e6eaa9
+        - mountPath: /tmp/7d79559a-49cf-429a-ac6f-6ea6c13cca88
           name: edu-volume-1
           readOnly: true
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-21"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
@@ -1933,16 +1985,18 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/59be4b2a-cc3e-4b73-88bd-dc1b30e50f51
+        - mountPath: /tmp/8350dfed-c6c2-4830-91e7-23178f888d84
           name: edu-volume-17
-        - mountPath: /tmp/25f1dbe4-153a-426c-a059-9d799bef32ee
+        - mountPath: /tmp/75ec8ca8-ee43-40a1-83ad-1866244ba1b6
           name: edu-volume-80
           readOnly: true
-        - mountPath: /tmp/1d45cc8f-0e9a-4a36-ab0b-0f218e619837
+        - mountPath: /tmp/1d3f4f33-f718-45c2-b723-f806aa158f7b
           name: edu-volume-81
-        - mountPath: /tmp/665efe1a-4f81-4636-9cc7-1b00dd4a0c45
+        - mountPath: /tmp/ef848db3-d775-48c5-a14b-3599c98129c6
           name: edu-volume-82
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-22"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
@@ -1976,16 +2030,18 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/64030ebc-5af4-4e24-8924-fb88fecfd589
+        - mountPath: /tmp/b533a221-0ce8-47cf-bfb0-252d6d37d38a
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/8400780e-74ea-43f7-a2a8-574efacf17a8
+        - mountPath: /tmp/786c35ab-c922-4bf6-9a44-ff2770a0fa1e
           name: edu-volume-3
-        - mountPath: /tmp/fe546c3a-b7bd-42e7-9dfb-730216d0c4cc
+        - mountPath: /tmp/c38ccb71-351d-4b09-a613-cd3b34c56c2e
           name: edu-volume-4
-        - mountPath: /tmp/801b8399-b1d2-4192-a794-f36f8c803643
+        - mountPath: /tmp/c89d15c4-52d7-4a0a-a44f-6a2621a3f8e5
           name: edu-volume-104
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-23"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
@@ -2017,12 +2073,14 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/825c5502-a272-416e-a504-de4bf1ba48dd
+        - mountPath: /tmp/5040750d-fe85-4be3-9a1e-279513dcb5e5
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/bacd5c9d-aa2d-45df-979d-e4217ba1cda3
+        - mountPath: /tmp/9466f29b-9b8d-4ac3-9bdc-c1794715cbc2
           name: edu-volume-3
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-24"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '3294'
         - name: PER_MEM
@@ -2064,27 +2122,27 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/9e83dc7a-e560-4a0b-8e2c-b2948f549812
+        - mountPath: /tmp/737d4de7-0eb9-49f5-b0b2-1e9410f65eae
           name: edu-volume-2
-        - mountPath: /tmp/808a1446-74c1-4d9d-9d56-51039979ccf0
+        - mountPath: /tmp/0a36cd5c-a870-4231-9808-45423151b691
           name: edu-volume-30
-        - mountPath: /tmp/ee83aae7-2a4c-4436-8ffa-eb593d586bcf
+        - mountPath: /tmp/6c8fc193-509f-4532-913a-f29e5f1733a0
           name: edu-volume-105
-        - mountPath: /tmp/6141dd3f-3a65-408c-b60b-757e491847ca
+        - mountPath: /tmp/d7d1abce-145e-41a7-b70a-815574935a07
           name: edu-volume-106
-        - mountPath: /tmp/2d8d2b8d-0b84-45d0-920c-f48904d4aad8
+        - mountPath: /tmp/1bfc27da-b8a6-410c-bc5a-6ed9eed4680e
           name: edu-volume-107
-        - mountPath: /tmp/a155e9c2-e201-4683-98f1-79fbbd29bf24
+        - mountPath: /tmp/1ab06e6b-cfdd-4b18-9014-98a8e7e17a6f
           name: edu-volume-108
-        - mountPath: /tmp/8d8ba86f-1879-4110-9450-4ab7b3fab27a
+        - mountPath: /tmp/7edd7336-244f-4779-bfc4-4853f3214b54
           name: edu-volume-17
-        - mountPath: /tmp/71c8248e-6a30-48f2-b47a-4c36e1ddba66
+        - mountPath: /tmp/27b7dfb9-453f-4f94-a732-1a73fecefdd1
           name: edu-volume-92
           readOnly: true
-        - mountPath: /tmp/0013b2b7-a85a-415a-932e-d574869f4e4c
+        - mountPath: /tmp/f119443f-1913-41c4-b971-de701a55b669
           name: edu-volume-4
           readOnly: true
-        - mountPath: /tmp/80a35470-63ee-42db-aab4-353a53516e29
+        - mountPath: /tmp/6b7199f2-7fe7-4613-8205-793709bbfc5e
           name: edu-volume-72
       volumes:
       - emptyDir: {}
@@ -2310,6 +2368,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-0"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
@@ -2348,25 +2408,27 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/0e21e2b2-14ab-43b7-8630-2d12126275c1
+        - mountPath: /tmp/1c71f59f-c52c-42b4-901e-1fb1a8430d90
           name: edu-volume-11
-        - mountPath: /tmp/78320197-1cc7-432c-ac56-afc27d74bee0
+        - mountPath: /tmp/a324b0e7-7fca-4a30-8ae8-3bee94f404b8
           name: edu-volume-12
-        - mountPath: /tmp/d8b99f55-de95-40f3-90db-a21743435b05
+        - mountPath: /tmp/7f506f49-fd46-4e80-af86-9bb325e597dc
           name: edu-volume-13
-        - mountPath: /tmp/b76b8c3a-7059-405e-a111-5ca73657067f
+        - mountPath: /tmp/ec0e057d-81db-41c6-ae6a-defdf1de8aaa
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/d7c55944-4885-4903-97a2-0aa8a19820ff
+        - mountPath: /tmp/619bfbc1-2b95-4119-ba2b-91f68818673e
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/30aa6235-3f09-49c5-9229-2666c2e00536
+        - mountPath: /tmp/ae7406a3-54f2-44ae-ad61-cdac3930c45f
           name: edu-volume-9
-        - mountPath: /tmp/77dc59e0-c26c-464f-8b6a-6b6f2f2e00e1
+        - mountPath: /tmp/6d45cb35-613a-4ada-a834-e671864214f5
           name: edu-volume-15
-        - mountPath: /tmp/ee238398-4709-47bc-b94d-ce2ab8ca08a6
+        - mountPath: /tmp/cc32988e-5d53-42c5-8c5e-e643442cf3ef
           name: edu-volume-16
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-25"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '4872'
         - name: PER_MEM
@@ -2407,33 +2469,35 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/9ef832a5-44cf-41b1-a011-ee2a763163ce
+        - mountPath: /tmp/28e3961a-9476-4ac9-9e72-759555dbceed
           name: edu-volume-111
-        - mountPath: /tmp/d8dd06ac-e909-4566-83bd-4e78a7341e1b
+        - mountPath: /tmp/f281867f-927a-42be-9aac-a02323449bc7
           name: edu-volume-112
-        - mountPath: /tmp/93cadd3e-a319-43b8-b3ec-f7377c0f2f17
+        - mountPath: /tmp/53b17a64-f934-4f6b-af3d-2f1967b70ebc
           name: edu-volume-10
-        - mountPath: /tmp/95f189dc-d686-407a-aaa8-2d82d1344f9a
+        - mountPath: /tmp/334afa40-b56a-46df-a3e7-c8566f7cd168
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/dc0312cf-fbca-4309-965e-b03809dde464
+        - mountPath: /tmp/c95b29e3-2266-4203-afff-8c27c257e74d
           name: edu-volume-109
-        - mountPath: /tmp/aa0e5610-1f7a-4fd8-8e9f-bffc356bb21f
+        - mountPath: /tmp/d030f4ec-f7f0-4dac-888f-89ec912b7bdb
           name: edu-volume-110
-        - mountPath: /tmp/1af57686-83fb-4919-9dab-7e78353f9775
+        - mountPath: /tmp/8ef33bd4-589b-41b2-9cea-15f1caa51086
           name: edu-volume-2
-        - mountPath: /tmp/af95f07a-8e1d-4d6f-a830-d227152bd9ba
+        - mountPath: /tmp/eaebc7cb-5fe1-4d2b-926f-419e37da7c79
           name: edu-volume-114
-        - mountPath: /tmp/6f42908d-2e03-47c8-973e-4430c6d103be
+        - mountPath: /tmp/08ce9aa6-236d-45f8-8eee-e9ed459a9c2d
           name: edu-volume-113
-        - mountPath: /tmp/78a556da-8f14-4003-9073-788f8995e102
+        - mountPath: /tmp/4d01b1af-5fe9-4c79-ae90-43cff64398f2
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/91602d9d-d9dd-418b-8641-a475063f68be
+        - mountPath: /tmp/79c3ef28-4a41-4167-bc9c-8a49ffe020b5
           name: edu-volume-3
-        - mountPath: /tmp/a01be81b-2ff4-4726-966e-906b4dea02c0
+        - mountPath: /tmp/1eab3d43-4014-4592-aae3-029e7497c86f
           name: edu-volume-4
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-26"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '64'
         - name: PER_MEM
@@ -2468,26 +2532,28 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/fda1e7fb-2025-40b0-8d93-6562736630ba
+        - mountPath: /tmp/e77e6c21-1eb3-449f-81dc-ad1d98cc1f37
           name: edu-volume-115
-        - mountPath: /tmp/6db7c297-efdf-488b-a7ca-821fbbc859a3
+        - mountPath: /tmp/453157aa-aa1d-4a89-881d-1e741aeb0cac
           name: edu-volume-116
-        - mountPath: /tmp/e1360020-2774-4fe3-a29d-14ce079d0789
+        - mountPath: /tmp/5a029422-6e4f-4e0e-8afa-3a41d7f7e112
           name: edu-volume-117
-        - mountPath: /tmp/267308f0-f56c-4fbf-a2d3-656e5581f10e
+        - mountPath: /tmp/17105cea-be66-42f9-976c-1c944955eda8
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/ce9f1706-3c8c-443e-82c8-b306c2a750a3
+        - mountPath: /tmp/ac802d25-6be1-4c67-b152-a4ae6bb8baa0
           name: edu-volume-118
-        - mountPath: /tmp/2699306b-61d6-43d5-9a7f-93a962ae78e3
+        - mountPath: /tmp/a39b35e6-dab4-4ff7-918c-7ea64e0ed922
           name: edu-volume-119
-        - mountPath: /tmp/8dbc7bcc-7cf0-491d-8ac2-1e38234b5c34
+        - mountPath: /tmp/19fddcee-8f63-4428-858b-29c6b50038cf
           name: edu-volume-120
-        - mountPath: /tmp/d5da1b14-985b-49e6-815f-5c033ab4e67d
+        - mountPath: /tmp/318edd4c-e061-47c1-b174-7409c1d3f8b0
           name: edu-volume-121
-        - mountPath: /tmp/92f391c7-4333-4d19-b220-a7b67433a259
+        - mountPath: /tmp/731abc46-af7d-42ef-8c80-5a01c7de47b6
           name: edu-volume-122
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-27"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
@@ -2523,13 +2589,15 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/a565110f-5a42-4b72-8458-2f6c917ec3eb
+        - mountPath: /tmp/15751cdd-fb36-4b6e-b0af-041cef8a7d6b
           name: edu-volume-110
-        - mountPath: /tmp/2ce1971a-c847-4274-b41e-2b1b00d998d1
+        - mountPath: /tmp/dcd88bdf-ee0f-4c62-abe8-63426596aadc
           name: edu-volume-109
-        - mountPath: /tmp/b57319e6-4665-421e-8bca-23b3c195de08
+        - mountPath: /tmp/c7212212-f46f-455a-b9a8-885d7392b242
           name: edu-volume-2
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-2"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
@@ -2561,7 +2629,7 @@ spec:
             - all
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/ddccc399-c8c4-4892-b22b-80544f4a9812
+        - mountPath: /tmp/c22e7509-10d0-4ce0-b2a5-933c5190de1d
           name: edu-volume-14
       volumes:
       - configMap:
@@ -2659,6 +2727,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-28"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '4104'
         - name: PER_MEM
@@ -2702,26 +2772,26 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/1a40086d-3d18-4f45-b94b-0438248033a6
+        - mountPath: /tmp/c096f9ac-947e-41be-be07-ec3b7df4f5c5
           name: edu-volume-2
-        - mountPath: /tmp/06299771-7746-48c2-a219-2c247e936483
+        - mountPath: /tmp/6807a4eb-40a0-4178-b5f3-d85056a2d0dd
           name: edu-volume-124
-        - mountPath: /tmp/304ae534-cdb4-4781-81c1-fe4925ac6fb1
+        - mountPath: /tmp/e8af468d-5814-4b53-b74c-43952ad97f1f
           name: edu-volume-123
-        - mountPath: /tmp/796bde55-a9e3-4e20-bd00-6bb2f15b4e81
+        - mountPath: /tmp/fdb3100f-16df-41af-a723-bf955611e485
           name: edu-volume-126
-        - mountPath: /tmp/f2fe982d-d205-428b-a6fc-26c2725a5128
+        - mountPath: /tmp/05d7f0ea-1a86-4ffb-ae77-a41293d831dd
           name: edu-volume-125
-        - mountPath: /tmp/018d8451-a322-43cc-92d0-ff405332af4b
+        - mountPath: /tmp/dc217777-aa0c-473e-8697-d76d4b1a6e04
           name: edu-volume-10
-        - mountPath: /tmp/56d8137f-fa1c-4021-8203-f813bc9e2972
+        - mountPath: /tmp/d921e89f-ce84-4c0d-9eb1-09bd268e7b11
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/60d4c4c6-f6cc-4be7-bc9b-48e249e5e317
+        - mountPath: /tmp/5a1c86b0-b0f9-4b80-a592-a76819443b63
           name: edu-volume-127
-        - mountPath: /tmp/b8ff2b0e-c746-4978-b600-b94360a75978
+        - mountPath: /tmp/0156b45d-2ffc-43e5-a6ca-e6bed1b56b5d
           name: edu-volume-3
-        - mountPath: /tmp/eaded6f7-2106-42c5-a213-71c42db7116f
+        - mountPath: /tmp/69a0d9c2-8ee8-411c-affa-2dd42231fcb0
           name: edu-volume-4
       volumes:
       - name: edu-volume-10
@@ -2781,6 +2851,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-29"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '2048'
         - name: PER_MEM
@@ -2819,13 +2891,13 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/9750b5c8-d8ca-4cd1-bb87-b2c73a81b7c4
+        - mountPath: /tmp/f0a18346-0eef-4d3e-93cc-39aae7330d7e
           name: edu-volume-2
-        - mountPath: /tmp/33b86e6e-81eb-4c43-a8d7-9ab3fe3b0ef7
+        - mountPath: /tmp/b11e4cb7-2c13-4b60-9652-93062ed8dc76
           name: edu-volume-128
-        - mountPath: /tmp/2037c9a4-b899-4b06-954c-692b7d079004
+        - mountPath: /tmp/7172c7ce-08b0-4672-83c9-7d7dfc24018a
           name: edu-volume-129
-        - mountPath: /tmp/61ece46e-9e07-4a1d-b700-87e478a57f4a
+        - mountPath: /tmp/ffbe2188-c6fa-47c9-ad66-34c11a75a561
           name: edu-volume-130
       volumes:
       - configMap:
@@ -2862,6 +2934,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-30"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '3848'
         - name: PER_MEM
@@ -2905,26 +2979,26 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/8bf11b0c-0e88-4e66-9cd4-3715ba8d4004
+        - mountPath: /tmp/ddb2ecce-37ad-4591-977a-2b4a78b7e478
           name: edu-volume-2
-        - mountPath: /tmp/5345052e-b353-487c-a8bb-48415dfc6e6d
+        - mountPath: /tmp/b6265927-d67e-4429-84a0-cd706f5cea82
           name: edu-volume-134
-        - mountPath: /tmp/6ddf80e8-6844-4a70-b3fd-22a9a59cb3ae
+        - mountPath: /tmp/5c2c4894-720b-406f-9980-5b0c79015c8a
           name: edu-volume-133
-        - mountPath: /tmp/4a200a69-ce3a-4505-aaee-0968affa4e2a
+        - mountPath: /tmp/8bc2cecc-1466-47e6-bed8-c7e19216ffa8
           name: edu-volume-132
-        - mountPath: /tmp/17542285-430c-4bdf-8062-6f213f3128dd
+        - mountPath: /tmp/51045718-533b-47f0-91f5-27543c5747ef
           name: edu-volume-131
-        - mountPath: /tmp/b045cc4c-3edd-42be-8bfc-e2f94dac1f38
+        - mountPath: /tmp/6823081f-ab9c-4fdd-8f6f-d1c2c2c09741
           name: edu-volume-30
-        - mountPath: /tmp/5f9b203d-bcb5-4711-a4c6-ac80952aed53
+        - mountPath: /tmp/e2655977-6ace-41a9-b7ba-3e9405a4edf2
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/3030e9cf-c913-435f-92bc-e0de14e9fca6
+        - mountPath: /tmp/99c849ee-af13-4e75-9696-2e4f1c45b034
           name: edu-volume-135
-        - mountPath: /tmp/f8b50c5e-a64b-483c-beb2-6be9757253b0
+        - mountPath: /tmp/24298762-b1b1-43b7-b8f6-f64f598c11df
           name: edu-volume-3
-        - mountPath: /tmp/d1882fd9-8aa2-47ac-9d01-d62dd33f4093
+        - mountPath: /tmp/be5fec25-d0fc-490c-a87b-42061a7bb921
           name: edu-volume-4
       volumes:
       - configMap:
@@ -2984,6 +3058,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-31"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '4872'
         - name: PER_MEM
@@ -3028,25 +3104,25 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/891b2c0d-e465-4a4d-81e4-5096b3a7abd5
+        - mountPath: /tmp/e63bc0bc-6e29-4b8e-adbc-e3c778705cea
           name: edu-volume-2
-        - mountPath: /tmp/038be4e9-f047-449f-b830-c9ac687c2e78
+        - mountPath: /tmp/2d508fc1-ccab-4fc4-a2ce-1f83f9890297
           name: edu-volume-137
-        - mountPath: /tmp/ad7142e2-6957-44e4-b836-e63e53c2b85d
+        - mountPath: /tmp/4b0d7554-190f-4cf9-ab69-c51aba92547d
           name: edu-volume-136
-        - mountPath: /tmp/3052448b-c4e5-4612-b4ab-c1438bf054bf
+        - mountPath: /tmp/b7af7527-ecbb-4db9-a95b-455f7edd3251
           name: edu-volume-139
-        - mountPath: /tmp/4d0ae963-d338-4bc7-81b3-583b6f21dfe5
+        - mountPath: /tmp/1c5bbdd1-869f-4691-8291-96b0d1061554
           name: edu-volume-138
-        - mountPath: /tmp/21a0a651-5e36-457e-9797-2d0c3d73bfd3
+        - mountPath: /tmp/6c56c6af-565f-480a-931c-94f59112fd62
           name: edu-volume-10
-        - mountPath: /tmp/185a5c37-5b95-4eae-8e7c-8277eaf9c03b
+        - mountPath: /tmp/05454d71-b34b-44b1-8cd5-32f6b23814d6
           name: edu-volume-3
-        - mountPath: /tmp/5b87f986-3093-404a-a13c-1e97a7e6f61c
+        - mountPath: /tmp/13ba7df9-0c93-4e6c-af0c-79a7b5b7ccb5
           name: edu-volume-4
-        - mountPath: /tmp/288f1427-5cd3-4c04-9f7d-acb1bed0af2e
+        - mountPath: /tmp/c1dfafb5-40f8-4768-a9f9-36baac429a69
           name: edu-volume-17
-        - mountPath: /tmp/90ade0c0-db8a-4c9f-9141-d1b7327db417
+        - mountPath: /tmp/da76f600-5712-4cc3-a0e2-3fa11aa74cbc
           name: edu-volume-140
       volumes:
       - name: edu-volume-10
@@ -3103,6 +3179,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-32"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '200'
         - name: PER_MEM
@@ -3140,23 +3218,25 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/ca6a0e97-476c-4b0c-b3cd-60e19649b682
+        - mountPath: /tmp/614718de-f053-4be2-9a24-e8471802cb05
           name: edu-volume-141
-        - mountPath: /tmp/4e21839c-6f4a-4592-aa5e-0e0de2be1b1f
+        - mountPath: /tmp/7d3b180e-6b4a-4301-98dd-c0de56c38d02
           name: edu-volume-141
-        - mountPath: /tmp/73353ca4-a15a-43b9-96bc-51aea9c90a64
+        - mountPath: /tmp/bbba89b4-b9a0-466d-a24e-8956498073da
           name: edu-volume-142
-        - mountPath: /tmp/41b7b049-0fef-408e-b7f3-141c192033d9
+        - mountPath: /tmp/c9c2f8d4-b536-444d-a1b0-2e436bb30832
           name: edu-volume-142
-        - mountPath: /tmp/8f7a3e20-f944-4e27-9041-a360eec7d054
+        - mountPath: /tmp/8b75842d-fe73-4892-8f64-bd5267ea0212
           name: edu-volume-142
-        - mountPath: /tmp/c427bccc-43f6-4480-87ba-bcd0cd058817
+        - mountPath: /tmp/03765ee9-b25d-4ad1-83af-8602d333f44b
           name: edu-volume-143
-        - mountPath: /tmp/77af3a4d-0035-462c-a2e3-4047b57d101c
+        - mountPath: /tmp/82b62f70-d580-412d-b4d0-2b1210eb4dc9
           name: edu-volume-143
-        - mountPath: /tmp/47fe2819-69d3-4b26-91ab-7f9d165dc114
+        - mountPath: /tmp/b056ad4c-ff44-466c-a7a6-2012b490aa02
           name: edu-volume-144
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-33"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '100'
         - name: PER_MEM
@@ -3195,15 +3275,15 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/c29d4c5d-7637-4658-a9d3-6e766253bce6
+        - mountPath: /tmp/1aa42850-c4e5-474f-801a-8dd186330b84
           name: edu-volume-142
-        - mountPath: /tmp/864e054b-4161-4aae-871e-f24f9705d264
+        - mountPath: /tmp/60d977c0-6118-4a38-ac28-66f9e6ae425b
           name: edu-volume-142
-        - mountPath: /tmp/df511f1e-1e0f-4cbc-8ca4-a4c8d1e485d5
+        - mountPath: /tmp/dbe7f571-e9f0-4630-91c6-e7c71c50509e
           name: edu-volume-143
-        - mountPath: /tmp/536adb66-f665-401a-8d72-126840ab536d
+        - mountPath: /tmp/37768be2-f9c4-431d-95d3-dcfda3d994b8
           name: edu-volume-143
-        - mountPath: /tmp/41ded2a1-1c6f-4347-aba5-5b2eafcfec83
+        - mountPath: /tmp/eb4d30fa-fd91-4c50-9edb-69d12a5be3d0
           name: edu-volume-144
       volumes:
       - configMap:
@@ -3237,6 +3317,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-34"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '512'
         - name: PER_MEM
@@ -3270,23 +3352,23 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/a9265438-c973-4b35-9693-ab84f38a13ea
+        - mountPath: /tmp/ee2bd9a0-3ee8-432f-86b4-208ecf362f86
           name: edu-volume-145
-        - mountPath: /tmp/5b0944ba-77f6-4841-8934-39d89ce1c785
+        - mountPath: /tmp/5dd0dac7-9937-414e-8f53-da535d7e1f93
           name: edu-volume-145
-        - mountPath: /tmp/6dd207e8-fd8e-4f78-bede-221a6f02b2f6
+        - mountPath: /tmp/5d7163ba-e02d-475d-9cdb-a63e9cdb0bf9
           name: edu-volume-145
-        - mountPath: /tmp/ea3492ee-7610-4a86-9df6-fe2bfea73010
+        - mountPath: /tmp/8339a84f-6b6d-4961-9ef1-daea9edeadf3
           name: edu-volume-145
-        - mountPath: /tmp/e4386093-a480-4d85-b43a-127ffa3d2c72
+        - mountPath: /tmp/88a0f671-2dba-422c-9b1e-8b273b85a5d9
           name: edu-volume-145
-        - mountPath: /tmp/40e44652-47ad-48eb-89ae-091b9add8c09
+        - mountPath: /tmp/15cedbc9-5573-4765-b4d9-ab13ef165546
           name: edu-volume-146
-        - mountPath: /tmp/4c4b95e3-b6ab-4ef3-9aa3-f64491235485
+        - mountPath: /tmp/870729fe-99ad-42f4-860b-21d222e3e39b
           name: edu-volume-147
-        - mountPath: /tmp/0eb6c511-bd4d-43eb-aedb-fb1aa93ea0f8
+        - mountPath: /tmp/ed781934-1bd6-45c7-8ed3-606ddcae9c4a
           name: edu-volume-148
-        - mountPath: /tmp/49f0c748-a190-4326-bdc4-30d230f8a052
+        - mountPath: /tmp/ef9ea138-01dd-4b90-8ad5-e8c406d64383
           name: edu-volume-148
       volumes:
       - emptyDir: {}
@@ -3318,6 +3400,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-35"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '2048'
         - name: PER_MEM
@@ -3362,15 +3446,15 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/cadd39d7-651b-4e49-98b8-fdde2587ad24
+        - mountPath: /tmp/f91b0a7b-db06-4444-9326-faefd89b64d5
           name: edu-volume-150
-        - mountPath: /tmp/b098a2b8-4469-4829-b335-dd461e3a9fbe
+        - mountPath: /tmp/3855edb9-7707-4a37-8213-0abdbfe0e3fa
           name: edu-volume-151
-        - mountPath: /tmp/7874a7bc-e262-4ceb-864a-453f34dfb577
+        - mountPath: /tmp/3ff42aee-43a3-435f-b303-71af974ec44c
           name: edu-volume-152
-        - mountPath: /tmp/315ecfbd-e16b-4ed9-8949-f57b13939d09
+        - mountPath: /tmp/0427422a-2038-4482-bad6-7ea503adb13b
           name: edu-volume-153
-        - mountPath: /tmp/efa62553-7226-4113-afd3-4983ad9c8215
+        - mountPath: /tmp/af0b0066-b3a2-48cf-b977-22dbb1d5ac7f
           name: edu-volume-154
       volumes:
       - configMap:
@@ -3409,6 +3493,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-36"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '100'
         - name: PER_MEM
@@ -3442,13 +3528,13 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/27bfd228-f87d-4e9c-825f-34f9681946d6
+        - mountPath: /tmp/95da8235-316e-4e5f-a118-0f3b43f23608
           name: edu-volume-155
-        - mountPath: /tmp/897d4677-1998-40e4-9813-bcc8aaac67cf
+        - mountPath: /tmp/e47e9a1c-29a5-449b-ad29-e5f9326902a6
           name: edu-volume-156
-        - mountPath: /tmp/06e8ccda-ea91-4c90-b42f-d5e97b066039
+        - mountPath: /tmp/5d3a2f47-6696-48fe-91bc-768fbf57e55c
           name: edu-volume-157
-        - mountPath: /tmp/c263c167-b2e0-4744-8ba3-866cdf8a1885
+        - mountPath: /tmp/6d8194fa-e34d-4ef0-b84e-54428cdd24cd
           name: edu-volume-158
       volumes:
       - name: edu-volume-155
@@ -3480,6 +3566,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-37"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
@@ -3501,11 +3589,13 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/d0f221b8-7ca9-46c3-a8a2-f92acdea7e55
+        - mountPath: /tmp/670bc0a6-eac2-49b6-91fb-9f39e0ad26eb
           name: edu-volume-174
-        - mountPath: /tmp/9de2f390-4b6a-420b-8d27-ac392945b96f
+        - mountPath: /tmp/5438ddbc-6fe1-4684-90bd-9018b043514c
           name: edu-volume-176
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-38"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
@@ -3536,11 +3626,13 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/e2e1c135-77b7-45c3-a97f-968e79603db4
+        - mountPath: /tmp/1a7e7d2c-b7a8-4457-8a36-4beb03c6ef6e
           name: edu-volume-160
-        - mountPath: /tmp/31a1a937-958c-49a5-88ac-ecfd8d20b9fc
+        - mountPath: /tmp/6f6a2617-b849-4810-8a33-47f0e2835e9d
           name: edu-volume-172
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-39"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
@@ -3587,13 +3679,13 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         volumeMounts:
-        - mountPath: /tmp/cde87e45-2ca4-4070-a4df-9bde2a66338b
+        - mountPath: /tmp/92ea25c4-b03e-4c30-83a8-21c0a39ce636
           name: edu-volume-159
-        - mountPath: /tmp/61866227-bf52-4f95-8378-683b4393641d
+        - mountPath: /tmp/971be78e-037e-469b-8d86-acc10548e574
           name: edu-volume-173
-        - mountPath: /tmp/3b71b258-223f-40f6-af2c-88709731820f
+        - mountPath: /tmp/ee2f6c55-c751-4d3c-84ac-8ffb6481aea3
           name: edu-volume-175
-        - mountPath: /tmp/6cec3dc3-2309-4260-a472-021ba2dbd3ea
+        - mountPath: /tmp/0590b0fd-e365-4537-a5e7-08f3c4621c1c
           name: edu-volume-17
       volumes:
       - name: edu-volume-159
@@ -3670,6 +3762,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-40"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
@@ -3704,13 +3798,13 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/6af3c80f-9f51-4e74-8e68-5a96fd95782f
+        - mountPath: /tmp/4c17dbc7-c8f1-442c-ba9c-a179f1e79844
           name: edu-volume-178
-        - mountPath: /tmp/a7410c21-bf0f-4dbe-a7e7-f1967be96b67
+        - mountPath: /tmp/8d09d99f-b2d3-491b-b785-82eddd39400b
           name: edu-volume-179
-        - mountPath: /tmp/4383e1ca-77d6-426d-a8a9-015446c0e6c9
+        - mountPath: /tmp/5ddaf499-2a60-45de-8cbd-47b592390c72
           name: edu-volume-180
-        - mountPath: /tmp/0f246b8d-1341-4e2f-a5d2-09713f1829b5
+        - mountPath: /tmp/4606f464-987f-4777-a5fc-c8d8a970e7e2
           name: edu-volume-24
       volumes:
       - configMap:
@@ -3750,6 +3844,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-0"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
@@ -3786,25 +3882,27 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/665f2f77-eda8-4146-bc62-4d921c199abe
+        - mountPath: /tmp/7e1a764a-0d1e-4677-b2a5-3c9210b9925e
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/13491888-bd3e-44b3-b051-3c74751a6e49
+        - mountPath: /tmp/fc6e8a12-cff4-43f0-90d7-45b7b8defa77
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/3356a461-50bd-48ad-bce5-84fc29cb3a2d
+        - mountPath: /tmp/1ef0ef3e-b512-4fbc-a386-efb518c40055
           name: edu-volume-9
-        - mountPath: /tmp/39c34ad5-2247-44cd-8de5-11e7801ae35d
+        - mountPath: /tmp/a15b678a-328e-4c30-bc2d-7554bc6beb75
           name: edu-volume-11
-        - mountPath: /tmp/627e6bbd-93eb-4b1f-bbbb-8f34ec053a58
+        - mountPath: /tmp/d0c6fa39-2ca2-45ea-8fd0-4a2fb67cf632
           name: edu-volume-12
-        - mountPath: /tmp/3abba19a-6fb6-473f-a271-a33a6b738cfb
+        - mountPath: /tmp/71cf3bb8-a6f7-4a3c-9065-a6e92feb6c32
           name: edu-volume-13
-        - mountPath: /tmp/09f8607b-c067-4bfe-8905-be097e8759b7
+        - mountPath: /tmp/1291c833-e1ef-4fef-8451-230fb96d470f
           name: edu-volume-15
-        - mountPath: /tmp/563a97e0-d767-4734-b457-4d57ea5b46d8
+        - mountPath: /tmp/735128ff-03f5-4169-a36d-42e59431fd31
           name: edu-volume-16
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-2"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '64'
         - name: PER_MEM
@@ -3838,9 +3936,11 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/8d75f420-07fe-458b-9610-fae087ff5f78
+        - mountPath: /tmp/6034c444-030e-4e21-a9f8-e26aa03727bf
           name: edu-volume-14
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-41"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
@@ -3881,12 +3981,14 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/45f532a7-5d05-4f75-acd6-18312c6187aa
+        - mountPath: /tmp/4affacc4-3256-43b4-8202-89cc66bc0b16
           name: edu-volume-11
-        - mountPath: /tmp/150058ec-be77-4f41-8e5f-f6c5e3904b12
+        - mountPath: /tmp/38529dcc-6e59-4def-bd85-6c08f7ff676a
           name: edu-volume-1
           readOnly: true
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-42"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
@@ -3924,7 +4026,7 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/f7d225ec-bb73-4fb5-90bf-bd04e44cb40f
+        - mountPath: /tmp/e6130629-9ce6-44e2-90e4-2e2157cdee91
           name: edu-volume-11
       volumes:
       - emptyDir: {}
@@ -3978,6 +4080,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-0"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
@@ -4014,25 +4118,27 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/a10e4230-b7cb-44a6-9dba-b43ef18c5b3d
+        - mountPath: /tmp/31fba331-f988-4bab-8a5a-5e86f9081803
           name: edu-volume-0
           readOnly: true
-        - mountPath: /tmp/2fd33fb8-7676-4af3-b76a-82d2c571cfe1
+        - mountPath: /tmp/2ac1b65e-ca5b-4d72-b24e-fca54062ddc6
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/f166c854-6310-44c1-88f5-d799f2f0ea45
+        - mountPath: /tmp/6e810676-06bf-485a-a8fa-d504bbd92ac9
           name: edu-volume-55
-        - mountPath: /tmp/f2e9b428-93d3-4b82-850e-9e987aa06ae2
+        - mountPath: /tmp/5307d523-ba44-4036-87d2-80e0384b62e2
           name: edu-volume-11
-        - mountPath: /tmp/0c9a4037-1b3a-401c-9d9d-0e549511ff13
+        - mountPath: /tmp/06d6561b-34d3-4702-9e6c-244449650279
           name: edu-volume-12
-        - mountPath: /tmp/c0cd31da-17ba-4158-9c7b-4801683818b0
+        - mountPath: /tmp/e53c3056-f0e7-48f5-9baf-7a229011a5f4
           name: edu-volume-13
-        - mountPath: /tmp/df59c812-835f-4e86-99c8-e4ad4db01c08
+        - mountPath: /tmp/062429fe-4946-4ad5-b1c3-bc29a418c04f
           name: edu-volume-15
-        - mountPath: /tmp/ce765a30-c009-43d9-811e-c4ba317cfdf3
+        - mountPath: /tmp/b468bd7e-a8c6-40a6-a91f-6efffd364897
           name: edu-volume-16
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-43"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '11460'
         - name: PER_MEM
@@ -4091,39 +4197,41 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         volumeMounts:
-        - mountPath: /tmp/95e52db3-3693-43aa-b78e-ce4c514deec7
+        - mountPath: /tmp/bc19df9c-7497-45ba-9925-d279d6e085f2
           name: edu-volume-185
-        - mountPath: /tmp/88b8b1cf-31e0-4fda-b7cb-8e77aef8c03e
+        - mountPath: /tmp/95501645-3e57-4cb0-ad33-6660870337dd
           name: edu-volume-184
-        - mountPath: /tmp/473fef56-6475-4798-a4fe-9a36f0071463
+        - mountPath: /tmp/fc98be29-688c-404d-bb00-9b994df6f039
           name: edu-volume-198
-        - mountPath: /tmp/e3645b9b-d94f-412a-a36f-8b609f434bb2
+        - mountPath: /tmp/f9692cc9-6605-48c7-80e8-11102f8d1699
           name: edu-volume-188
-        - mountPath: /tmp/f9c37ecc-3574-4bfe-89a0-db921b5010b0
+        - mountPath: /tmp/7360fca5-1575-4af2-a9e4-5f4a32d38b55
           name: edu-volume-189
-        - mountPath: /tmp/7ed83b4e-37f8-437e-a05b-e07cb8b5b580
+        - mountPath: /tmp/8bdf55eb-2679-45c5-9daf-b2f2bdfe25f8
           name: edu-volume-190
-        - mountPath: /tmp/0e5e8fd1-37f8-420f-9b61-bb46cff06230
+        - mountPath: /tmp/f2195196-6cfc-4298-aa75-b6ba4cdfbe31
           name: edu-volume-183
-        - mountPath: /tmp/c4bc3f51-6ee6-45d9-a783-f5a765226bbc
+        - mountPath: /tmp/ae6a388b-0de0-4cec-938b-c7c3efb37728
           name: edu-volume-199
           readOnly: true
-        - mountPath: /tmp/2579840a-abd1-4eda-9f6f-e9f5c8ed6032
+        - mountPath: /tmp/23a0040a-2cf0-4a21-b9aa-0cb612b876b1
           name: edu-volume-2
-        - mountPath: /tmp/3e8dd0f8-a865-49a8-8f19-338b86594059
+        - mountPath: /tmp/8198fa1a-f558-4621-b347-48bf35d92593
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/4df7656b-33c6-4a47-832f-6cda4990e205
+        - mountPath: /tmp/37947b90-307d-41cb-98a9-f9ca59553d87
           name: edu-volume-0
-        - mountPath: /tmp/51a60562-6263-4ea1-9373-ff9075f97f37
+        - mountPath: /tmp/68d9c52a-ac85-4d93-9133-1369554b5373
           name: edu-volume-201
-        - mountPath: /tmp/91fc4711-0444-4294-8b30-1d6b2429f42c
+        - mountPath: /tmp/df73a1cb-b08c-4140-85cc-8d46ebfd894a
           name: edu-volume-202
-        - mountPath: /tmp/ce8ea761-e913-43bb-b60b-c4e0bcdff094
+        - mountPath: /tmp/71f60dc0-05f5-4326-9db5-10b6732b291b
           name: edu-volume-3
-        - mountPath: /tmp/81f6e5a7-647a-4e9e-924e-71c6489366a0
+        - mountPath: /tmp/922a8ce6-35e4-479a-a8b2-9be8cf7ed670
           name: edu-volume-4
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-44"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '11772'
         - name: PER_MEM
@@ -4183,35 +4291,37 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         volumeMounts:
-        - mountPath: /tmp/a0cd5a4a-1eab-429c-9e0b-f119965ab1c4
+        - mountPath: /tmp/26d18552-9225-4f4f-b56b-58e4be770ad6
           name: edu-volume-187
-        - mountPath: /tmp/e9092625-8ff5-4637-b842-61dd95111c50
+        - mountPath: /tmp/5bbfe00f-f414-44b5-994b-846a5c693dad
           name: edu-volume-186
-        - mountPath: /tmp/feaff9e6-5e25-425c-82e0-ca53ef27b59f
+        - mountPath: /tmp/0c87ae3e-7724-4bb2-83b0-086ad95499a6
           name: edu-volume-198
-        - mountPath: /tmp/919a81c8-4347-46a7-9625-500aedc99267
+        - mountPath: /tmp/75588212-55ce-4495-bbbe-ce93755c924f
           name: edu-volume-191
-        - mountPath: /tmp/c2af5d0d-681e-449c-ac72-136a535250b2
+        - mountPath: /tmp/9fc68d6d-92b4-4c4d-9593-d5f1719415d7
           name: edu-volume-192
-        - mountPath: /tmp/47bcf559-fb98-4183-9a38-68e0f69571e8
+        - mountPath: /tmp/2556f55d-70c3-4f77-884b-1e2562897e8a
           name: edu-volume-193
-        - mountPath: /tmp/e165d301-92ae-4d12-b41e-92812e931026
+        - mountPath: /tmp/c44f282d-4219-439c-b336-626166b3e29c
           name: edu-volume-182
-        - mountPath: /tmp/6519d340-4652-4a8b-9f2f-089d4edf3d53
+        - mountPath: /tmp/ff34091d-63bf-4630-82bc-b78f4ec89b4b
           name: edu-volume-200
           readOnly: true
-        - mountPath: /tmp/685c4458-eeb1-4b55-9727-b400ab484047
+        - mountPath: /tmp/4c3e007c-b312-4afe-b1f8-4877c51fe89a
           name: edu-volume-2
-        - mountPath: /tmp/3f757335-cbc4-4362-a099-753dffacbec0
+        - mountPath: /tmp/19893748-e763-4f5f-9e50-dfc43802b9d8
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/0552ae6d-644b-44c0-b78c-92580d806080
+        - mountPath: /tmp/d9662e6e-2b18-472e-9caa-971614d1699e
           name: edu-volume-0
-        - mountPath: /tmp/e2372afc-f206-4f22-8b90-c58097749e6d
+        - mountPath: /tmp/1c587d2c-626d-46d0-b0ce-7cdd5d3a45b8
           name: edu-volume-3
-        - mountPath: /tmp/3c81dd53-c35e-47cf-a129-7545006e968c
+        - mountPath: /tmp/af1b2a3b-639b-4a11-adec-03c87484ba09
           name: edu-volume-4
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-45"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '8742'
         - name: PER_MEM
@@ -4271,28 +4381,30 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         volumeMounts:
-        - mountPath: /tmp/976a9de2-6f25-4d44-9197-bae4e9a5e62d
+        - mountPath: /tmp/5e3f2f15-54bf-4847-acbb-61f57599c103
           name: edu-volume-198
-        - mountPath: /tmp/6c9b9e2f-89ba-40f9-b0d4-3286ef60b34d
+        - mountPath: /tmp/2ad5bbbd-3e97-455b-9cc5-d85019e7a9d8
           name: edu-volume-194
-        - mountPath: /tmp/27ef0057-7122-4175-bc9a-6cf6bb6cf9ef
+        - mountPath: /tmp/89a96a52-0a9c-482b-a396-ad52b3b4ee74
           name: edu-volume-195
-        - mountPath: /tmp/c0aeff42-6d34-4d50-8c87-ae78b36114f6
+        - mountPath: /tmp/d634d37a-cc96-456c-a0b8-8b2d186695f7
           name: edu-volume-196
-        - mountPath: /tmp/c4a22c6d-8acf-464d-9c9b-5a897952e7cf
+        - mountPath: /tmp/ff765500-59c4-42d1-b49a-64e5785073da
           name: edu-volume-2
-        - mountPath: /tmp/c5809fc9-585a-44c3-a658-05e05931f851
+        - mountPath: /tmp/ceef974e-5920-41ec-8921-ea3796b68e21
           name: edu-volume-0
-        - mountPath: /tmp/663d2123-9356-46a8-9cbe-59fe7718a047
+        - mountPath: /tmp/d744f981-817a-47bb-8827-b6f61678dae0
           name: edu-volume-181
-        - mountPath: /tmp/51139206-8af7-45b8-9c1d-20f8a793f8ec
+        - mountPath: /tmp/07e2c93d-5638-4776-bd70-08c5cd414a16
           name: edu-volume-197
           readOnly: true
-        - mountPath: /tmp/3dfb8d08-5189-4399-b912-d12f0cc89d8b
+        - mountPath: /tmp/b81d0b6e-9220-4740-9212-179d124d1a38
           name: edu-volume-3
-        - mountPath: /tmp/88d059ad-fec4-4d6b-8811-ceeda459a6aa
+        - mountPath: /tmp/eab89530-bdb4-43cd-9444-f9d8a0e25d8c
           name: edu-volume-4
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-2"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '64'
         - name: PER_MEM
@@ -4326,9 +4438,11 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/2998d7ff-eaa8-4fb5-81b5-d0a37f0b0eaf
+        - mountPath: /tmp/358de5e8-958d-4286-b6c6-64394a457060
           name: edu-volume-14
       - env:
+        - name: NUM_THREADS
+          value: '{{ spammer_num_threads["edu-container-3"] | default(spammer_num_threads_default) }}'
         - name: MAX_MEM
           value: '1024'
         - name: PER_MEM
@@ -4372,21 +4486,21 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/071ffbfe-947c-4bbe-a231-a7fb47a32f3f
+        - mountPath: /tmp/287b1af0-db73-426b-ad40-57674b323b62
           name: edu-volume-17
-        - mountPath: /tmp/828f1646-e346-4847-8a34-17d5a0ef8c90
+        - mountPath: /tmp/0b6f4d1c-07dd-4a26-b584-75c52444dc4b
           name: edu-volume-2
-        - mountPath: /tmp/5cd26398-d0dc-45ab-9800-098d357ee0cb
+        - mountPath: /tmp/ce0ccac3-25cc-4a5d-9633-4838ac7b84c5
           name: edu-volume-20
-        - mountPath: /tmp/a1eea7fb-821f-4b12-a76d-abbfe7cc03cd
+        - mountPath: /tmp/62ba2fd7-e6ed-472e-8ba4-dc0b9fc2b48b
           name: edu-volume-21
-        - mountPath: /tmp/7fdc9fd1-732b-4884-86a0-33c1f05c7b28
+        - mountPath: /tmp/b5fbc9a3-9d3d-4045-b36e-87326ea541c1
           name: edu-volume-22
-        - mountPath: /tmp/35ffc3d0-efd8-418e-9b4e-cb87cffa63b1
+        - mountPath: /tmp/96c4de4d-9403-404e-bd58-cff609c1baf8
           name: edu-volume-18
-        - mountPath: /tmp/7535afd4-9592-454e-b116-f9ad4b3741dc
+        - mountPath: /tmp/6ac61b75-2bdc-4daf-84fd-03cf2dd5d513
           name: edu-volume-19
-        - mountPath: /tmp/88f67efc-e803-4db7-b873-89c967ee715c
+        - mountPath: /tmp/69ff5e0b-92fa-4d46-aae3-974ad1073977
           name: edu-volume-1
           readOnly: true
       volumes:
