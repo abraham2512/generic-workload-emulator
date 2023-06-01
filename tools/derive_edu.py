@@ -185,11 +185,13 @@ for sourcefile in os.listdir(args.sourcedir):
       newdeployment['spec']['template']['spec']['volumes'].append(newvolume)
 
     for container in yamldata['spec']['containers']:
-      containerref = resourceref('container', container['name'])
+      containerref = resourceref('container', '_'.join([yamldata['metadata']['name'], container['name']]))
       newcontainer = copy.deepcopy(templates['container'])
       newcontainer['name'] = containerref
+      newcontainer['imagePullPolicy'] = 'Always'
       newcontainer['env'] = [
         {'name': 'NUM_THREADS', 'value': '{{ spammer_num_threads["' + containerref + '"] | default(spammer_num_threads_default) }}'},
+        {'name': 'PER_CPU', 'value': '{{ spammer_per_cpu["' + containerref + '"] | default(spammer_per_cpu_default) }}'},
         {'name': 'MAX_MEM', 'value': str(mem_in_mb(container['resources']['requests']['memory']))},
         {'name': 'PER_MEM', 'value': '{{ spammer_per_mem["' + containerref + '"] | default(spammer_per_mem_default) }}'}]
 
@@ -205,8 +207,10 @@ for sourcefile in os.listdir(args.sourcedir):
             newcontainer[property]['exec']['command'] = ['ls']
           elif 'httpGet' in newcontainer[property] and not list(filter(lambda x: (x['name'] == "LISTEN_PORT"), newcontainer['env'])):
             newcontainer['env'].append({'name': 'LISTEN_PORT', 'value': str(newcontainer[property]['httpGet']['port'])})
+            newcontainer['env'].append({'name': 'LISTEN', 'value': '1'})
           elif 'tcpSocket' in newcontainer[property] and not list(filter(lambda x: (x['name'] == "LISTEN_PORT"), newcontainer['env'])):
             newcontainer['env'].append({'name': 'LISTEN_PORT', 'value': str(newcontainer[property]['tcpSocket']['port'])})
+            newcontainer['env'].append({'name': 'LISTEN', 'value': '1'})
 
       for volumemount in container['volumeMounts']:
         volumeref = resourceref('volume', volumemount['name'])
