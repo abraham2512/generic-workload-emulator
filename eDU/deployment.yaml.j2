@@ -24,12 +24,14 @@ spec:
       - env:
         - name: NUM_THREADS
           value: '{{ spammer_num_threads["edu-container-0"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-0"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
           value: '{{ spammer_per_mem["edu-container-0"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -62,33 +64,35 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/d0c6b7de-ce87-4ed7-b213-bb68d9b71c90
+        - mountPath: /tmp/2cf0666a-7f2b-46d9-86ff-0f9509f744f7
           name: edu-volume-0
           readOnly: true
-        - mountPath: /tmp/a5248e5c-495a-42d9-9063-2c83339dce81
+        - mountPath: /tmp/02559a38-31db-49e3-bfa5-baaf32948b1d
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/22154c2a-768b-4821-87da-e65954a3f637
+        - mountPath: /tmp/d7dd8574-10e2-4bb2-bfbc-d6780ffc5245
           name: edu-volume-9
-        - mountPath: /tmp/7a1bb20c-121c-4b4a-a91f-e1344e5a00c2
+        - mountPath: /tmp/32d6a3cf-7137-4a3f-9cd3-f371613f3f95
           name: edu-volume-11
-        - mountPath: /tmp/60d3cae0-833d-4e8a-8652-a08c7ac7fecf
+        - mountPath: /tmp/e7d04276-9a93-4f65-a696-d6509ccfbd4b
           name: edu-volume-12
-        - mountPath: /tmp/2695e9e3-187d-4547-b2d0-ecc14ec4d061
+        - mountPath: /tmp/85809cd6-0dfb-49e4-a355-cff04a455de2
           name: edu-volume-13
-        - mountPath: /tmp/54d4ce77-0fc6-4557-854a-64bad6447e2b
+        - mountPath: /tmp/fdaa1386-2889-47de-88e5-adf50fea1c56
           name: edu-volume-15
-        - mountPath: /tmp/98fed793-bea5-49a5-b712-3e8c00e997b3
+        - mountPath: /tmp/4d75b195-5359-4c2c-b9f6-52377a0ed03b
           name: edu-volume-16
       - env:
         - name: NUM_THREADS
           value: '{{ spammer_num_threads["edu-container-1"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-1"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '5896'
         - name: PER_MEM
           value: '{{ spammer_per_mem["edu-container-1"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -123,37 +127,39 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/08c478f1-2dbb-4879-b0cd-5b2a9816742d
+        - mountPath: /tmp/b73021d3-da41-4d68-bdd9-d90ca7283323
           name: edu-volume-5
-        - mountPath: /tmp/e7d2d59c-1053-437e-ba66-ef38cf93b0b5
+        - mountPath: /tmp/f6f7efe5-ae87-4d91-b4eb-6305d4122dc8
           name: edu-volume-6
-        - mountPath: /tmp/a27b9c60-63f1-4e40-bc91-8ffce4caf4aa
+        - mountPath: /tmp/1c3d45e7-dfdd-4cec-bc72-25ab9e9e7124
           name: edu-volume-10
-        - mountPath: /tmp/0946f9cb-3104-4be3-8d6c-504ff1296de5
+        - mountPath: /tmp/35ef6f1d-36d1-478b-adde-0dc0e5e6d838
           name: edu-volume-0
           readOnly: true
-        - mountPath: /tmp/6523b1a9-025c-46fb-a7cb-56b1fedb0dc0
+        - mountPath: /tmp/2eddb762-6b74-45b5-8359-cc7ba1d72ec6
           name: edu-volume-2
-        - mountPath: /tmp/c14d5bc8-fb48-41ee-b5b1-268e16cf097f
+        - mountPath: /tmp/786c5ad7-0939-46e0-a4fc-b915217d836c
           name: edu-volume-8
-        - mountPath: /tmp/a1a0156b-45d5-4bbb-bdd3-db64841eaf19
+        - mountPath: /tmp/df8a0265-d44c-4a5a-8e18-ff80aadd4ddf
           name: edu-volume-7
-        - mountPath: /tmp/976e58a9-3211-458c-ab10-5b12c6f65d98
+        - mountPath: /tmp/92f409f9-c371-4605-99e8-cd92be82fbbf
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/46f6d658-678f-4f2a-8a77-395857b66b45
+        - mountPath: /tmp/46d222d6-0107-4b0b-b461-18f5c1bebf2a
           name: edu-volume-3
-        - mountPath: /tmp/0ab4cc54-b149-4924-ada5-cd2d63ea9535
+        - mountPath: /tmp/6aad520b-5db4-472b-ad10-09bd15f0fea2
           name: edu-volume-4
       - env:
         - name: NUM_THREADS
           value: '{{ spammer_num_threads["edu-container-2"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-2"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '64'
         - name: PER_MEM
           value: '{{ spammer_per_mem["edu-container-2"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -181,17 +187,19 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/a2d32666-1f1a-4f30-b568-c7c86da9589d
+        - mountPath: /tmp/8cc57ea2-e9fb-4cd3-96aa-3df0a7dc6365
           name: edu-volume-14
       - env:
         - name: NUM_THREADS
           value: '{{ spammer_num_threads["edu-container-3"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-3"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '1024'
         - name: PER_MEM
           value: '{{ spammer_per_mem["edu-container-3"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -229,21 +237,21 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/fba9ed98-ee40-4ea8-a79d-5e1269c6a5cb
+        - mountPath: /tmp/28afc335-7d97-4871-b1c7-ae1c105ec15a
           name: edu-volume-17
-        - mountPath: /tmp/6d1f864b-7748-4777-a4ea-d708b3208ed1
+        - mountPath: /tmp/b17b4cbe-0389-4ae1-a8d7-2cb83313f43f
           name: edu-volume-2
-        - mountPath: /tmp/85ae2460-fd70-4b47-92c0-4d715c9a92b7
+        - mountPath: /tmp/8901d4a9-da5c-4e80-9bc5-34f5fb11ef56
           name: edu-volume-20
-        - mountPath: /tmp/1e213979-9080-4518-b720-94f3c3f9374a
+        - mountPath: /tmp/7806c403-32ec-46b3-990f-aa6df923ba85
           name: edu-volume-21
-        - mountPath: /tmp/5a21c4e4-f180-4eb5-b432-9a71384db3e7
+        - mountPath: /tmp/b0ae5117-d1d4-45f4-a070-46e5d45eefd8
           name: edu-volume-22
-        - mountPath: /tmp/94807e46-7f17-495e-9ad0-275393c4b181
+        - mountPath: /tmp/4760f056-edca-4cc1-87d0-0bac87c71aee
           name: edu-volume-18
-        - mountPath: /tmp/1fb64d2f-4962-44cb-8cc9-17d6836d5c65
+        - mountPath: /tmp/fe9fb145-44cb-4d86-b265-78bebb2b70b0
           name: edu-volume-19
-        - mountPath: /tmp/911675b2-f757-4eee-878f-e3a403714ce2
+        - mountPath: /tmp/cbd1ac48-f501-42fe-bd5c-5798ee4c4d92
           name: edu-volume-1
           readOnly: true
       volumes:
@@ -333,14 +341,18 @@ spec:
       - env:
         - name: NUM_THREADS
           value: '{{ spammer_num_threads["edu-container-4"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-4"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
           value: '{{ spammer_per_mem["edu-container-4"] | default(spammer_per_mem_default) }}'
         - name: LISTEN_PORT
           value: '50056'
+        - name: LISTEN
+          value: '1'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -373,15 +385,15 @@ spec:
           seLinuxOptions:
             level: s0
         volumeMounts:
-        - mountPath: /tmp/e209917a-29b0-4cbc-8ad4-16633f167479
+        - mountPath: /tmp/ba20542c-1ec6-439a-9099-38db8865b163
           name: edu-volume-2
-        - mountPath: /tmp/63d77420-29e5-4ac7-bc94-c7a0586e05f8
+        - mountPath: /tmp/b4882899-a9c0-4974-8e31-6c1fd49eedd2
           name: edu-volume-23
-        - mountPath: /tmp/2d3f0a47-c491-4f72-96b8-2e1c5fae191b
+        - mountPath: /tmp/f98f9dbc-9f7d-4e6e-aa98-0a250babe938
           name: edu-volume-23
-        - mountPath: /tmp/17822dc1-4a14-4493-b212-46dcf6f997c3
+        - mountPath: /tmp/d3e124b1-28e4-44cf-8edd-11590bc0118e
           name: edu-volume-24
-        - mountPath: /tmp/cf90d430-324c-40d3-87e1-abb97a960e75
+        - mountPath: /tmp/24c633de-992e-4725-b6ee-768ab3cf8797
           name: edu-volume-25
           readOnly: true
       volumes:
@@ -416,14 +428,18 @@ spec:
       - env:
         - name: NUM_THREADS
           value: '{{ spammer_num_threads["edu-container-5"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-5"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
           value: '{{ spammer_per_mem["edu-container-5"] | default(spammer_per_mem_default) }}'
         - name: LISTEN_PORT
           value: '8082'
+        - name: LISTEN
+          value: '1'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -449,9 +465,9 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/2928b85b-0908-45db-a68b-cf1134a435f9
+        - mountPath: /tmp/7c90b0b8-e2ea-4a9e-b41d-df6ed5c95f46
           name: edu-volume-24
-        - mountPath: /tmp/f7a5ef7f-9d96-4764-929c-32edac1724c5
+        - mountPath: /tmp/5877e52d-3941-4246-b447-781293531bd6
           name: edu-volume-26
           readOnly: true
       volumes:
@@ -480,12 +496,14 @@ spec:
       - env:
         - name: NUM_THREADS
           value: '{{ spammer_num_threads["edu-container-6"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-6"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '384'
         - name: PER_MEM
           value: '{{ spammer_per_mem["edu-container-6"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -508,23 +526,27 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/70b6ae2d-c662-471b-ae93-238ac3a77d7a
+        - mountPath: /tmp/7133cc71-3bf0-4735-9657-4ddf9323423f
           name: edu-volume-27
-        - mountPath: /tmp/34c71985-7c13-4319-a609-58615e8c8d10
+        - mountPath: /tmp/749bdec3-3723-42bf-b317-352326cecd76
           name: edu-volume-28
-        - mountPath: /tmp/998f898d-9ffe-4f7b-b24c-5459b0be967f
+        - mountPath: /tmp/a5977daf-8515-4b11-80c8-fb922a589195
           name: edu-volume-24
       - env:
         - name: NUM_THREADS
           value: '{{ spammer_num_threads["edu-container-7"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-7"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
           value: '{{ spammer_per_mem["edu-container-7"] | default(spammer_per_mem_default) }}'
         - name: LISTEN_PORT
           value: '50108'
+        - name: LISTEN
+          value: '1'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -548,11 +570,11 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/c368f24b-0414-4023-a42b-2aa17509e9f8
+        - mountPath: /tmp/236bfc2c-9ff5-438b-af32-d41849e42b79
           name: edu-volume-27
-        - mountPath: /tmp/52d31db6-b9d3-461f-ad1a-1ac64d49215b
+        - mountPath: /tmp/d26eaf75-1d52-48fb-87fb-77918f9cda05
           name: edu-volume-28
-        - mountPath: /tmp/765ce2c5-e951-4188-828d-0f0eedfb6525
+        - mountPath: /tmp/973f196d-6f77-4082-af34-9f4ae2560216
           name: edu-volume-24
       volumes:
       - emptyDir: {}
@@ -585,12 +607,14 @@ spec:
       - env:
         - name: NUM_THREADS
           value: '{{ spammer_num_threads["edu-container-8"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-8"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
           value: '{{ spammer_per_mem["edu-container-8"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -615,9 +639,9 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/2917d6c5-62ed-48ca-be8b-8bcd3d051d0c
+        - mountPath: /tmp/cbb04b47-f15d-4c0f-967c-aca29a7c0545
           name: edu-volume-29
-        - mountPath: /tmp/5eee0c84-b30c-4adb-9adc-6ea450b1a057
+        - mountPath: /tmp/95d281a6-3cb4-417c-8946-abf048346d93
           name: edu-volume-24
       volumes:
       - configMap:
@@ -647,12 +671,14 @@ spec:
       - env:
         - name: NUM_THREADS
           value: '{{ spammer_num_threads["edu-container-9"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-9"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '4096'
         - name: PER_MEM
           value: '{{ spammer_per_mem["edu-container-9"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -690,43 +716,45 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/b42efee9-243c-4af6-93af-ae679d2e00fe
+        - mountPath: /tmp/4b0190c6-c6ba-4f54-94f3-26c63f6c2e83
           name: edu-volume-2
-        - mountPath: /tmp/93ebc8eb-81f1-491d-a5e3-4a795a551761
+        - mountPath: /tmp/e1fe3903-6e7c-4013-9243-132c0d6bdbf2
           name: edu-volume-35
-        - mountPath: /tmp/d51dad8f-ff96-4c32-8af7-3a2b9923b7c4
+        - mountPath: /tmp/d4432106-33de-493b-80f2-f2e7f1652147
           name: edu-volume-34
-        - mountPath: /tmp/f3ece2a1-5700-450d-acf9-62bacde65bbe
+        - mountPath: /tmp/fd382c21-87f2-4582-87de-88227237b90b
           name: edu-volume-33
-        - mountPath: /tmp/c3b4d0cb-2305-4e8e-930f-f81ea29a5a02
+        - mountPath: /tmp/136d48a1-8a10-42ce-8d81-689242865833
           name: edu-volume-32
-        - mountPath: /tmp/2efc3fd1-d92d-43e3-9e78-772c4bd6ba7d
+        - mountPath: /tmp/e6a98e3f-233d-482c-ac9c-a85d84436d5f
           name: edu-volume-30
-        - mountPath: /tmp/34cfe3c4-83a6-4ddd-bbda-3389a2d9b8c8
+        - mountPath: /tmp/7211b694-a0b8-497c-9afd-961032cf4060
           name: edu-volume-31
-        - mountPath: /tmp/559686a2-ef79-4f3d-ac54-82e919ca231f
+        - mountPath: /tmp/521272e4-ec1f-401f-9855-86a0e670363b
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/5ddaa356-08b4-4453-b42c-43f839f1d430
+        - mountPath: /tmp/0e7aeeca-4c99-499f-bf76-803cc1c456d1
           name: edu-volume-3
-        - mountPath: /tmp/dbed725a-a066-47cc-b537-ae3eb64357b4
+        - mountPath: /tmp/f28ed242-b165-4b37-b799-44555f7504e2
           name: edu-volume-4
-        - mountPath: /tmp/54279e37-331d-4f66-85c3-814ad36defcc
+        - mountPath: /tmp/4654555b-14f3-4eca-a1e1-85e73780db17
           name: edu-volume-41
-        - mountPath: /tmp/6ab0f96b-876b-4149-b403-93fdcde3a9e9
+        - mountPath: /tmp/9d1ca465-b3dc-49c4-9666-824d1d5ccaa1
           name: edu-volume-42
-        - mountPath: /tmp/27183e68-4d64-4e6c-be07-c62c9784c2bd
+        - mountPath: /tmp/2bd7c675-1e7f-46c2-9a05-9305e28466e2
           name: edu-volume-43
           readOnly: true
       - env:
         - name: NUM_THREADS
           value: '{{ spammer_num_threads["edu-container-10"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-10"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '4744'
         - name: PER_MEM
           value: '{{ spammer_per_mem["edu-container-10"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -764,32 +792,32 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/5b3188e7-7f73-41d6-84c7-c045ba7a8674
+        - mountPath: /tmp/692f4a67-45ee-4287-9ad4-e9c8abd47afc
           name: edu-volume-2
-        - mountPath: /tmp/8de8c347-b82a-4c73-a7b1-c4cc83362303
+        - mountPath: /tmp/08765971-52ab-4816-82e5-23b7af307ebd
           name: edu-volume-39
-        - mountPath: /tmp/ece78282-f401-4486-be08-ba8ed3198f43
+        - mountPath: /tmp/e7c38b0b-0575-47e3-ad45-0a90fcc643bc
           name: edu-volume-38
-        - mountPath: /tmp/74691f8e-26d3-48bf-bce7-64813a022602
+        - mountPath: /tmp/65e76430-07f9-4d7f-a20c-d8fbfeaaba5a
           name: edu-volume-37
-        - mountPath: /tmp/17a71213-8bc5-429c-a643-c1efa21177b5
+        - mountPath: /tmp/a8ee1caf-96e4-42f8-b762-30fed072a17c
           name: edu-volume-36
-        - mountPath: /tmp/9ca46ff0-b54f-4fca-8ded-34579d582afb
+        - mountPath: /tmp/df2a33d1-f2ad-4aa6-bc49-34b35d3657dc
           name: edu-volume-30
-        - mountPath: /tmp/1b04abbb-0af1-4a27-aa3a-ba4468d95c79
+        - mountPath: /tmp/4b7eca31-c989-4fdc-ad93-bb7b050fdcb8
           name: edu-volume-31
-        - mountPath: /tmp/55ea34c9-6d97-47fd-8e01-40b08d9ad669
+        - mountPath: /tmp/802c4a88-0a15-4660-98bb-35392b8eaeab
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/c23bc947-b634-4bc2-b014-2fe2875eda98
+        - mountPath: /tmp/ad8912e1-ea0d-4b33-b397-6b544048ab46
           name: edu-volume-3
-        - mountPath: /tmp/a5c6ae95-b152-4434-aef3-5c8d545bfafa
+        - mountPath: /tmp/f2af515f-de63-4a11-b650-bb9efdf8ed57
           name: edu-volume-4
-        - mountPath: /tmp/57a36bf1-266b-443d-9e4d-117d7be8b598
+        - mountPath: /tmp/e5592047-da01-4aed-8760-befb34b4189a
           name: edu-volume-40
-        - mountPath: /tmp/98f12409-6db7-4e6c-829e-8a5a7118e5f4
+        - mountPath: /tmp/4620fbad-52e2-45d1-b753-69e0ee5b75f2
           name: edu-volume-42
-        - mountPath: /tmp/20472e5f-5544-4659-8cfb-22c45a32e981
+        - mountPath: /tmp/2a588001-b473-45a8-bbd0-a583a1d9315e
           name: edu-volume-43
           readOnly: true
       volumes:
@@ -879,12 +907,14 @@ spec:
       - env:
         - name: NUM_THREADS
           value: '{{ spammer_num_threads["edu-container-11"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-11"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '4048'
         - name: PER_MEM
           value: '{{ spammer_per_mem["edu-container-11"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -922,26 +952,26 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/297ed1f7-1c7c-4e69-8404-1f7a5c91f75a
+        - mountPath: /tmp/3ede9e6c-f5b2-44e2-9df3-d3ac14cbc097
           name: edu-volume-2
-        - mountPath: /tmp/81a89b4e-e6b1-47df-9692-7d42be7a33fd
+        - mountPath: /tmp/cdb45b23-631b-43fe-83a7-3f054520931b
           name: edu-volume-47
-        - mountPath: /tmp/3b13c55b-bd19-4f2f-9d92-8b9ed9185886
+        - mountPath: /tmp/37630cc8-affb-49be-9b13-749857314386
           name: edu-volume-46
-        - mountPath: /tmp/e3f40c95-6fbe-4987-ad05-6c70f889b5f8
+        - mountPath: /tmp/294f83c0-4c2f-442e-a55b-944e177f41f8
           name: edu-volume-45
-        - mountPath: /tmp/a2605e37-9ac9-4f08-8939-5beeb4125f77
+        - mountPath: /tmp/99bd122b-4883-4a36-939a-9fe68a393ef0
           name: edu-volume-44
-        - mountPath: /tmp/22ec7608-bb29-4452-a1b0-e742faafbee6
+        - mountPath: /tmp/c03e529d-80de-466f-a855-8def8c238366
           name: edu-volume-30
-        - mountPath: /tmp/e667648c-00c8-41ca-8244-e4ea2af48c48
+        - mountPath: /tmp/6395ef14-8c30-42c6-960b-9577ca8df112
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/37f52c43-9129-4fec-9631-c376b1b5096a
+        - mountPath: /tmp/a42e2aa3-7393-4ffa-ab94-50bd94c7c47c
           name: edu-volume-48
-        - mountPath: /tmp/48f30cb3-9543-4ec8-8866-147d2b08b435
+        - mountPath: /tmp/f94466fe-2e0d-4b66-9292-d012045561c1
           name: edu-volume-3
-        - mountPath: /tmp/89157674-20c7-4163-81f4-b3e3386a7ab0
+        - mountPath: /tmp/19260182-3466-44c8-a5c7-be1af0bea5cd
           name: edu-volume-4
       volumes:
       - configMap:
@@ -1002,13 +1032,15 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-0"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-12"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-12"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-0"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-12"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1018,7 +1050,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-0
+        name: edu-container-12
         resources:
           limits:
             cpu: 100m
@@ -1039,33 +1071,35 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/d4d6e927-4647-4b8e-b9f4-39ece2649b27
+        - mountPath: /tmp/b8a30cc7-a6e2-4632-a07d-bf2ea1d123e2
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/d06a714e-53ab-4153-8c17-2b3219e96afd
+        - mountPath: /tmp/13093ee1-72ac-4a9b-a8d0-673f1524d977
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/43e7788c-90fd-45c4-bbe1-aa0e6a85c384
+        - mountPath: /tmp/444b408c-8372-47aa-94f0-60ffa9b709f7
           name: edu-volume-55
-        - mountPath: /tmp/8db6643c-6837-485f-b5a0-6041a0dfc8b2
+        - mountPath: /tmp/b15a0c64-d342-4a51-a813-35d38b80caae
           name: edu-volume-11
-        - mountPath: /tmp/40d2346d-7d88-4a79-9ade-2a7e0ae5374a
+        - mountPath: /tmp/66d8e033-d51c-4407-8d87-4c690d9b3043
           name: edu-volume-12
-        - mountPath: /tmp/954c3f72-58c2-4cbc-a522-ba00ad900d69
+        - mountPath: /tmp/fffabd89-c69c-4101-90ad-542649e682dc
           name: edu-volume-13
-        - mountPath: /tmp/5312b47c-3dba-4db8-8326-27fd07da916b
+        - mountPath: /tmp/bb6f3c43-6caf-4b54-9337-4820510eeb4b
           name: edu-volume-15
-        - mountPath: /tmp/3bf49ac2-f617-4a9d-9076-6be595923ae3
+        - mountPath: /tmp/5e9ca370-66a5-4e66-bb7c-d127c298913b
           name: edu-volume-16
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-12"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-13"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-13"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '4872'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-12"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-13"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1075,7 +1109,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-12
+        name: edu-container-13
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -1103,28 +1137,28 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/8fe92eee-6cd1-4f23-95c5-bf7867f79594
+        - mountPath: /tmp/28b9eb37-d9fb-484c-a140-c3014c7f6e6f
           name: edu-volume-2
-        - mountPath: /tmp/0effb822-70a9-4ed5-9b14-97ff49e2174f
+        - mountPath: /tmp/595bba87-4fdf-4f88-9535-e9bb2c999662
           name: edu-volume-50
-        - mountPath: /tmp/28b423af-403e-489e-ab58-8c85c24a83a1
+        - mountPath: /tmp/793fdd6b-ceb6-4207-9334-f83ccf34d93b
           name: edu-volume-49
-        - mountPath: /tmp/57262bac-cab3-48e6-b189-fb295e32a0d8
+        - mountPath: /tmp/8f41ef65-83c3-43bc-8db7-62074a834bd2
           name: edu-volume-53
-        - mountPath: /tmp/ca43c7ea-53fd-4a0b-9d78-783ef4d915f3
+        - mountPath: /tmp/b7be6383-a25e-4ff2-a909-6f4777a31453
           name: edu-volume-52
-        - mountPath: /tmp/02b9891f-6a07-4763-9b98-ea5dbf8ceae5
+        - mountPath: /tmp/fcd10098-0efc-4cea-98e2-0cf833f5483e
           name: edu-volume-10
-        - mountPath: /tmp/fa603b72-cd50-4b90-ab8c-831cbecfb086
+        - mountPath: /tmp/4e3ac00d-5ee2-4d51-8a64-e44a8cc66bad
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/aa8fdcb5-8c39-4e67-a3d6-675570cb6d05
+        - mountPath: /tmp/62b8999e-e0e0-49ce-b156-d0364ca226dc
           name: edu-volume-3
-        - mountPath: /tmp/cc18b15e-5247-4369-b906-cf36032ebb34
+        - mountPath: /tmp/c68f6e65-18fd-484f-9eb3-714dd92a001e
           name: edu-volume-4
-        - mountPath: /tmp/e8abec4b-0a74-4907-90f4-f17787b6a39a
+        - mountPath: /tmp/dd2efb89-d2df-4369-a1ca-99da01ee1c6b
           name: edu-volume-17
-        - mountPath: /tmp/8b5bb68f-6ba8-460e-ac4d-08a1c3b4d515
+        - mountPath: /tmp/05ab2dac-e9c8-4d96-b634-657f968e88a8
           name: edu-volume-54
       volumes:
       - name: edu-volume-10
@@ -1201,13 +1235,15 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-13"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-14"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-14"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '4872'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-13"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-14"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1217,7 +1253,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-13
+        name: edu-container-14
         resources:
           limits:
             cpu: 700m
@@ -1240,26 +1276,26 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/bf6434d7-94b0-44c7-bca3-87b74c6ad8d5
+        - mountPath: /tmp/6167cb7b-8768-4830-8d61-f5cb8e7292d5
           name: edu-volume-56
-        - mountPath: /tmp/fac80956-ab1a-4ef7-9183-b800c32e3622
+        - mountPath: /tmp/dbd4826b-c002-49c9-bfb0-12dd39cc6099
           name: edu-volume-57
-        - mountPath: /tmp/f0e7416d-86d7-4aa3-aa7e-9f3f0921e684
+        - mountPath: /tmp/1a5ad4f5-da14-4777-9dae-ba28e689cf57
           name: edu-volume-10
-        - mountPath: /tmp/f7b21521-61c1-4ea8-a226-2537011b2bbe
+        - mountPath: /tmp/a9b94b76-3430-4a7c-8444-7ebc4ac27513
           name: edu-volume-2
-        - mountPath: /tmp/75db2d18-1694-4a35-bb00-024682bed89f
+        - mountPath: /tmp/57b0b908-6d85-4ea9-b00b-1826e5ed8482
           name: edu-volume-58
-        - mountPath: /tmp/177f3f0f-944e-4b70-9775-98cac90fcd8e
+        - mountPath: /tmp/abc54316-9f1e-409f-98ae-feed97cc88e1
           name: edu-volume-59
-        - mountPath: /tmp/58ed42bd-5c3e-41f2-920c-1c8f44222f3a
+        - mountPath: /tmp/2617f4ef-c299-4617-b358-cc1761873190
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/8d97f28a-d716-4d73-a70c-f902d2076579
+        - mountPath: /tmp/a79ee112-91d1-47f4-83b8-2e8855940178
           name: edu-volume-60
-        - mountPath: /tmp/670bc527-7a68-43fa-a273-f8fafa7b3430
+        - mountPath: /tmp/0874c586-233e-4515-b3f5-dec7edaf79aa
           name: edu-volume-3
-        - mountPath: /tmp/88225eed-3f9d-4130-bd14-32ca79c83ccd
+        - mountPath: /tmp/dd83cb3e-efbf-4eb8-bfdb-8abebeef5b2a
           name: edu-volume-4
       volumes:
       - configMap:
@@ -1318,20 +1354,22 @@ spec:
       annotations:
         k8s.v1.cni.cncf.io/networks: |-
           [
-            {"interfaceRequest": "oam", "name": "networking-oam", "namespace": "edu-namespace-0", "ips": ["{{ networking['oam']['ips'][0] }}"], "gateway_ips": ["{{ networking['oam']['gateway'] }}"]},
-            {"interfaceRequest": "tracing", "name": "networking-oam", "namespace": "edu-namespace-0", "ips": ["{{ networking['oam']['ips'][1] }}"], "gateway_ips": ["{{ networking['oam']['gateway'] }}"]}
+            {"interfaceRequest": "oam", "name": "networking-e5l", "namespace": "edu-namespace-0", "ips": ["{{ networking['oam']['ips'][0] }}"], "gateway_ips": ["{{ networking['oam']['gateway'] }}"]},
+            {"interfaceRequest": "tracing", "name": "networking-e5l", "namespace": "edu-namespace-0", "ips": ["{{ networking['oam']['ips'][1] }}"], "gateway_ips": ["{{ networking['oam']['gateway'] }}"]}
           ]
     spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-0"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-15"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-15"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-0"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-15"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1341,16 +1379,16 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-0
+        name: edu-container-15
         resources:
           limits:
             cpu: 100m
             memory: 256Mi
-            openshift.io/pci_sriov_net_oam: '2'
+            openshift.io/pci_sriov_net_e5l: '2'
           requests:
             cpu: 50m
             memory: 256Mi
-            openshift.io/pci_sriov_net_oam: '2'
+            openshift.io/pci_sriov_net_e5l: '2'
         securityContext:
           allowPrivilegeEscalation: true
           capabilities:
@@ -1364,36 +1402,38 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/67f5f215-eb3f-4038-a86d-4e728fe1e24f
+        - mountPath: /tmp/555d4fb7-415b-460b-9235-01cda952eca5
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/215c8c45-1810-4deb-8282-e4bb92a561ac
+        - mountPath: /tmp/7eebeb42-1d7b-4348-ba6f-9e3b66448fca
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/db238ba1-1fdd-4066-900d-2f3e273156ac
+        - mountPath: /tmp/186317cd-908b-4021-b9b7-cc09b7738677
           name: edu-volume-75
           readOnly: true
-        - mountPath: /tmp/74ec1b08-8ec2-4d16-9657-37fd54a5ef96
+        - mountPath: /tmp/689b8d5c-5bad-4fbb-91df-055d5cf4e7c2
           name: edu-volume-9
-        - mountPath: /tmp/f61b2837-bbb1-4e9e-ad2d-7dce7dd2cef5
+        - mountPath: /tmp/d0ec677c-9010-4ae7-982f-46c98622dd5c
           name: edu-volume-11
-        - mountPath: /tmp/f2270893-ad7b-41a9-b581-d99b31055bc2
+        - mountPath: /tmp/f487638d-bf9b-4ed4-adb3-8d0908b305d2
           name: edu-volume-12
-        - mountPath: /tmp/afbb6ce5-9a4c-4963-9a96-fbe5e1c902e9
+        - mountPath: /tmp/e2cae4aa-d671-4e53-8ac0-cde76def1547
           name: edu-volume-13
-        - mountPath: /tmp/75656bba-f2f1-4b36-859f-e2edafe36988
+        - mountPath: /tmp/254cbe77-10eb-4c0a-b369-7e23e5562990
           name: edu-volume-15
-        - mountPath: /tmp/199544a5-1750-456d-b09b-8230db886818
+        - mountPath: /tmp/52890ef3-a5e0-4483-9f04-9da8cdbee208
           name: edu-volume-16
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-2"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-16"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-16"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '64'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-2"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-16"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1403,7 +1443,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-2
+        name: edu-container-16
         resources:
           limits:
             cpu: 100m
@@ -1421,17 +1461,19 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/9f6e263d-8f90-4ff0-a6c8-5ca4a0381a49
+        - mountPath: /tmp/5c516558-cb39-46eb-9a81-5c459a7e8e8f
           name: edu-volume-14
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-14"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-17"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-17"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-14"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-17"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1440,7 +1482,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 9
-        name: edu-container-14
+        name: edu-container-17
         resources:
           limits:
             cpu: 250m
@@ -1466,23 +1508,25 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         volumeMounts:
-        - mountPath: /tmp/e3f5ea0a-969a-4d37-852b-babd5d028df8
+        - mountPath: /tmp/b2c94bd8-2d50-4a34-9a68-7e31ed1d786e
           name: edu-volume-17
-        - mountPath: /tmp/ae6dce76-8724-4739-b457-cf8c5dd30ecc
+        - mountPath: /tmp/9a03effc-cdb1-4e82-9a16-08ce7508f1ca
           name: edu-volume-91
-        - mountPath: /tmp/61998714-2950-46c3-9fe1-c3044a6c0514
+        - mountPath: /tmp/6be2a835-26c7-49b1-80c4-16dd76862327
           name: edu-volume-3
-        - mountPath: /tmp/432be61a-7e08-4ced-aa07-d7870d30eb29
+        - mountPath: /tmp/fdfd5cd6-acda-4e41-872f-791c7705c86c
           name: edu-volume-4
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-15"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-18"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-18"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-15"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-18"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1491,7 +1535,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-15
+        name: edu-container-18
         readinessProbe:
           exec:
             command:
@@ -1526,43 +1570,45 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         volumeMounts:
-        - mountPath: /tmp/4a681cbe-a350-493d-b69e-4a26fdc12dce
+        - mountPath: /tmp/8974d9d0-ae47-4dc2-9d62-21ccb0efb9ca
           name: edu-volume-79
-        - mountPath: /tmp/eb245cc2-d9c4-46fd-9e9f-6ce0f3126881
+        - mountPath: /tmp/b1d4172c-8c05-4dda-958f-6fad13bb7af6
           name: edu-volume-93
-        - mountPath: /tmp/4733651d-b3e1-4f41-8beb-aa58de75bddb
+        - mountPath: /tmp/bb2feb75-2d62-481c-9333-f183bb9b87af
           name: edu-volume-3
-        - mountPath: /tmp/9a0aabd6-3efa-4452-9f0e-68fcb83a214f
+        - mountPath: /tmp/03ce6eef-78ab-42e6-ba63-7aa12569d6fe
           name: edu-volume-4
-        - mountPath: /tmp/4bc1d1bd-08fc-4778-b0d4-7e1af5575017
+        - mountPath: /tmp/680ee6f3-77ac-47db-87ae-e4e6da9957fc
           name: edu-volume-94
-        - mountPath: /tmp/27ae5a0a-784a-407a-b306-e6f028118b33
+        - mountPath: /tmp/e7c7a254-0933-4985-ba44-e9c1abe15af0
           name: edu-volume-95
-        - mountPath: /tmp/29a645a6-16fa-4c91-afc2-92ce523632f0
+        - mountPath: /tmp/ed4085e1-aec1-432c-9976-7b575f93bf19
           name: edu-volume-96
-        - mountPath: /tmp/b3588b2f-a475-4572-b50a-3255426a7b77
+        - mountPath: /tmp/4de14dbd-bac5-4735-91b6-fdc6a06de72f
           name: edu-volume-97
-        - mountPath: /tmp/dd9013bf-94af-403d-aacd-5ed38e5f4275
+        - mountPath: /tmp/739a7a30-e9c2-4549-918c-f90ce0428242
           name: edu-volume-98
-        - mountPath: /tmp/494b557a-d97a-405a-9567-0fa374bcde2e
+        - mountPath: /tmp/5b79ef57-ccb4-4c3c-8669-c0826a051db6
           name: edu-volume-99
-        - mountPath: /tmp/eea2ebfa-6507-4c0b-bf0a-80e524b005f9
+        - mountPath: /tmp/389ceae6-534c-4f8c-8290-6adc89061fec
           name: edu-volume-100
-        - mountPath: /tmp/2ef36655-e4d3-4e9d-9ad5-681bba50b04c
+        - mountPath: /tmp/caf4de39-f5d3-45e8-9854-f5e7fbd98107
           name: edu-volume-101
-        - mountPath: /tmp/9d592373-48db-46d9-b244-047d471c66b3
+        - mountPath: /tmp/8602ede7-f908-433c-9c0a-e038ca365d27
           name: edu-volume-102
-        - mountPath: /tmp/91aefc09-be50-4491-94dd-a7e3f263b6e5
+        - mountPath: /tmp/90b1e402-ef16-43d5-a07b-b5c631de6ba7
           name: edu-volume-103
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-16"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-19"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-19"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '1024'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-16"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-19"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1571,7 +1617,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 5
-        name: edu-container-16
+        name: edu-container-19
         readinessProbe:
           exec:
             command:
@@ -1606,27 +1652,29 @@ spec:
           successThreshold: 1
           timeoutSeconds: 5
         volumeMounts:
-        - mountPath: /tmp/9480c86c-7e1f-4d81-9262-6844f887b2f3
+        - mountPath: /tmp/8fee8038-e5bc-49ad-b104-0ec32506ae1d
           name: edu-volume-84
-        - mountPath: /tmp/d1e38a12-e3d9-47f6-b6e6-0094186c1e6e
+        - mountPath: /tmp/b1f898cc-5701-4ab5-bbaf-f164c9497900
           name: edu-volume-17
-        - mountPath: /tmp/803ee37f-3aeb-47ea-89b5-9670d6923d19
+        - mountPath: /tmp/1596b3f5-d121-4fcb-9159-e6f01c1a6463
           name: edu-volume-76
-        - mountPath: /tmp/9e4f0a5a-3b04-4e0c-b694-cdc6a61c55fc
+        - mountPath: /tmp/a6b62710-5154-4013-b52b-062687fd3039
           name: edu-volume-78
-        - mountPath: /tmp/22bee829-516b-4d70-98d4-e4323af98453
+        - mountPath: /tmp/840b4c51-10d0-429c-a6e6-4f197e9f78f1
           name: edu-volume-85
-        - mountPath: /tmp/0c0983f5-c907-463a-92d2-a62329f7e347
+        - mountPath: /tmp/ce8d07f8-67f1-4641-b009-e71f1b2120b3
           name: edu-volume-86
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-17"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-20"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-20"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-17"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-20"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1636,7 +1684,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-17
+        name: edu-container-20
         resources:
           limits:
             cpu: 100m
@@ -1654,27 +1702,29 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/1c162f2b-a2b3-4042-b500-f115679d0a10
+        - mountPath: /tmp/120087af-e7c8-4aaf-8a6f-6876aeadd14e
           name: edu-volume-17
-        - mountPath: /tmp/590849b6-494e-496d-8803-ce4f06e57f24
+        - mountPath: /tmp/3bf0685b-2daf-46b3-a58a-d2249b887319
           name: edu-volume-92
           readOnly: true
-        - mountPath: /tmp/5616afa4-b820-4d66-a7e3-47a505652e00
+        - mountPath: /tmp/7ecc8cc1-5959-47d6-a0c7-1959a4a06ed6
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/2549111b-917c-4b45-be26-5e608155b017
+        - mountPath: /tmp/ee69d823-0c03-41d3-8755-ed2ba50c0236
           name: edu-volume-89
-        - mountPath: /tmp/12b481fc-e797-4fa1-a713-275d8e921be1
+        - mountPath: /tmp/4f8596d3-7bea-449b-af45-4b1d9c8a15f1
           name: edu-volume-90
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-18"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-21"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-21"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '4872'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-18"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-21"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1684,7 +1734,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-18
+        name: edu-container-21
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -1718,39 +1768,41 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/bb20cd0e-e78c-460f-86ef-028dfebb3f2b
+        - mountPath: /tmp/6f71edeb-7f05-46c8-a23f-25262362978f
           name: edu-volume-65
-        - mountPath: /tmp/5d51d730-c406-46bb-ae96-6dcb025c07b9
+        - mountPath: /tmp/5dae9da5-712b-4577-a327-576e0161a4fa
           name: edu-volume-66
-        - mountPath: /tmp/87494175-8421-4b30-8ba3-c2da89d35fd1
+        - mountPath: /tmp/3b4d32d0-626e-4e40-bb11-2f130d864185
           name: edu-volume-64
-        - mountPath: /tmp/be1436de-0ee4-4c50-85c6-fcbadaae8bd8
+        - mountPath: /tmp/86af9988-ea48-4aec-a9d4-df900abb8aef
           name: edu-volume-63
-        - mountPath: /tmp/128a17eb-478e-4ce9-ae3d-957d9d501bef
+        - mountPath: /tmp/d349f9f6-80c0-47fb-aee6-709daf449586
           name: edu-volume-2
-        - mountPath: /tmp/0af6b583-8390-423a-84db-449af4864d99
+        - mountPath: /tmp/4a21348a-6ebf-4638-be02-8470231b1526
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/31ebe7ac-5240-4e99-8f49-e68256e89eb8
+        - mountPath: /tmp/d1ed7d76-5aed-41dc-998a-d6acc47fd8b0
           name: edu-volume-30
-        - mountPath: /tmp/c2e996f7-7c3b-4c4a-8281-f6b9e54696b2
+        - mountPath: /tmp/f6aeeb90-b2c1-4be8-bdde-f32348e48d0f
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/81f3aaa4-afd7-460c-9aad-4640989dab07
+        - mountPath: /tmp/47aed578-a0c1-41a3-9b59-568e5d1643a6
           name: edu-volume-3
-        - mountPath: /tmp/ff869047-689d-4523-a2f3-f3952a2f3d6e
+        - mountPath: /tmp/885f4ba8-d9b2-4a7d-b301-e3fc37e06821
           name: edu-volume-4
-        - mountPath: /tmp/45e801db-53ad-4670-b95f-319ba21d276d
+        - mountPath: /tmp/a49d0b01-c89c-41fd-a7d9-dd4c6bb582f9
           name: edu-volume-73
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-19"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-22"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-22"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '1024'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-19"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-22"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1760,7 +1812,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-19
+        name: edu-container-22
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -1792,41 +1844,43 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/e778262c-3564-4cc9-ae31-21b65c8e7601
+        - mountPath: /tmp/bbe38100-7eb0-44fe-bb66-d5c16b816f37
           name: edu-volume-17
-        - mountPath: /tmp/56bbd48b-e8d6-4584-82b5-7fc4bdc347c1
+        - mountPath: /tmp/687e946e-52a9-401c-8bd3-2fc12b10743b
           name: edu-volume-70
-        - mountPath: /tmp/60ae280c-d515-4d48-b351-2b8d312019ac
+        - mountPath: /tmp/2f716962-bdfa-4971-b5f6-8330a2897e24
           name: edu-volume-71
-        - mountPath: /tmp/e623bc70-014a-499f-9a1d-e6b50b0c69d1
+        - mountPath: /tmp/a2f24b27-5a96-4142-9f5e-e9d5a8cdccdf
           name: edu-volume-69
-        - mountPath: /tmp/64255323-0919-4125-b39e-f975c35d268a
+        - mountPath: /tmp/3e37db98-7cb6-489e-b9f1-daf3fa40aa73
           name: edu-volume-68
-        - mountPath: /tmp/2ee4c09a-855f-4f6f-8a05-2665f6716d1f
+        - mountPath: /tmp/5981caaa-19ce-449e-a2ef-4f25d2936b95
           name: edu-volume-2
-        - mountPath: /tmp/891d4925-ee2e-490f-8b56-e31b9443bff9
+        - mountPath: /tmp/6c7f3f58-5155-48f9-9434-833f9fa2e533
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/89c4757f-b9f3-4cf5-8e87-0ee753fa35f4
+        - mountPath: /tmp/ec9bd101-2c1f-4e72-b9ca-62e67e993f44
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/d52b2ff8-e283-4466-84d4-376a69503667
+        - mountPath: /tmp/7d17e2a2-3072-49ae-9c02-2a6cd58ed46e
           name: edu-volume-74
-        - mountPath: /tmp/2757be41-8271-4ed3-916d-a4948a374638
+        - mountPath: /tmp/fd6d7485-e576-4f28-89f3-38acdc0176f3
           name: edu-volume-3
-        - mountPath: /tmp/fcd1d15c-33f8-416f-ab04-8d9e4deb8277
+        - mountPath: /tmp/0f3c7279-6112-493b-818f-dc8ff6d9c3e6
           name: edu-volume-4
-        - mountPath: /tmp/68c158ae-673b-479f-b9c2-abe0b8bb9788
+        - mountPath: /tmp/1f40bf46-b41e-4d8e-a2fb-6416575542e0
           name: edu-volume-72
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-20"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-23"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-23"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '2765'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-20"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-23"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1836,7 +1890,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-20
+        name: edu-container-23
         ports:
         - containerPort: 8443
           protocol: TCP
@@ -1863,37 +1917,39 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/63cb8390-7530-4246-9c5f-7370e3033f9d
+        - mountPath: /tmp/82edd961-20ca-48d5-b46d-7cb91e61538e
           name: edu-volume-83
-        - mountPath: /tmp/3d2d8107-34fa-4813-ab47-17a3828c502a
+        - mountPath: /tmp/2792bb2e-fe57-43f2-a491-03b54245bcd5
           name: edu-volume-77
-        - mountPath: /tmp/1fc8f88d-6c07-48b2-8568-4bc03dc9bcb4
+        - mountPath: /tmp/9ca9a8d9-f20f-41e7-a739-d4432bffac7a
           name: edu-volume-67
-        - mountPath: /tmp/65e7526a-766b-46f6-8cb4-7e89de2d1176
+        - mountPath: /tmp/512d0104-4164-408d-8864-72018308c324
           name: edu-volume-88
-        - mountPath: /tmp/ae560ef8-b694-4e43-997e-19c44fcec685
+        - mountPath: /tmp/f91caebc-c648-4126-8bc5-b2be1c37ff9f
           name: edu-volume-87
-        - mountPath: /tmp/1a0ab7c1-fa27-4384-9f8c-0e4ac7af87e2
+        - mountPath: /tmp/6e19acbd-a263-480f-8c35-764d1df549b4
           name: edu-volume-17
-        - mountPath: /tmp/3526ac5c-a3a9-4a25-afbf-facce8db249b
+        - mountPath: /tmp/7e4d28c0-1652-44cc-8984-faeb9251582f
           name: edu-volume-61
-        - mountPath: /tmp/8e74953d-15a9-483f-8a15-0868072affb1
+        - mountPath: /tmp/12dab937-d3ca-42cd-a452-fb21c5a6a009
           name: edu-volume-62
-        - mountPath: /tmp/a8c75999-ddbc-45a6-9d41-9a9f413658c9
+        - mountPath: /tmp/a700b385-aa66-4622-a89c-277e63e3404b
           name: edu-volume-92
           readOnly: true
-        - mountPath: /tmp/4a96488e-0b41-4902-a1b2-afb87a9e8fba
+        - mountPath: /tmp/f3beb4f3-dab5-410e-b650-75281cfe1852
           name: edu-volume-4
           readOnly: true
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-3"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-24"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-24"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '1024'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-3"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-24"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1903,7 +1959,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 2
-        name: edu-container-3
+        name: edu-container-24
         resources:
           limits:
             cpu: 400m
@@ -1931,32 +1987,34 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/aeff1b6e-e31e-4fc2-b8d0-bb358a11a600
+        - mountPath: /tmp/8a4eca9a-878e-43db-a270-6491ea082dcd
           name: edu-volume-17
-        - mountPath: /tmp/6cd2443f-7032-48a0-bd66-858408ffc64e
+        - mountPath: /tmp/591c9080-3d5b-4dd2-a945-fdd94416ea1d
           name: edu-volume-2
-        - mountPath: /tmp/72479564-df41-4b73-95bd-3fb3a5f62b4b
+        - mountPath: /tmp/16814771-ddcd-4190-b82e-38dd2f42c8e4
           name: edu-volume-20
-        - mountPath: /tmp/26e39463-d147-43a2-8041-df60d858e3ce
+        - mountPath: /tmp/b9063427-bfcf-4bca-b05e-007b6a52543e
           name: edu-volume-18
-        - mountPath: /tmp/3bdae7ec-f365-4c92-9a7a-5d5be64d3718
+        - mountPath: /tmp/e851f3ee-b8a4-4aeb-92b8-e6aded5c454f
           name: edu-volume-19
-        - mountPath: /tmp/11e9c759-112f-4aae-9f50-7c591f890c07
+        - mountPath: /tmp/9f14957d-54c9-4f1e-aadc-56ab0e5d553a
           name: edu-volume-21
-        - mountPath: /tmp/3b2dd743-44ea-41c8-a671-13c3c97527e6
+        - mountPath: /tmp/7858f0db-ffae-4eac-8c17-f55c0aa1649a
           name: edu-volume-22
-        - mountPath: /tmp/7d79559a-49cf-429a-ac6f-6ea6c13cca88
+        - mountPath: /tmp/7472321c-dcd6-41fb-a501-044a40205135
           name: edu-volume-1
           readOnly: true
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-21"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-25"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-25"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-21"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-25"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -1966,7 +2024,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 2
-        name: edu-container-21
+        name: edu-container-25
         resources:
           limits:
             cpu: 50m
@@ -1985,24 +2043,26 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/8350dfed-c6c2-4830-91e7-23178f888d84
+        - mountPath: /tmp/645af3b4-17c3-4411-a324-34648bad4629
           name: edu-volume-17
-        - mountPath: /tmp/75ec8ca8-ee43-40a1-83ad-1866244ba1b6
+        - mountPath: /tmp/98fd71ef-7bfb-4899-b3ab-c4d22c9a6693
           name: edu-volume-80
           readOnly: true
-        - mountPath: /tmp/1d3f4f33-f718-45c2-b723-f806aa158f7b
+        - mountPath: /tmp/11bd07e9-ba2f-4376-87a4-8b2a2eae97a9
           name: edu-volume-81
-        - mountPath: /tmp/ef848db3-d775-48c5-a14b-3599c98129c6
+        - mountPath: /tmp/5f8acf46-7930-42bd-b2bd-fd124802bac0
           name: edu-volume-82
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-22"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-26"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-26"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-22"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-26"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -2012,7 +2072,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-22
+        name: edu-container-26
         resources:
           limits:
             cpu: 500m
@@ -2030,24 +2090,26 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/b533a221-0ce8-47cf-bfb0-252d6d37d38a
+        - mountPath: /tmp/effbc5ed-cd5e-400a-a14b-d545486fdb2e
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/786c35ab-c922-4bf6-9a44-ff2770a0fa1e
+        - mountPath: /tmp/abd32e8d-47f7-4134-8614-4ec1966f2559
           name: edu-volume-3
-        - mountPath: /tmp/c38ccb71-351d-4b09-a613-cd3b34c56c2e
+        - mountPath: /tmp/d3490927-4978-4a50-a8cc-dc258bc310c2
           name: edu-volume-4
-        - mountPath: /tmp/c89d15c4-52d7-4a0a-a44f-6a2621a3f8e5
+        - mountPath: /tmp/19c87e07-415d-4da0-b331-09cf6c84cb08
           name: edu-volume-104
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-23"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-27"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-27"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-23"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-27"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -2057,7 +2119,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-23
+        name: edu-container-27
         resources:
           limits:
             cpu: 500m
@@ -2073,20 +2135,22 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/5040750d-fe85-4be3-9a1e-279513dcb5e5
+        - mountPath: /tmp/409e5e50-951b-4d42-bde9-ddfeb19082d1
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/9466f29b-9b8d-4ac3-9bdc-c1794715cbc2
+        - mountPath: /tmp/93b2a780-04fb-419b-9e54-f0f5ed530795
           name: edu-volume-3
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-24"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-28"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-28"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '3294'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-24"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-28"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -2096,7 +2160,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-24
+        name: edu-container-28
         ports:
         - containerPort: 50017
           protocol: TCP
@@ -2122,27 +2186,27 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/737d4de7-0eb9-49f5-b0b2-1e9410f65eae
+        - mountPath: /tmp/36213413-0e99-4c8b-bdf0-2c7e6dc18d77
           name: edu-volume-2
-        - mountPath: /tmp/0a36cd5c-a870-4231-9808-45423151b691
+        - mountPath: /tmp/0705d00c-662b-4cbc-9ad5-a9b57b88ea9f
           name: edu-volume-30
-        - mountPath: /tmp/6c8fc193-509f-4532-913a-f29e5f1733a0
+        - mountPath: /tmp/31cf6309-d51d-49b6-a79e-fdc314604357
           name: edu-volume-105
-        - mountPath: /tmp/d7d1abce-145e-41a7-b70a-815574935a07
+        - mountPath: /tmp/5c217bce-bf19-434c-b033-d6e679be9b50
           name: edu-volume-106
-        - mountPath: /tmp/1bfc27da-b8a6-410c-bc5a-6ed9eed4680e
+        - mountPath: /tmp/d9189264-17b6-4773-b6d4-f6050b3b0b2e
           name: edu-volume-107
-        - mountPath: /tmp/1ab06e6b-cfdd-4b18-9014-98a8e7e17a6f
+        - mountPath: /tmp/a0caa5db-06ee-4892-9b51-8a57de28cd3e
           name: edu-volume-108
-        - mountPath: /tmp/7edd7336-244f-4779-bfc4-4853f3214b54
+        - mountPath: /tmp/c26624cd-0e93-464e-990a-9a8570acb393
           name: edu-volume-17
-        - mountPath: /tmp/27b7dfb9-453f-4f94-a732-1a73fecefdd1
+        - mountPath: /tmp/45eb702d-2ebf-4ae1-99c6-7433b207fcbc
           name: edu-volume-92
           readOnly: true
-        - mountPath: /tmp/f119443f-1913-41c4-b971-de701a55b669
+        - mountPath: /tmp/96445910-b9c2-4918-a870-b0ff5414e7aa
           name: edu-volume-4
           readOnly: true
-        - mountPath: /tmp/6b7199f2-7fe7-4613-8205-793709bbfc5e
+        - mountPath: /tmp/211b1c97-91d2-4869-9b4a-50231d8b4147
           name: edu-volume-72
       volumes:
       - emptyDir: {}
@@ -2369,13 +2433,15 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-0"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-29"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-29"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-0"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-29"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -2385,7 +2451,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-0
+        name: edu-container-29
         resources:
           limits:
             cpu: 100m
@@ -2408,33 +2474,35 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/1c71f59f-c52c-42b4-901e-1fb1a8430d90
+        - mountPath: /tmp/3b638a4d-6b3f-4a1d-8487-58b5c63a7d9c
           name: edu-volume-11
-        - mountPath: /tmp/a324b0e7-7fca-4a30-8ae8-3bee94f404b8
+        - mountPath: /tmp/b15276b6-f634-4f1e-b26e-d88d9010e65e
           name: edu-volume-12
-        - mountPath: /tmp/7f506f49-fd46-4e80-af86-9bb325e597dc
+        - mountPath: /tmp/225453d0-63e2-4545-826a-135ee8f83cc0
           name: edu-volume-13
-        - mountPath: /tmp/ec0e057d-81db-41c6-ae6a-defdf1de8aaa
+        - mountPath: /tmp/fa6d0801-f7b8-499a-8319-0ea46946c165
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/619bfbc1-2b95-4119-ba2b-91f68818673e
+        - mountPath: /tmp/8e65f6c1-194e-4541-81eb-5790d2f37f40
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/ae7406a3-54f2-44ae-ad61-cdac3930c45f
+        - mountPath: /tmp/30233184-0709-4299-9113-3787ac21bd98
           name: edu-volume-9
-        - mountPath: /tmp/6d45cb35-613a-4ada-a834-e671864214f5
+        - mountPath: /tmp/0af9a549-f09c-45da-a1ae-342f3407bad7
           name: edu-volume-15
-        - mountPath: /tmp/cc32988e-5d53-42c5-8c5e-e643442cf3ef
+        - mountPath: /tmp/f70b35d9-9015-41e0-a2de-04b3054e868d
           name: edu-volume-16
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-25"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-30"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-30"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '4872'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-25"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-30"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -2444,7 +2512,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-25
+        name: edu-container-30
         resources:
           limits:
             cpu: 800m
@@ -2469,41 +2537,43 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/28e3961a-9476-4ac9-9e72-759555dbceed
+        - mountPath: /tmp/3fa5d23e-dbcc-4921-873a-05b230dcd05e
           name: edu-volume-111
-        - mountPath: /tmp/f281867f-927a-42be-9aac-a02323449bc7
+        - mountPath: /tmp/9d92c554-587d-4a86-845e-a321b90e2d75
           name: edu-volume-112
-        - mountPath: /tmp/53b17a64-f934-4f6b-af3d-2f1967b70ebc
+        - mountPath: /tmp/c1230a4e-1240-4893-8640-917e2540940f
           name: edu-volume-10
-        - mountPath: /tmp/334afa40-b56a-46df-a3e7-c8566f7cd168
+        - mountPath: /tmp/757a9660-6dec-49d9-b491-3c5fba5076d8
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/c95b29e3-2266-4203-afff-8c27c257e74d
+        - mountPath: /tmp/1b98d588-c40f-4572-901c-e35be5fa0593
           name: edu-volume-109
-        - mountPath: /tmp/d030f4ec-f7f0-4dac-888f-89ec912b7bdb
+        - mountPath: /tmp/a6f0a61a-f1df-4b9d-a2e8-8101f13591a5
           name: edu-volume-110
-        - mountPath: /tmp/8ef33bd4-589b-41b2-9cea-15f1caa51086
+        - mountPath: /tmp/61c0a1da-023d-4c01-a4d9-f0b9d45f3477
           name: edu-volume-2
-        - mountPath: /tmp/eaebc7cb-5fe1-4d2b-926f-419e37da7c79
+        - mountPath: /tmp/5bf8b930-52bb-4c12-abea-88069ed8c7d4
           name: edu-volume-114
-        - mountPath: /tmp/08ce9aa6-236d-45f8-8eee-e9ed459a9c2d
+        - mountPath: /tmp/11b3dec7-6efc-46a1-a564-731c2842497b
           name: edu-volume-113
-        - mountPath: /tmp/4d01b1af-5fe9-4c79-ae90-43cff64398f2
+        - mountPath: /tmp/4bd37404-e3eb-42c9-99f0-aed94e3ad224
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/79c3ef28-4a41-4167-bc9c-8a49ffe020b5
+        - mountPath: /tmp/49aed3ed-939e-4ec2-96b4-6341e2df5203
           name: edu-volume-3
-        - mountPath: /tmp/1eab3d43-4014-4592-aae3-029e7497c86f
+        - mountPath: /tmp/1da3fa93-d64a-41d6-b0ac-c6408219e9d0
           name: edu-volume-4
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-26"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-31"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-31"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '64'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-26"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-31"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -2513,7 +2583,7 @@ spec:
           periodSeconds: 15
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-26
+        name: edu-container-31
         resources:
           limits:
             cpu: 50m
@@ -2532,34 +2602,36 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/e77e6c21-1eb3-449f-81dc-ad1d98cc1f37
+        - mountPath: /tmp/268a575c-44d3-4580-90f3-258ee034f510
           name: edu-volume-115
-        - mountPath: /tmp/453157aa-aa1d-4a89-881d-1e741aeb0cac
+        - mountPath: /tmp/67d90cb7-d939-4c08-8c33-43def1e11a00
           name: edu-volume-116
-        - mountPath: /tmp/5a029422-6e4f-4e0e-8afa-3a41d7f7e112
+        - mountPath: /tmp/ff421d10-22a6-4a5a-bf54-db4d4a12f62b
           name: edu-volume-117
-        - mountPath: /tmp/17105cea-be66-42f9-976c-1c944955eda8
+        - mountPath: /tmp/a57a5566-fbaf-4d72-a39d-76daeb1d2081
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/ac802d25-6be1-4c67-b152-a4ae6bb8baa0
+        - mountPath: /tmp/a1ea69dc-6771-436a-a57c-4a8ca7b02c17
           name: edu-volume-118
-        - mountPath: /tmp/a39b35e6-dab4-4ff7-918c-7ea64e0ed922
+        - mountPath: /tmp/064bd021-9bbc-417a-b6b9-e916382e700e
           name: edu-volume-119
-        - mountPath: /tmp/19fddcee-8f63-4428-858b-29c6b50038cf
+        - mountPath: /tmp/794ecd77-bd57-487d-8e4e-c470ef7d2be8
           name: edu-volume-120
-        - mountPath: /tmp/318edd4c-e061-47c1-b174-7409c1d3f8b0
+        - mountPath: /tmp/eb5d9020-a9bb-4bc4-9bde-673baf58f75b
           name: edu-volume-121
-        - mountPath: /tmp/731abc46-af7d-42ef-8c80-5a01c7de47b6
+        - mountPath: /tmp/4abd6295-4975-4626-894b-5776fab87d9c
           name: edu-volume-122
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-27"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-32"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-32"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-27"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-32"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -2569,7 +2641,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-27
+        name: edu-container-32
         resources:
           limits:
             cpu: 200m
@@ -2589,21 +2661,23 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/15751cdd-fb36-4b6e-b0af-041cef8a7d6b
+        - mountPath: /tmp/1e137fec-5ffb-4ccf-aa2d-367ff7733344
           name: edu-volume-110
-        - mountPath: /tmp/dcd88bdf-ee0f-4c62-abe8-63426596aadc
+        - mountPath: /tmp/f39cc86e-0484-4b82-bb22-05224e9cf109
           name: edu-volume-109
-        - mountPath: /tmp/c7212212-f46f-455a-b9a8-885d7392b242
+        - mountPath: /tmp/1fc52835-2fd4-41aa-9e40-1f11cc673627
           name: edu-volume-2
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-2"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-33"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-33"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-2"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-33"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -2613,7 +2687,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-2
+        name: edu-container-33
         resources:
           limits:
             cpu: 100m
@@ -2629,7 +2703,7 @@ spec:
             - all
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/c22e7509-10d0-4ce0-b2a5-933c5190de1d
+        - mountPath: /tmp/79dba315-d444-406a-8206-a935c0c2ac38
           name: edu-volume-14
       volumes:
       - configMap:
@@ -2728,13 +2802,15 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-28"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-34"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-34"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '4104'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-28"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-34"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -2744,7 +2820,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-28
+        name: edu-container-34
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -2772,26 +2848,26 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/c096f9ac-947e-41be-be07-ec3b7df4f5c5
+        - mountPath: /tmp/877b6ab2-a927-4f49-a788-3b76aedc693e
           name: edu-volume-2
-        - mountPath: /tmp/6807a4eb-40a0-4178-b5f3-d85056a2d0dd
+        - mountPath: /tmp/a4359272-f57f-406e-a8ec-afa998482ad1
           name: edu-volume-124
-        - mountPath: /tmp/e8af468d-5814-4b53-b74c-43952ad97f1f
+        - mountPath: /tmp/2d3ccb1f-219b-4e72-87f2-336b46d0b0d2
           name: edu-volume-123
-        - mountPath: /tmp/fdb3100f-16df-41af-a723-bf955611e485
+        - mountPath: /tmp/3fff926a-9724-49f3-a895-56f5112491e2
           name: edu-volume-126
-        - mountPath: /tmp/05d7f0ea-1a86-4ffb-ae77-a41293d831dd
+        - mountPath: /tmp/22b497d1-faec-4436-9ebc-3421203b2146
           name: edu-volume-125
-        - mountPath: /tmp/dc217777-aa0c-473e-8697-d76d4b1a6e04
+        - mountPath: /tmp/d6a8a848-8f94-4a42-b8d5-7249fe429675
           name: edu-volume-10
-        - mountPath: /tmp/d921e89f-ce84-4c0d-9eb1-09bd268e7b11
+        - mountPath: /tmp/917d26a2-487a-486b-b357-e0e754044a75
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/5a1c86b0-b0f9-4b80-a592-a76819443b63
+        - mountPath: /tmp/469aa688-c90f-4cc6-bf12-58916de047c0
           name: edu-volume-127
-        - mountPath: /tmp/0156b45d-2ffc-43e5-a6ca-e6bed1b56b5d
+        - mountPath: /tmp/7de1e926-8d3b-4dda-9fe8-53593bbd9e51
           name: edu-volume-3
-        - mountPath: /tmp/69a0d9c2-8ee8-411c-affa-2dd42231fcb0
+        - mountPath: /tmp/8577c3ab-285f-4a93-9501-c608103eeef0
           name: edu-volume-4
       volumes:
       - name: edu-volume-10
@@ -2852,13 +2928,15 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-29"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-35"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-35"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '2048'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-29"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-35"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -2868,7 +2946,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-29
+        name: edu-container-35
         resources:
           limits:
             cpu: '1'
@@ -2891,13 +2969,13 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/f0a18346-0eef-4d3e-93cc-39aae7330d7e
+        - mountPath: /tmp/0cf61d54-44db-435b-96bf-83dfea02a61c
           name: edu-volume-2
-        - mountPath: /tmp/b11e4cb7-2c13-4b60-9652-93062ed8dc76
+        - mountPath: /tmp/74312bff-e03c-4589-aebb-9cdf9aea2667
           name: edu-volume-128
-        - mountPath: /tmp/7172c7ce-08b0-4672-83c9-7d7dfc24018a
+        - mountPath: /tmp/7e7b7a42-77b2-4326-92d6-a0905e65a1fa
           name: edu-volume-129
-        - mountPath: /tmp/ffbe2188-c6fa-47c9-ad66-34c11a75a561
+        - mountPath: /tmp/ce7f65e3-0385-46eb-9fdd-b58f08f3ebb5
           name: edu-volume-130
       volumes:
       - configMap:
@@ -2935,13 +3013,15 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-30"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-36"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-36"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '3848'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-30"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-36"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -2951,7 +3031,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-30
+        name: edu-container-36
         ports:
         - containerPort: 8080
           protocol: TCP
@@ -2979,26 +3059,26 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/ddb2ecce-37ad-4591-977a-2b4a78b7e478
+        - mountPath: /tmp/268d9d10-efb0-4039-a3cc-a73f05d45505
           name: edu-volume-2
-        - mountPath: /tmp/b6265927-d67e-4429-84a0-cd706f5cea82
+        - mountPath: /tmp/be2aee22-c875-4b2a-be51-f38c71ee476a
           name: edu-volume-134
-        - mountPath: /tmp/5c2c4894-720b-406f-9980-5b0c79015c8a
+        - mountPath: /tmp/84df66cf-bb84-4e4a-9bb8-f8354953b3d3
           name: edu-volume-133
-        - mountPath: /tmp/8bc2cecc-1466-47e6-bed8-c7e19216ffa8
+        - mountPath: /tmp/a3a39fac-8380-4442-b5a5-5f3bfcbfda63
           name: edu-volume-132
-        - mountPath: /tmp/51045718-533b-47f0-91f5-27543c5747ef
+        - mountPath: /tmp/fb8f2324-18b5-4e00-b8dd-8250de76233d
           name: edu-volume-131
-        - mountPath: /tmp/6823081f-ab9c-4fdd-8f6f-d1c2c2c09741
+        - mountPath: /tmp/49e0d79c-152a-4e72-8d52-eb60167b332f
           name: edu-volume-30
-        - mountPath: /tmp/e2655977-6ace-41a9-b7ba-3e9405a4edf2
+        - mountPath: /tmp/14903f33-3379-4595-8095-5e9a2b6bb8c9
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/99c849ee-af13-4e75-9696-2e4f1c45b034
+        - mountPath: /tmp/4b1eaae7-be0c-4b08-bf2c-f221db890044
           name: edu-volume-135
-        - mountPath: /tmp/24298762-b1b1-43b7-b8f6-f64f598c11df
+        - mountPath: /tmp/19b996bc-c80c-4010-93a3-b6a976dd4243
           name: edu-volume-3
-        - mountPath: /tmp/be5fec25-d0fc-490c-a87b-42061a7bb921
+        - mountPath: /tmp/82715c71-a13d-4014-8e8d-0e3410e0897b
           name: edu-volume-4
       volumes:
       - configMap:
@@ -3059,13 +3139,15 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-31"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-37"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-37"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '4872'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-31"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-37"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -3075,7 +3157,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-31
+        name: edu-container-37
         resources:
           limits:
             cpu: 700m
@@ -3104,25 +3186,25 @@ spec:
             level: s0
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/e63bc0bc-6e29-4b8e-adbc-e3c778705cea
+        - mountPath: /tmp/8300a937-7e1a-4f77-9bc0-176247a16071
           name: edu-volume-2
-        - mountPath: /tmp/2d508fc1-ccab-4fc4-a2ce-1f83f9890297
+        - mountPath: /tmp/b88523cf-a05c-4232-a743-59dab2548d6d
           name: edu-volume-137
-        - mountPath: /tmp/4b0d7554-190f-4cf9-ab69-c51aba92547d
+        - mountPath: /tmp/c250ec08-294b-4fc5-bc63-ca710d562370
           name: edu-volume-136
-        - mountPath: /tmp/b7af7527-ecbb-4db9-a95b-455f7edd3251
+        - mountPath: /tmp/0bf0c9e2-f786-466c-b150-988d9b284aaf
           name: edu-volume-139
-        - mountPath: /tmp/1c5bbdd1-869f-4691-8291-96b0d1061554
+        - mountPath: /tmp/1590846c-0341-4e32-ac77-bbd10f107598
           name: edu-volume-138
-        - mountPath: /tmp/6c56c6af-565f-480a-931c-94f59112fd62
+        - mountPath: /tmp/034bb84c-a93c-48fd-9e8d-ada3a7cdb19a
           name: edu-volume-10
-        - mountPath: /tmp/05454d71-b34b-44b1-8cd5-32f6b23814d6
+        - mountPath: /tmp/059dc834-5510-4793-ad10-f362b0e44bdc
           name: edu-volume-3
-        - mountPath: /tmp/13ba7df9-0c93-4e6c-af0c-79a7b5b7ccb5
+        - mountPath: /tmp/ac9f3509-0e6d-43d7-ae7f-fa19517a50e9
           name: edu-volume-4
-        - mountPath: /tmp/c1dfafb5-40f8-4768-a9f9-36baac429a69
+        - mountPath: /tmp/246af61d-e2f5-476e-ada1-c62468768502
           name: edu-volume-17
-        - mountPath: /tmp/da76f600-5712-4cc3-a0e2-3fa11aa74cbc
+        - mountPath: /tmp/cc3c878d-9d2e-44ba-a66b-f6388eaa3f10
           name: edu-volume-140
       volumes:
       - name: edu-volume-10
@@ -3180,13 +3262,15 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-32"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-38"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-38"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '200'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-32"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-38"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -3196,7 +3280,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-32
+        name: edu-container-38
         ports:
         - containerPort: 50003
           protocol: TCP
@@ -3218,33 +3302,37 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/614718de-f053-4be2-9a24-e8471802cb05
+        - mountPath: /tmp/9b789a82-5a23-4794-aeba-06365fc443fe
           name: edu-volume-141
-        - mountPath: /tmp/7d3b180e-6b4a-4301-98dd-c0de56c38d02
+        - mountPath: /tmp/dd9da0a1-92b2-4cdb-9907-c781e54d4980
           name: edu-volume-141
-        - mountPath: /tmp/bbba89b4-b9a0-466d-a24e-8956498073da
+        - mountPath: /tmp/0c357f24-1de1-46ca-a62b-f26115a3a516
           name: edu-volume-142
-        - mountPath: /tmp/c9c2f8d4-b536-444d-a1b0-2e436bb30832
+        - mountPath: /tmp/894a6123-2c40-40be-8b31-068b238f90c7
           name: edu-volume-142
-        - mountPath: /tmp/8b75842d-fe73-4892-8f64-bd5267ea0212
+        - mountPath: /tmp/0140013f-c1d4-4289-aeb6-f91b1ef842af
           name: edu-volume-142
-        - mountPath: /tmp/03765ee9-b25d-4ad1-83af-8602d333f44b
+        - mountPath: /tmp/3007ab22-202a-4b78-8756-084a211b25bc
           name: edu-volume-143
-        - mountPath: /tmp/82b62f70-d580-412d-b4d0-2b1210eb4dc9
+        - mountPath: /tmp/c99a24a5-29b1-4f71-8af7-2cfbaa8c8baa
           name: edu-volume-143
-        - mountPath: /tmp/b056ad4c-ff44-466c-a7a6-2012b490aa02
+        - mountPath: /tmp/a7af36cb-20ef-4924-b5be-210701b0a33b
           name: edu-volume-144
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-33"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-39"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-39"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '100'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-33"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-39"] | default(spammer_per_mem_default) }}'
         - name: LISTEN_PORT
           value: '50106'
+        - name: LISTEN
+          value: '1'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -3255,7 +3343,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-33
+        name: edu-container-39
         ports:
         - containerPort: 50106
           protocol: TCP
@@ -3275,15 +3363,15 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/1aa42850-c4e5-474f-801a-8dd186330b84
+        - mountPath: /tmp/6e5f05f7-61de-4c96-bca1-3078acd9bd2a
           name: edu-volume-142
-        - mountPath: /tmp/60d977c0-6118-4a38-ac28-66f9e6ae425b
+        - mountPath: /tmp/cfb12bd1-2ee3-4413-85eb-a20ad3d03626
           name: edu-volume-142
-        - mountPath: /tmp/dbe7f571-e9f0-4630-91c6-e7c71c50509e
+        - mountPath: /tmp/cc165629-c505-4eb4-bd81-37a2ee479e0a
           name: edu-volume-143
-        - mountPath: /tmp/37768be2-f9c4-431d-95d3-dcfda3d994b8
+        - mountPath: /tmp/06ab041a-3723-4d14-a2d8-e60fbcff7d27
           name: edu-volume-143
-        - mountPath: /tmp/eb4d30fa-fd91-4c50-9edb-69d12a5be3d0
+        - mountPath: /tmp/23ed3c1e-f805-40b2-97f3-214b38c614c7
           name: edu-volume-144
       volumes:
       - configMap:
@@ -3318,13 +3406,15 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-34"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-40"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-40"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '512'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-34"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-40"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -3334,7 +3424,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-34
+        name: edu-container-40
         resources:
           limits:
             cpu: 100m
@@ -3352,23 +3442,23 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/ee2bd9a0-3ee8-432f-86b4-208ecf362f86
+        - mountPath: /tmp/0ac05a35-12c9-4ef4-8bfe-841b2e3ecca1
           name: edu-volume-145
-        - mountPath: /tmp/5dd0dac7-9937-414e-8f53-da535d7e1f93
+        - mountPath: /tmp/1e36b601-395d-4cc7-b775-86cc408075c5
           name: edu-volume-145
-        - mountPath: /tmp/5d7163ba-e02d-475d-9cdb-a63e9cdb0bf9
+        - mountPath: /tmp/9e786d8d-e6ce-487b-bbcc-4feef0a237e3
           name: edu-volume-145
-        - mountPath: /tmp/8339a84f-6b6d-4961-9ef1-daea9edeadf3
+        - mountPath: /tmp/84b259a0-196b-4904-bad8-1105a4a8ffb3
           name: edu-volume-145
-        - mountPath: /tmp/88a0f671-2dba-422c-9b1e-8b273b85a5d9
+        - mountPath: /tmp/1850e212-4169-46cc-96c8-a833f89a2735
           name: edu-volume-145
-        - mountPath: /tmp/15cedbc9-5573-4765-b4d9-ab13ef165546
+        - mountPath: /tmp/46bf6647-3324-4f73-bc89-6abf387cc96f
           name: edu-volume-146
-        - mountPath: /tmp/870729fe-99ad-42f4-860b-21d222e3e39b
+        - mountPath: /tmp/22f0a7bc-734d-4c57-a666-a150427f0a34
           name: edu-volume-147
-        - mountPath: /tmp/ed781934-1bd6-45c7-8ed3-606ddcae9c4a
+        - mountPath: /tmp/1fc64781-6f64-4c30-97d1-a78bc79516df
           name: edu-volume-148
-        - mountPath: /tmp/ef9ea138-01dd-4b90-8ad5-e8c406d64383
+        - mountPath: /tmp/8f5e6006-b5e0-45fa-865f-0156771c5d3c
           name: edu-volume-148
       volumes:
       - emptyDir: {}
@@ -3401,15 +3491,19 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-35"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-41"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-41"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '2048'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-35"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-41"] | default(spammer_per_mem_default) }}'
         - name: LISTEN_PORT
           value: '6379'
+        - name: LISTEN
+          value: '1'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -3419,7 +3513,7 @@ spec:
           periodSeconds: 2
           successThreshold: 1
           timeoutSeconds: 5
-        name: edu-container-35
+        name: edu-container-41
         ports:
         - containerPort: 6379
           name: redis
@@ -3446,15 +3540,15 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/f91b0a7b-db06-4444-9326-faefd89b64d5
+        - mountPath: /tmp/c86017d6-1da2-44b3-a914-c0a844e6942a
           name: edu-volume-150
-        - mountPath: /tmp/3855edb9-7707-4a37-8213-0abdbfe0e3fa
+        - mountPath: /tmp/3886fe57-974a-4826-8232-bb835ad0d0d9
           name: edu-volume-151
-        - mountPath: /tmp/3ff42aee-43a3-435f-b303-71af974ec44c
+        - mountPath: /tmp/224277bf-92e7-4e86-aa1e-fce469419351
           name: edu-volume-152
-        - mountPath: /tmp/0427422a-2038-4482-bad6-7ea503adb13b
+        - mountPath: /tmp/ba770f64-b089-47fb-aac2-8c9f14987677
           name: edu-volume-153
-        - mountPath: /tmp/af0b0066-b3a2-48cf-b977-22dbb1d5ac7f
+        - mountPath: /tmp/53a50bbf-16ac-4279-813d-d49bc96f3560
           name: edu-volume-154
       volumes:
       - configMap:
@@ -3494,15 +3588,19 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-36"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-42"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-42"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '100'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-36"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-42"] | default(spammer_per_mem_default) }}'
         - name: LISTEN_PORT
           value: '50507'
+        - name: LISTEN
+          value: '1'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -3513,7 +3611,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-36
+        name: edu-container-42
         resources:
           limits:
             cpu: 100m
@@ -3528,13 +3626,13 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/95da8235-316e-4e5f-a118-0f3b43f23608
+        - mountPath: /tmp/db138d55-09ea-493f-b620-4632043c9ff7
           name: edu-volume-155
-        - mountPath: /tmp/e47e9a1c-29a5-449b-ad29-e5f9326902a6
+        - mountPath: /tmp/396af6ef-aab2-4927-b0b7-00c22203c5ca
           name: edu-volume-156
-        - mountPath: /tmp/5d3a2f47-6696-48fe-91bc-768fbf57e55c
+        - mountPath: /tmp/912a2a7e-d3d8-49ee-bf28-3b4305e6ea9f
           name: edu-volume-157
-        - mountPath: /tmp/6d8194fa-e34d-4ef0-b84e-54428cdd24cd
+        - mountPath: /tmp/a6cec231-57dd-4c57-b768-2890d751ec47
           name: edu-volume-158
       volumes:
       - name: edu-volume-155
@@ -3567,14 +3665,16 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-37"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-43"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-43"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-37"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-43"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
-        name: edu-container-37
+        imagePullPolicy: Always
+        name: edu-container-43
         resources:
           limits:
             cpu: 100m
@@ -3589,19 +3689,21 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/670bc0a6-eac2-49b6-91fb-9f39e0ad26eb
+        - mountPath: /tmp/fbfef608-14d9-4b3c-afb9-0927682592a6
           name: edu-volume-174
-        - mountPath: /tmp/5438ddbc-6fe1-4684-90bd-9018b043514c
+        - mountPath: /tmp/2cbbb697-d0ad-44bc-ae58-0f8323ffcacd
           name: edu-volume-176
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-38"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-44"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-44"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-38"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-44"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -3611,7 +3713,7 @@ spec:
           periodSeconds: 15
           successThreshold: 1
           timeoutSeconds: 15
-        name: edu-container-38
+        name: edu-container-44
         resources:
           limits:
             cpu: 500m
@@ -3626,19 +3728,21 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/1a7e7d2c-b7a8-4457-8a36-4beb03c6ef6e
+        - mountPath: /tmp/6fffaac2-c375-44c6-a70e-bea5884cb9fd
           name: edu-volume-160
-        - mountPath: /tmp/6f6a2617-b849-4810-8a33-47f0e2835e9d
+        - mountPath: /tmp/fb23f77e-160e-4f15-8048-3f9b055468a1
           name: edu-volume-172
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-39"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-45"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-45"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-39"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-45"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -3648,7 +3752,7 @@ spec:
           periodSeconds: 15
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-39
+        name: edu-container-45
         readinessProbe:
           exec:
             command:
@@ -3679,13 +3783,13 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         volumeMounts:
-        - mountPath: /tmp/92ea25c4-b03e-4c30-83a8-21c0a39ce636
+        - mountPath: /tmp/15bb40f5-c641-4e49-bdd2-1ef37f97f67f
           name: edu-volume-159
-        - mountPath: /tmp/971be78e-037e-469b-8d86-acc10548e574
+        - mountPath: /tmp/9f3e7d3b-bd74-4078-932d-09d75e19dd29
           name: edu-volume-173
-        - mountPath: /tmp/ee2f6c55-c751-4d3c-84ac-8ffb6481aea3
+        - mountPath: /tmp/04742515-8e20-4f4a-a7d7-44954d384656
           name: edu-volume-175
-        - mountPath: /tmp/0590b0fd-e365-4537-a5e7-08f3c4621c1c
+        - mountPath: /tmp/b6de53e1-2533-4f31-a5b9-842f70567aad
           name: edu-volume-17
       volumes:
       - name: edu-volume-159
@@ -3763,13 +3867,15 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-40"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-46"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-46"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-40"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-46"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -3779,7 +3885,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-40
+        name: edu-container-46
         ports:
         - containerPort: 6513
           name: netconf-tls
@@ -3798,13 +3904,13 @@ spec:
             - ALL
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/4c17dbc7-c8f1-442c-ba9c-a179f1e79844
+        - mountPath: /tmp/3162d1fd-3d55-4228-831a-610b3048e8bf
           name: edu-volume-178
-        - mountPath: /tmp/8d09d99f-b2d3-491b-b785-82eddd39400b
+        - mountPath: /tmp/687c9607-bd3c-4415-8dd2-033e46b6e2a9
           name: edu-volume-179
-        - mountPath: /tmp/5ddaf499-2a60-45de-8cbd-47b592390c72
+        - mountPath: /tmp/b03cfcd6-e69f-4edc-8df8-819b5deb7a35
           name: edu-volume-180
-        - mountPath: /tmp/4606f464-987f-4777-a5fc-c8d8a970e7e2
+        - mountPath: /tmp/c957a252-bc80-41d4-832e-ac669746a44f
           name: edu-volume-24
       volumes:
       - configMap:
@@ -3839,19 +3945,21 @@ spec:
       annotations:
         k8s.v1.cni.cncf.io/networks: |-
           [
-            {"interfaceRequest": "twamp", "name": "networking-e5l", "namespace": "edu-namespace-0", "ips": ["{{ networking['twamp']['ips'][0] }}"], "gateway_ips": ["{{ networking['twamp']['gateway'] }}"]}
+            {"interfaceRequest": "twamp", "name": "networking-oam", "namespace": "edu-namespace-0", "ips": ["{{ networking['twamp']['ips'][0] }}"], "gateway_ips": ["{{ networking['twamp']['gateway'] }}"]}
           ]
     spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-0"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-47"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-47"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-0"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-47"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -3861,7 +3969,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-0
+        name: edu-container-47
         resources:
           limits:
             cpu: 300m
@@ -3882,33 +3990,35 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/7e1a764a-0d1e-4677-b2a5-3c9210b9925e
+        - mountPath: /tmp/600030e7-6c05-426a-88dd-3d37ef5b6760
           name: edu-volume-51
           readOnly: true
-        - mountPath: /tmp/fc6e8a12-cff4-43f0-90d7-45b7b8defa77
+        - mountPath: /tmp/7e6b00bd-97b3-4203-ad1b-96e5552e64a1
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/1ef0ef3e-b512-4fbc-a386-efb518c40055
+        - mountPath: /tmp/85dde968-4fbc-416e-87e1-e36fa8290501
           name: edu-volume-9
-        - mountPath: /tmp/a15b678a-328e-4c30-bc2d-7554bc6beb75
+        - mountPath: /tmp/2cb2d74a-1d09-4965-857c-ba14db0d4d3d
           name: edu-volume-11
-        - mountPath: /tmp/d0c6fa39-2ca2-45ea-8fd0-4a2fb67cf632
+        - mountPath: /tmp/ad741ab6-8788-406b-b71d-b41bcf4575d1
           name: edu-volume-12
-        - mountPath: /tmp/71cf3bb8-a6f7-4a3c-9065-a6e92feb6c32
+        - mountPath: /tmp/0d22a264-196f-44ea-8f1f-17c2beb031e8
           name: edu-volume-13
-        - mountPath: /tmp/1291c833-e1ef-4fef-8451-230fb96d470f
+        - mountPath: /tmp/32767bc7-dd95-4a42-8f6b-993920b507be
           name: edu-volume-15
-        - mountPath: /tmp/735128ff-03f5-4169-a36d-42e59431fd31
+        - mountPath: /tmp/16328dd6-0cba-4e5a-a681-77657afc0731
           name: edu-volume-16
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-2"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-48"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-48"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '64'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-2"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-48"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -3918,7 +4028,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-2
+        name: edu-container-48
         resources:
           limits:
             cpu: 300m
@@ -3936,17 +4046,19 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/6034c444-030e-4e21-a9f8-e26aa03727bf
+        - mountPath: /tmp/52e92478-7bd6-4ed1-b75d-68c22ddba29f
           name: edu-volume-14
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-41"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-49"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-49"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-41"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-49"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -3956,7 +4068,7 @@ spec:
           periodSeconds: 15
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-41
+        name: edu-container-49
         resources:
           limits:
             cpu: 500m
@@ -3981,20 +4093,22 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/4affacc4-3256-43b4-8202-89cc66bc0b16
+        - mountPath: /tmp/d60b04bd-81ae-4c32-ab16-29564d679d15
           name: edu-volume-11
-        - mountPath: /tmp/38529dcc-6e59-4def-bd85-6c08f7ff676a
+        - mountPath: /tmp/0e40dc36-0d4e-4e37-b22c-538fab81471d
           name: edu-volume-1
           readOnly: true
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-42"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-50"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-50"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '128'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-42"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-50"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -4004,16 +4118,16 @@ spec:
           periodSeconds: 15
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-42
+        name: edu-container-50
         resources:
           limits:
             cpu: 500m
             memory: 128Mi
-            openshift.io/pci_sriov_net_e5l: '1'
+            openshift.io/pci_sriov_net_oam: '1'
           requests:
             cpu: 100m
             memory: 128Mi
-            openshift.io/pci_sriov_net_e5l: '1'
+            openshift.io/pci_sriov_net_oam: '1'
         securityContext:
           allowPrivilegeEscalation: true
           capabilities:
@@ -4026,7 +4140,7 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/e6130629-9ce6-44e2-90e4-2e2157cdee91
+        - mountPath: /tmp/a14ae9d7-dbe0-4b1b-a103-b306b584a952
           name: edu-volume-11
       volumes:
       - emptyDir: {}
@@ -4081,13 +4195,15 @@ spec:
       containers:
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-0"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-51"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-51"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '256'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-0"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-51"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -4097,7 +4213,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-0
+        name: edu-container-51
         resources:
           limits:
             cpu: 100m
@@ -4118,35 +4234,39 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/31fba331-f988-4bab-8a5a-5e86f9081803
+        - mountPath: /tmp/eedbe38d-47a0-4b71-8ac7-b87f41f088f4
           name: edu-volume-0
           readOnly: true
-        - mountPath: /tmp/2ac1b65e-ca5b-4d72-b24e-fca54062ddc6
+        - mountPath: /tmp/626efcbc-78fc-4d60-81ea-23ef20fb6a0b
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/6e810676-06bf-485a-a8fa-d504bbd92ac9
+        - mountPath: /tmp/66c44ffd-cd27-4b66-9252-62165880aca6
           name: edu-volume-55
-        - mountPath: /tmp/5307d523-ba44-4036-87d2-80e0384b62e2
+        - mountPath: /tmp/bbde2333-7acd-44af-98c8-eda43eb9fbef
           name: edu-volume-11
-        - mountPath: /tmp/06d6561b-34d3-4702-9e6c-244449650279
+        - mountPath: /tmp/f19ad799-be69-4c8a-b76b-7b8750827508
           name: edu-volume-12
-        - mountPath: /tmp/e53c3056-f0e7-48f5-9baf-7a229011a5f4
+        - mountPath: /tmp/dc3f7736-167e-4fec-8eea-219dd3663740
           name: edu-volume-13
-        - mountPath: /tmp/062429fe-4946-4ad5-b1c3-bc29a418c04f
+        - mountPath: /tmp/10de6be3-bed9-4459-ba65-c2f27e0cba3c
           name: edu-volume-15
-        - mountPath: /tmp/b468bd7e-a8c6-40a6-a91f-6efffd364897
+        - mountPath: /tmp/be36954c-bc46-4a5d-99e2-ea84c9bffedb
           name: edu-volume-16
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-43"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-52"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-52"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '11460'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-43"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-52"] | default(spammer_per_mem_default) }}'
         - name: LISTEN_PORT
           value: '49211'
+        - name: LISTEN
+          value: '1'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -4156,7 +4276,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-43
+        name: edu-container-52
         resources:
           limits:
             cpu: '12'
@@ -4197,49 +4317,53 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         volumeMounts:
-        - mountPath: /tmp/bc19df9c-7497-45ba-9925-d279d6e085f2
+        - mountPath: /tmp/e7256865-1aa2-4909-aed4-d7cd8ce3bbaf
           name: edu-volume-185
-        - mountPath: /tmp/95501645-3e57-4cb0-ad33-6660870337dd
+        - mountPath: /tmp/eaef0df7-ead2-4805-93df-0e98d658ca5a
           name: edu-volume-184
-        - mountPath: /tmp/fc98be29-688c-404d-bb00-9b994df6f039
+        - mountPath: /tmp/72785fd2-fe22-4cdd-823f-a3dc3bea2fd1
           name: edu-volume-198
-        - mountPath: /tmp/f9692cc9-6605-48c7-80e8-11102f8d1699
+        - mountPath: /tmp/c2cd3398-00b8-4cba-8f01-bdb4a197528f
           name: edu-volume-188
-        - mountPath: /tmp/7360fca5-1575-4af2-a9e4-5f4a32d38b55
+        - mountPath: /tmp/0b3a55fb-2587-4d7e-8e2d-395d8e02fb69
           name: edu-volume-189
-        - mountPath: /tmp/8bdf55eb-2679-45c5-9daf-b2f2bdfe25f8
+        - mountPath: /tmp/7ca20acd-54d9-42a6-976c-84e0d325a329
           name: edu-volume-190
-        - mountPath: /tmp/f2195196-6cfc-4298-aa75-b6ba4cdfbe31
+        - mountPath: /tmp/7a729fe3-f8f8-42af-a46f-c0dc6ef795fe
           name: edu-volume-183
-        - mountPath: /tmp/ae6a388b-0de0-4cec-938b-c7c3efb37728
+        - mountPath: /tmp/d1a9c32a-12f4-42f0-a4e4-df94f59f3e6e
           name: edu-volume-199
           readOnly: true
-        - mountPath: /tmp/23a0040a-2cf0-4a21-b9aa-0cb612b876b1
+        - mountPath: /tmp/070ed0ce-db0f-4be5-bd63-dbca3b4d8908
           name: edu-volume-2
-        - mountPath: /tmp/8198fa1a-f558-4621-b347-48bf35d92593
+        - mountPath: /tmp/c540c38b-7aa5-44dc-9067-2153ef31e338
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/37947b90-307d-41cb-98a9-f9ca59553d87
+        - mountPath: /tmp/2cd0a65a-7a4e-4871-8a30-a17e8eece59b
           name: edu-volume-0
-        - mountPath: /tmp/68d9c52a-ac85-4d93-9133-1369554b5373
+        - mountPath: /tmp/baefd966-1ee4-4a26-96d8-b2e68c2b4885
           name: edu-volume-201
-        - mountPath: /tmp/df73a1cb-b08c-4140-85cc-8d46ebfd894a
+        - mountPath: /tmp/bb8fff45-3b19-40d0-a1ab-5746ce45e6b2
           name: edu-volume-202
-        - mountPath: /tmp/71f60dc0-05f5-4326-9db5-10b6732b291b
+        - mountPath: /tmp/6db45380-bd82-4c17-bfbd-b01e47b6d065
           name: edu-volume-3
-        - mountPath: /tmp/922a8ce6-35e4-479a-a8b2-9be8cf7ed670
+        - mountPath: /tmp/2d87d564-fe6e-4f22-91c6-22202291f8f9
           name: edu-volume-4
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-44"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-53"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-53"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '11772'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-44"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-53"] | default(spammer_per_mem_default) }}'
         - name: LISTEN_PORT
           value: '49212'
+        - name: LISTEN
+          value: '1'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -4249,7 +4373,7 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-44
+        name: edu-container-53
         resources:
           limits:
             cpu: '12'
@@ -4291,45 +4415,49 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         volumeMounts:
-        - mountPath: /tmp/26d18552-9225-4f4f-b56b-58e4be770ad6
+        - mountPath: /tmp/34c965fe-b5dd-4309-a32e-1e708edf9e10
           name: edu-volume-187
-        - mountPath: /tmp/5bbfe00f-f414-44b5-994b-846a5c693dad
+        - mountPath: /tmp/71496a32-1354-4b7f-a36d-3126ba13c869
           name: edu-volume-186
-        - mountPath: /tmp/0c87ae3e-7724-4bb2-83b0-086ad95499a6
+        - mountPath: /tmp/4afb8c30-35ec-433d-87d0-5aae54332280
           name: edu-volume-198
-        - mountPath: /tmp/75588212-55ce-4495-bbbe-ce93755c924f
+        - mountPath: /tmp/fcc6cd4e-5ff7-486f-b1ec-4269d0c7c51c
           name: edu-volume-191
-        - mountPath: /tmp/9fc68d6d-92b4-4c4d-9593-d5f1719415d7
+        - mountPath: /tmp/1b13c5f5-018a-4160-8a02-84bed2ee99e9
           name: edu-volume-192
-        - mountPath: /tmp/2556f55d-70c3-4f77-884b-1e2562897e8a
+        - mountPath: /tmp/95e69155-22fd-478c-beef-f0f5b5d1a536
           name: edu-volume-193
-        - mountPath: /tmp/c44f282d-4219-439c-b336-626166b3e29c
+        - mountPath: /tmp/41be199a-f6af-4e61-b457-b9f126d02eb9
           name: edu-volume-182
-        - mountPath: /tmp/ff34091d-63bf-4630-82bc-b78f4ec89b4b
+        - mountPath: /tmp/8162ea3b-3eb3-4d8b-895a-11001f7537e1
           name: edu-volume-200
           readOnly: true
-        - mountPath: /tmp/4c3e007c-b312-4afe-b1f8-4877c51fe89a
+        - mountPath: /tmp/1337c15f-4edf-4709-b937-3d87ec7e9014
           name: edu-volume-2
-        - mountPath: /tmp/19893748-e763-4f5f-9e50-dfc43802b9d8
+        - mountPath: /tmp/baa06bbe-28cb-4157-8c55-0bf1cccec191
           name: edu-volume-1
           readOnly: true
-        - mountPath: /tmp/d9662e6e-2b18-472e-9caa-971614d1699e
+        - mountPath: /tmp/3d98a1a5-cb68-49d8-ac36-48f28c2da8e9
           name: edu-volume-0
-        - mountPath: /tmp/1c587d2c-626d-46d0-b0ce-7cdd5d3a45b8
+        - mountPath: /tmp/a1f17183-d914-4e2d-9aba-b6ab66ff80ed
           name: edu-volume-3
-        - mountPath: /tmp/af1b2a3b-639b-4a11-adec-03c87484ba09
+        - mountPath: /tmp/a0009688-71ab-4a91-be9a-f95ac7e89068
           name: edu-volume-4
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-45"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-54"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-54"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '8742'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-45"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-54"] | default(spammer_per_mem_default) }}'
         - name: LISTEN_PORT
           value: '49210'
+        - name: LISTEN
+          value: '1'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           failureThreshold: 3
           httpGet:
@@ -4339,18 +4467,16 @@ spec:
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-45
+        name: edu-container-54
         resources:
           limits:
             cpu: '26'
             hugepages-1Gi: 16Gi
-            intel.com/intel_fec_acc100: '1'
             memory: 8742Mi
             openshift.io/pci_sriov_net_f1: '2'
           requests:
             cpu: '26'
             hugepages-1Gi: 16Gi
-            intel.com/intel_fec_acc100: '1'
             memory: 8742Mi
             openshift.io/pci_sriov_net_f1: '2'
         securityContext:
@@ -4381,36 +4507,38 @@ spec:
           successThreshold: 1
           timeoutSeconds: 1
         volumeMounts:
-        - mountPath: /tmp/5e3f2f15-54bf-4847-acbb-61f57599c103
+        - mountPath: /tmp/cb682ad8-3e54-47f7-a162-4ca30bdeae9f
           name: edu-volume-198
-        - mountPath: /tmp/2ad5bbbd-3e97-455b-9cc5-d85019e7a9d8
+        - mountPath: /tmp/e731bcd9-77d7-491f-8f78-a72c6920ade4
           name: edu-volume-194
-        - mountPath: /tmp/89a96a52-0a9c-482b-a396-ad52b3b4ee74
+        - mountPath: /tmp/ac70a4e8-d5e2-4c71-bc3b-6204cbafb59f
           name: edu-volume-195
-        - mountPath: /tmp/d634d37a-cc96-456c-a0b8-8b2d186695f7
+        - mountPath: /tmp/9c0c355e-6cdb-4a23-b81d-cacccef3b9be
           name: edu-volume-196
-        - mountPath: /tmp/ff765500-59c4-42d1-b49a-64e5785073da
+        - mountPath: /tmp/079e3366-72a1-4972-a5b7-5361ebbef4c8
           name: edu-volume-2
-        - mountPath: /tmp/ceef974e-5920-41ec-8921-ea3796b68e21
+        - mountPath: /tmp/c66f216f-1f15-47f2-933f-6c53e5610551
           name: edu-volume-0
-        - mountPath: /tmp/d744f981-817a-47bb-8827-b6f61678dae0
+        - mountPath: /tmp/df80cbac-c028-429e-b593-eca5aad706b4
           name: edu-volume-181
-        - mountPath: /tmp/07e2c93d-5638-4776-bd70-08c5cd414a16
+        - mountPath: /tmp/48c9c856-d146-447c-9d37-5d6b54ee4569
           name: edu-volume-197
           readOnly: true
-        - mountPath: /tmp/b81d0b6e-9220-4740-9212-179d124d1a38
+        - mountPath: /tmp/bba1517c-8bc5-4b78-b313-5cae65656b2e
           name: edu-volume-3
-        - mountPath: /tmp/eab89530-bdb4-43cd-9444-f9d8a0e25d8c
+        - mountPath: /tmp/feae11da-53c1-450c-b2c5-f8a22ab68473
           name: edu-volume-4
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-2"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-55"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-55"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '64'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-2"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-55"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -4420,7 +4548,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        name: edu-container-2
+        name: edu-container-55
         resources:
           limits:
             cpu: 100m
@@ -4438,17 +4566,19 @@ spec:
           privileged: false
           readOnlyRootFilesystem: true
         volumeMounts:
-        - mountPath: /tmp/358de5e8-958d-4286-b6c6-64394a457060
+        - mountPath: /tmp/d9a72370-2d68-4f08-b69f-b57626afe24f
           name: edu-volume-14
       - env:
         - name: NUM_THREADS
-          value: '{{ spammer_num_threads["edu-container-3"] | default(spammer_num_threads_default) }}'
+          value: '{{ spammer_num_threads["edu-container-56"] | default(spammer_num_threads_default) }}'
+        - name: PER_CPU
+          value: '{{ spammer_per_cpu["edu-container-56"] | default(spammer_per_cpu_default) }}'
         - name: MAX_MEM
           value: '1024'
         - name: PER_MEM
-          value: '{{ spammer_per_mem["edu-container-3"] | default(spammer_per_mem_default) }}'
+          value: '{{ spammer_per_mem["edu-container-56"] | default(spammer_per_mem_default) }}'
         image: quay.io/cdonato/spammer:latest
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         livenessProbe:
           exec:
             command:
@@ -4458,7 +4588,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 2
-        name: edu-container-3
+        name: edu-container-56
         resources:
           limits:
             cpu: 200m
@@ -4486,21 +4616,21 @@ spec:
           seLinuxOptions:
             type: spc_t
         volumeMounts:
-        - mountPath: /tmp/287b1af0-db73-426b-ad40-57674b323b62
+        - mountPath: /tmp/be884869-a3d3-41ae-b4df-c2bdbd3c659c
           name: edu-volume-17
-        - mountPath: /tmp/0b6f4d1c-07dd-4a26-b584-75c52444dc4b
+        - mountPath: /tmp/bd7775c9-a9a5-4c9a-854b-1f398fd772e3
           name: edu-volume-2
-        - mountPath: /tmp/ce0ccac3-25cc-4a5d-9633-4838ac7b84c5
+        - mountPath: /tmp/da00ea5a-a554-4a35-ab17-4e76c24100c1
           name: edu-volume-20
-        - mountPath: /tmp/62ba2fd7-e6ed-472e-8ba4-dc0b9fc2b48b
+        - mountPath: /tmp/22bf6f4d-d112-43f0-a650-7796da7bcd25
           name: edu-volume-21
-        - mountPath: /tmp/b5fbc9a3-9d3d-4045-b36e-87326ea541c1
+        - mountPath: /tmp/7770f4ea-436c-417d-8104-9b675710dabe
           name: edu-volume-22
-        - mountPath: /tmp/96c4de4d-9403-404e-bd58-cff609c1baf8
+        - mountPath: /tmp/0f77ab2d-fe7d-46ab-a760-d50634fb1585
           name: edu-volume-18
-        - mountPath: /tmp/6ac61b75-2bdc-4daf-84fd-03cf2dd5d513
+        - mountPath: /tmp/42c74416-4561-47b7-bc6f-a19051e47e4f
           name: edu-volume-19
-        - mountPath: /tmp/69ff5e0b-92fa-4d46-aae3-974ad1073977
+        - mountPath: /tmp/0b25d4b8-cb0d-4e88-b274-5435c818dde9
           name: edu-volume-1
           readOnly: true
       volumes:
