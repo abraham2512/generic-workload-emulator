@@ -52,19 +52,23 @@ Optional extra-vars are as follows:
 
   percentage of requested memory that the spammer image will consume per container
 
-- **spammer_num_threads_default** (default: 1)
+- **spammer_num_threads_default** (default: 4)
 
   number of threads that the spammer image will spin up per container
+
+- **spammer_per_cpu_default** (default: 2)
+
+  number of calculations between injecting sleep in order to control CPU usage
 
 For example:
 ```shell
 ansible-playbook playbooks/setup_edu.yml -i inventory -e setup_edu_ansible_verification=false -e spammer_per_mem_default=25 -e spammer_num_threads_default=2
 ```
 
-Additionally, the spammer_per_mem and spammer_num_threads values can be tuned to override default settings per container for fine-grained control, for example:
+Additionally, the spammer_per_mem, spammer_num_threads, and spammer_per_cpu values can be tuned to override default settings per container for fine-grained control, for example:
 
 ```shell
-ansible-playbook playbooks/setup_edu.yml -i inventory -e '{"spammer_per_mem": {"edu-container-0": 75, "edu-container-42": 10}, "spammer_num_threads": {"edu-container-99": 4}}'
+ansible-playbook playbooks/setup_edu.yml -i inventory -e '{"spammer_per_mem": {"edu-container-0": 75, "edu-container-42": 10}, "spammer_num_threads": {"edu-container-99": 2}, "spammer_per_cpu": {"edu-container-22": 5}}'
 ```
 
 Depending on the degree of cutomization, it may be preferable to define these vars in inventory, for example:
@@ -75,7 +79,9 @@ spammer_per_mem:
   edu-container-0: 75
   edu-container-42: 10
 spammer_num_threads:
-  edu-container-99: 4
+  edu-container-99: 2
+spammer_per_cpu:
+  edu-container-22: 5
 ```
 
 ## eDU Teardown
