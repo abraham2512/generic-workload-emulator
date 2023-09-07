@@ -5,7 +5,7 @@ metadata:
   namespace: "openshift-local-storage"
 spec:
   storageClassDevices:
-    - storageClassName: "local-sc"
+    - storageClassName: "general"
       volumeMode: Filesystem
       fstype: xfs
       devicePaths:
@@ -19,20 +19,5 @@ spec:
         - /dev/new_vol_group/vol8
         - /dev/new_vol_group/vol9
         - /dev/new_vol_group/vol10
-        - /dev/new_vol_group/vol11
-        - /dev/new_vol_group/vol12
-        - /dev/new_vol_group/vol13
-        - /dev/new_vol_group/vol14
-        - /dev/new_vol_group/vol15
-        - /dev/new_vol_group/vol16
-        - /dev/new_vol_group/vol17
-        - /dev/new_vol_group/vol18
-        - /dev/new_vol_group/vol19
-        - /dev/new_vol_group/vol20
-        - /dev/new_vol_group/vol21
-        - /dev/new_vol_group/vol22
-        - /dev/new_vol_group/vol23
-        - /dev/new_vol_group/vol24
-        - /dev/new_vol_group/vol25
-        - /dev/new_vol_group/vol26
+
 
