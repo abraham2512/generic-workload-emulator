@@ -15,6 +15,9 @@ argparser.add_argument('--image', '-i', required=False,
 argparser.add_argument('--prefix', '-p', required=False,
                        default='edu',
                        help='Prefix to prepend to all resources')
+argparser.add_argument('--config', '-c', required=False,
+                       default='tools/du_configs.yaml',
+                       help='Config yaml with pod specs')
 args = argparser.parse_args()
 
 maps = {'configmap':  {'iterator': 0, 'resources': {}},
@@ -114,19 +117,14 @@ def resourceref(resourcetype, resourcename):
 
 deployments = 1
 
-volumes = [
-          #  {"name":"volume-1",  "persistentVolumeClaim": 1},
-           {"name":"volume-2", "secret": 1},
-           {"name":"volume-3", "configMap":1}
-           ]
 
-containers = [
+du_specs = None
+with open(args.config,"r") as fstream:
+  du_specs=yaml.safe_load(fstream)
+print(du_specs)
 
-               {"name": "container1", "type": "spammer",
-               "volumeMounts": [#{"name":"volume-1"}
-                                ]}
-              
-              ]
+volumes = du_specs['volumes']
+containers = du_specs['containers']
                
 # Create namespace
 namespaceref = resourceref('namespace', 'default-namespace')
@@ -188,19 +186,7 @@ for i in range(deployments):
     newcontainer = copy.deepcopy(templates['container'])
     newcontainer['name'] = containerref
     newcontainer['imagePullPolicy'] = 'Always'
-    # newcontainer['env'] = [
-    #   {'name': 'NUM_THREADS', 'value': '{{ spammer_num_threads["' + containerref 
-    #    + '"] | default(spammer_num_threads_default) }}'},
-    #   {'name': 'PER_CPU', 'value': '{{ spammer_per_cpu["' + containerref
-    #    + '"] | default(spammer_per_cpu_default) }}'},
-    #   {'name': 'MAX_MEM', 'value': '1024'},
-    #   {'name': 'PER_MEM', 'value': '{{ spammer_per_mem["' + containerref 
-    #    + '"] | default(spammer_per_mem_default) }}'}]
-    newcontainer['env'] = [
-      {'name':'CPU_LOAD','value':'1'},
-      {'name':'MEM_LOAD','value':'1'},
-      {'name':'MEM_SIZE','value':'256M'}
-    ]
+    newcontainer['env'] = container['env']
       
     for property in ['ports', 'resources', 'securityContext']:
       if property in container:
@@ -218,15 +204,16 @@ for i in range(deployments):
         elif 'tcpSocket' in newcontainer[property] and not list(filter(lambda x: (x['name'] == "LISTEN_PORT"), newcontainer['env'])):
           newcontainer['env'].append({'name': 'LISTEN_PORT', 'value': str(newcontainer[property]['tcpSocket']['port'])})
 
-    for volumemount in container['volumeMounts']:
-      volumeref = resourceref('volume', volumemount['name'])
-      mountpath = "/tmp/" + str(uuid.uuid4())
-      newvolumemount = {'mountPath': mountpath, 'name': volumeref}
+    if 'volumeMounts' in container.keys():
+      for volumemount in container['volumeMounts']:
+        volumeref = resourceref('volume', volumemount['name'])
+        mountpath = "/tmp/" + str(uuid.uuid4())
+        newvolumemount = {'mountPath': mountpath, 'name': volumeref}
 
-      if 'readOnly' in volumemount and volumemount['readOnly'] == True:
-        newvolumemount['readOnly'] = True
+        if 'readOnly' in volumemount and volumemount['readOnly'] == True:
+          newvolumemount['readOnly'] = True
 
-      newcontainer['volumeMounts'].append(newvolumemount)
+        newcontainer['volumeMounts'].append(newvolumemount)
     
     newdeployment['spec']['template']['spec']['containers'].append(newcontainer)
 
