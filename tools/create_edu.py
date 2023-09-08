@@ -10,7 +10,7 @@ argparser = argparse.ArgumentParser(description='Create eDU manifests')
 argparser.add_argument('--destdir', '-d', required=True,
                        help='Directory to output eDU manifests')
 argparser.add_argument('--image', '-i', required=False,
-                       default='quay.io/cdonato/spammer:latest',
+                       default='quay.io/rh_ee_apalanis/fedora-stress-ng',
                        help='Container image to substitute in eDU manifests')
 argparser.add_argument('--prefix', '-p', required=False,
                        default='edu',
@@ -115,23 +115,17 @@ def resourceref(resourcetype, resourcename):
 deployments = 1
 
 volumes = [
-           {"name":"volume-1",  "persistentVolumeClaim": 1},
+          #  {"name":"volume-1",  "persistentVolumeClaim": 1},
            {"name":"volume-2", "secret": 1},
            {"name":"volume-3", "configMap":1}
            ]
 
 containers = [
-              # {"name": "container2", "memory": "1Gi", 
-              #  "volumeMounts": [{"name":"volume-2"}],
-              #  "livenessProbe": {"exec":{"command":"ls"},
-              #                    "failureThreshold": 3,"initialDelaySeconds": 5,
-              #                    "periodSeconds": 15,"successThreshold": 1,
-              #                    "timeoutSeconds": 1},
-              #  "readinessProbe": {"exec":{"command":"ls"}, 
-              #                     "failureThreshold": 3,"periodSeconds": 5, 
-              #                     "successThreshold": 1,"timeoutSeconds": 1}},
-               {"name": "container1", "memory": "1024", 
-               "volumeMounts": [{"name":"volume-1"}]}
+
+               {"name": "container1", "type": "spammer",
+               "volumeMounts": [#{"name":"volume-1"}
+                                ]}
+              
               ]
                
 # Create namespace
@@ -199,7 +193,7 @@ for i in range(deployments):
        + '"] | default(spammer_num_threads_default) }}'},
       {'name': 'PER_CPU', 'value': '{{ spammer_per_cpu["' + containerref
        + '"] | default(spammer_per_cpu_default) }}'},
-      {'name': 'MAX_MEM', 'value': container['memory']},
+      {'name': 'MAX_MEM', 'value': '1024'},
       {'name': 'PER_MEM', 'value': '{{ spammer_per_mem["' + containerref 
        + '"] | default(spammer_per_mem_default) }}'}]
       
