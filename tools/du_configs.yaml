@@ -9,11 +9,14 @@ volumes:
 containers:
   - name: container1
     env:
-      - name: CPU_LOAD
-        value: '1'
-      - name: MEM_LOAD
-        value: '1'
-      - name: MEM_SIZE
+      - name: stress_cpu
+        value: '4'
+      - name: stress_vm
+        value: '4'
+      - name: stress_vm-bytes
         value: '256M'
     # volumeMounts:
     #   - name: volume-1
+
+
+
