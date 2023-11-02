@@ -118,16 +118,17 @@ def resourceref(resourcetype, resourcename):
 du_specs = None
 with open(args.config,"r") as fstream:
   du_specs=yaml.safe_load(fstream)
-print(du_specs)
+# print(du_specs)
 
 deployments = du_specs['deployments']
-               
+d=0
+
 # Create namespace
 namespaceref = resourceref('namespace', 'default-namespace')
 newnamespace = copy.deepcopy(templates['namespace'])
 newnamespace['metadata']['name'] = namespaceref
 resources['namespace'].append(newnamespace)
-d=0
+
 for deployment in deployments:
   d+=1
   deploymentref = resourceref('deployment', 'deployment-'+str(d))
@@ -138,8 +139,17 @@ for deployment in deployments:
   newdeployment['spec']['selector']['matchLabels'] = {'app': deploymentref}
 
   volumes = deployment['volumes']
-  containers = deployment['containers']
-
+  pods = deployment['pods']
+  containers = []
+  for pod in pods:
+    n = pod.pop('name')
+    r = pod.pop('repeat')
+    for i in range(r):
+      newcontainer = {}
+      newcontainer = copy.deepcopy(pod)
+      newcontainer['name'] = '_'.join([n,str(i)])
+      containers.append(newcontainer)
+ 
   for volume in volumes:
     volumeref = resourceref('volume', volume['name'])
     newvolume = copy.deepcopy(templates['volume'])
@@ -181,40 +191,40 @@ for deployment in deployments:
     newdeployment['spec']['template']['spec']['volumes'].append(newvolume)
 
   for container in containers:
-    containerref = resourceref('container', '_'.join(['default', container['name']]))
-    newcontainer = copy.deepcopy(templates['container'])
-    newcontainer['name'] = containerref
-    newcontainer['imagePullPolicy'] = 'Always'
-    newcontainer['env'] = container['env']
+      containerref = resourceref('container', '_'.join(['default', container['name']]))
+      newcontainer = copy.deepcopy(templates['container'])
+      newcontainer['name'] = containerref
+      newcontainer['imagePullPolicy'] = 'Always'
+      newcontainer['env'] = container['env']
+        
+      for property in ['ports', 'resources', 'securityContext']:
+        if property in container:
+          newcontainer[property] = container[property]
+
+      for property in ['livenessProbe', 'readinessProbe', 'startupProbe']:
+        if property in container:
+          newcontainer[property] = container[property]
+
+          if 'exec' in newcontainer[property]:
+              newcontainer[property]['exec']['command'] = ['ls']
+          elif 'httpGet' in newcontainer[property] and not list(filter(lambda x: (x['name'] == "LISTEN_PORT"), newcontainer['env'])):
+            newcontainer['env'].append({'name': 'LISTEN_PORT', 'value': str(newcontainer[property]['httpGet']['port'])})
+            newcontainer['env'].append({'name': 'LISTEN', 'value': '1'})
+          elif 'tcpSocket' in newcontainer[property] and not list(filter(lambda x: (x['name'] == "LISTEN_PORT"), newcontainer['env'])):
+            newcontainer['env'].append({'name': 'LISTEN_PORT', 'value': str(newcontainer[property]['tcpSocket']['port'])})
+
+      if 'volumeMounts' in container.keys():
+        for volumemount in container['volumeMounts']:
+          volumeref = resourceref('volume', volumemount['name'])
+          mountpath = "/tmp/" + str(uuid.uuid4())
+          newvolumemount = {'mountPath': mountpath, 'name': volumeref}
+
+          if 'readOnly' in volumemount and volumemount['readOnly'] == True:
+            newvolumemount['readOnly'] = True
+
+          newcontainer['volumeMounts'].append(newvolumemount)
       
-    for property in ['ports', 'resources', 'securityContext']:
-      if property in container:
-        newcontainer[property] = container[property]
-
-    for property in ['livenessProbe', 'readinessProbe', 'startupProbe']:
-      if property in container:
-        newcontainer[property] = container[property]
-
-        if 'exec' in newcontainer[property]:
-            newcontainer[property]['exec']['command'] = ['ls']
-        elif 'httpGet' in newcontainer[property] and not list(filter(lambda x: (x['name'] == "LISTEN_PORT"), newcontainer['env'])):
-          newcontainer['env'].append({'name': 'LISTEN_PORT', 'value': str(newcontainer[property]['httpGet']['port'])})
-          newcontainer['env'].append({'name': 'LISTEN', 'value': '1'})
-        elif 'tcpSocket' in newcontainer[property] and not list(filter(lambda x: (x['name'] == "LISTEN_PORT"), newcontainer['env'])):
-          newcontainer['env'].append({'name': 'LISTEN_PORT', 'value': str(newcontainer[property]['tcpSocket']['port'])})
-
-    if 'volumeMounts' in container.keys():
-      for volumemount in container['volumeMounts']:
-        volumeref = resourceref('volume', volumemount['name'])
-        mountpath = "/tmp/" + str(uuid.uuid4())
-        newvolumemount = {'mountPath': mountpath, 'name': volumeref}
-
-        if 'readOnly' in volumemount and volumemount['readOnly'] == True:
-          newvolumemount['readOnly'] = True
-
-        newcontainer['volumeMounts'].append(newvolumemount)
-    
-    newdeployment['spec']['template']['spec']['containers'].append(newcontainer)
+      newdeployment['spec']['template']['spec']['containers'].append(newcontainer)
 
   resources['deployment'].append(newdeployment)
 
