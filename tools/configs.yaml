@@ -11,7 +11,6 @@ deployments:
     pods:
       - name: pod_stress
         repeat: 3
-        image: quay.io/rh_ee_apalanis/fedora-stress-ng
         env:
           - name: stress_cpu
             value: '4'
@@ -19,22 +18,7 @@ deployments:
             value: '4'
           - name: stress_vm-bytes
             value: '256M'
-
-
-  # - pods:
-  #     - name: container2
-  #       image: quay.io/rh_ee_apalanis/fedora-stress-ng
-  #       env:
-  #         - name: stress_cpu
-  #           value: '4'
-  #         # - name: stress_icmp-flood
-  #         #   value: '4'  
-  #     - name: container3
-  #       image: quay.io/rh_ee_apalanis/fedora-stress-ng
-  #       env:
-  #         - name: stress_vm
-  #           value: '4'
-  #         - name: stress_vm-bytes
-  #           value: '256M'
-  #         # - name: stress_ping-sock
-  #         #   value: '4'
+          # - name: stress_icmp-flood
+          #   value: '4'  
+          # - name: stress_ping-sock
+          #   value: '4'
