@@ -16,7 +16,7 @@ argparser.add_argument('--prefix', '-p', required=False,
                        default='edu',
                        help='Prefix to prepend to all resources')
 argparser.add_argument('--config', '-c', required=False,
-                       default='tools/du_configs.yaml',
+                       default='tools/configs.yaml',
                        help='Config yaml with pod specs')
 args = argparser.parse_args()
 
@@ -115,31 +115,30 @@ def resourceref(resourcetype, resourcename):
   return maps[resourcetype]['resources'][resourcename]
 
 
-deployments = 1
-
-
 du_specs = None
 with open(args.config,"r") as fstream:
   du_specs=yaml.safe_load(fstream)
 print(du_specs)
 
-volumes = du_specs['volumes']
-containers = du_specs['containers']
+deployments = du_specs['deployments']
                
 # Create namespace
 namespaceref = resourceref('namespace', 'default-namespace')
 newnamespace = copy.deepcopy(templates['namespace'])
 newnamespace['metadata']['name'] = namespaceref
 resources['namespace'].append(newnamespace)
-
-for i in range(deployments):
-
-  deploymentref = resourceref('deployment', 'deployment-'+str(i))
+d=0
+for deployment in deployments:
+  d+=1
+  deploymentref = resourceref('deployment', 'deployment-'+str(d))
   newdeployment = copy.deepcopy(templates['deployment'])
   newdeployment['metadata'] = {'name': deploymentref, 'namespace': namespaceref, 
                                'labels': {'app': deploymentref}}
   newdeployment['spec']['template']['metadata']['labels'] = {'app': deploymentref}
   newdeployment['spec']['selector']['matchLabels'] = {'app': deploymentref}
+
+  volumes = deployment['volumes']
+  containers = deployment['containers']
 
   for volume in volumes:
     volumeref = resourceref('volume', volume['name'])
@@ -219,7 +218,7 @@ for i in range(deployments):
 
   resources['deployment'].append(newdeployment)
 
-print(resources)
+print(resources['deployment'])
 if not os.path.isdir(args.destdir):
   os.mkdir(args.destdir)
 
