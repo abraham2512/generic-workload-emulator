@@ -138,8 +138,8 @@ for deployment in deployments:
   newdeployment['spec']['template']['metadata']['labels'] = {'app': deploymentref}
   newdeployment['spec']['selector']['matchLabels'] = {'app': deploymentref}
 
-  volumes = deployment['volumes']
-  pods = deployment['pods']
+  volumes = deployment.get('volumes',None)
+  pods = deployment.get('pods',None)
   containers = []
   for pod in pods:
     n = pod.pop('name')
@@ -149,82 +149,82 @@ for deployment in deployments:
       newcontainer = copy.deepcopy(pod)
       newcontainer['name'] = '_'.join([n,str(i)])
       containers.append(newcontainer)
- 
-  for volume in volumes:
-    volumeref = resourceref('volume', volume['name'])
-    newvolume = copy.deepcopy(templates['volume'])
-    newvolume['name'] = volumeref
+  if volumes:
+    for volume in volumes:
+      volumeref = resourceref('volume', volume['name'])
+      newvolume = copy.deepcopy(templates['volume'])
+      newvolume['name'] = volumeref
 
-    if 'configMap' in volume:
-      for i in range(volume['configMap']):
-        configmapref = resourceref('configmap', 'configMap-'+str(i))
-        newconfigmap = copy.deepcopy(templates['configmap'])
-        newconfigmap['metadata']['name'] = configmapref
-        newconfigmap['metadata']['namespace'] = namespaceref
-        resources['configmap'].append(newconfigmap)
+      if 'configMap' in volume:
+        for i in range(volume['configMap']):
+          configmapref = resourceref('configmap', 'configMap-'+str(i))
+          newconfigmap = copy.deepcopy(templates['configmap'])
+          newconfigmap['metadata']['name'] = configmapref
+          newconfigmap['metadata']['namespace'] = namespaceref
+          resources['configmap'].append(newconfigmap)
 
-        newvolume['configMap'] = {'name': configmapref}
+          newvolume['configMap'] = {'name': configmapref}
 
-    elif 'secret' in volume:
-      for i in range(volume['secret']):
-        secretref = resourceref('secret', 'secret-'+str(i))
-        newsecret = copy.deepcopy(templates['secret'])
-        newsecret['metadata']['name'] = secretref
-        newsecret['metadata']['namespace'] = namespaceref
-        resources['secret'].append(newsecret)
+      elif 'secret' in volume:
+        for i in range(volume['secret']):
+          secretref = resourceref('secret', 'secret-'+str(i))
+          newsecret = copy.deepcopy(templates['secret'])
+          newsecret['metadata']['name'] = secretref
+          newsecret['metadata']['namespace'] = namespaceref
+          resources['secret'].append(newsecret)
 
-        newvolume['secret'] = {'secretName': secretref}
+          newvolume['secret'] = {'secretName': secretref}
 
-    elif 'persistentVolumeClaim' in volume:
-      for i in range(volume['persistentVolumeClaim']):
-        pvcref = resourceref('pvc', 'persistentVolumeClaim'+str(i))
-        newpvc = copy.deepcopy(templates['pvc'])
-        newpvc['metadata']['name'] = pvcref
-        newpvc['metadata']['namespace'] = namespaceref
-        resources['pvc'].append(newpvc)
+      elif 'persistentVolumeClaim' in volume:
+        for i in range(volume['persistentVolumeClaim']):
+          pvcref = resourceref('pvc', 'persistentVolumeClaim'+str(i))
+          newpvc = copy.deepcopy(templates['pvc'])
+          newpvc['metadata']['name'] = pvcref
+          newpvc['metadata']['namespace'] = namespaceref
+          resources['pvc'].append(newpvc)
 
-        newvolume['persistentVolumeClaim'] = {'claimName': pvcref}
-    
-    elif 'emptyDir' in volume:
-      newvolume['emptyDir'] = volume['emptyDir']
-
-    newdeployment['spec']['template']['spec']['volumes'].append(newvolume)
-
-  for container in containers:
-      containerref = resourceref('container', '_'.join(['default', container['name']]))
-      newcontainer = copy.deepcopy(templates['container'])
-      newcontainer['name'] = containerref
-      newcontainer['imagePullPolicy'] = 'Always'
-      newcontainer['env'] = container['env']
-        
-      for property in ['ports', 'resources', 'securityContext']:
-        if property in container:
-          newcontainer[property] = container[property]
-
-      for property in ['livenessProbe', 'readinessProbe', 'startupProbe']:
-        if property in container:
-          newcontainer[property] = container[property]
-
-          if 'exec' in newcontainer[property]:
-              newcontainer[property]['exec']['command'] = ['ls']
-          elif 'httpGet' in newcontainer[property] and not list(filter(lambda x: (x['name'] == "LISTEN_PORT"), newcontainer['env'])):
-            newcontainer['env'].append({'name': 'LISTEN_PORT', 'value': str(newcontainer[property]['httpGet']['port'])})
-            newcontainer['env'].append({'name': 'LISTEN', 'value': '1'})
-          elif 'tcpSocket' in newcontainer[property] and not list(filter(lambda x: (x['name'] == "LISTEN_PORT"), newcontainer['env'])):
-            newcontainer['env'].append({'name': 'LISTEN_PORT', 'value': str(newcontainer[property]['tcpSocket']['port'])})
-
-      if 'volumeMounts' in container.keys():
-        for volumemount in container['volumeMounts']:
-          volumeref = resourceref('volume', volumemount['name'])
-          mountpath = "/tmp/" + str(uuid.uuid4())
-          newvolumemount = {'mountPath': mountpath, 'name': volumeref}
-
-          if 'readOnly' in volumemount and volumemount['readOnly'] == True:
-            newvolumemount['readOnly'] = True
-
-          newcontainer['volumeMounts'].append(newvolumemount)
+          newvolume['persistentVolumeClaim'] = {'claimName': pvcref}
       
-      newdeployment['spec']['template']['spec']['containers'].append(newcontainer)
+      elif 'emptyDir' in volume:
+        newvolume['emptyDir'] = volume['emptyDir']
+
+      newdeployment['spec']['template']['spec']['volumes'].append(newvolume)
+  if containers:
+    for container in containers:
+        containerref = resourceref('container', '_'.join(['default', container['name']]))
+        newcontainer = copy.deepcopy(templates['container'])
+        newcontainer['name'] = containerref
+        newcontainer['imagePullPolicy'] = 'Always'
+        newcontainer['env'] = container['env']
+          
+        for property in ['ports', 'resources', 'securityContext']:
+          if property in container:
+            newcontainer[property] = container[property]
+
+        for property in ['livenessProbe', 'readinessProbe', 'startupProbe']:
+          if property in container:
+            newcontainer[property] = container[property]
+
+            if 'exec' in newcontainer[property]:
+                newcontainer[property]['exec']['command'] = ['ls']
+            elif 'httpGet' in newcontainer[property] and not list(filter(lambda x: (x['name'] == "LISTEN_PORT"), newcontainer['env'])):
+              newcontainer['env'].append({'name': 'LISTEN_PORT', 'value': str(newcontainer[property]['httpGet']['port'])})
+              newcontainer['env'].append({'name': 'LISTEN', 'value': '1'})
+            elif 'tcpSocket' in newcontainer[property] and not list(filter(lambda x: (x['name'] == "LISTEN_PORT"), newcontainer['env'])):
+              newcontainer['env'].append({'name': 'LISTEN_PORT', 'value': str(newcontainer[property]['tcpSocket']['port'])})
+
+        if 'volumeMounts' in container.keys():
+          for volumemount in container['volumeMounts']:
+            volumeref = resourceref('volume', volumemount['name'])
+            mountpath = "/tmp/" + str(uuid.uuid4())
+            newvolumemount = {'mountPath': mountpath, 'name': volumeref}
+
+            if 'readOnly' in volumemount and volumemount['readOnly'] == True:
+              newvolumemount['readOnly'] = True
+
+            newcontainer['volumeMounts'].append(newvolumemount)
+        
+        newdeployment['spec']['template']['spec']['containers'].append(newcontainer)
 
   resources['deployment'].append(newdeployment)
 
