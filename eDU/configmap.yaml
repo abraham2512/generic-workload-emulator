@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  property1: value1
+  property2: value2
+  property3: value3
+kind: ConfigMap
+metadata:
+  name: edu-configmap-0
+  namespace: edu-namespace-0
