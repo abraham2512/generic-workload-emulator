@@ -21,7 +21,8 @@ A synthetic workload generator intended to emulate a RAN vDU implementation on O
 
 - **tools**
 
-  Ancillary support utilities
+  Python script to generate eDU manifests
+  Config yaml to describe the eDU
 
 ## Usage
 
