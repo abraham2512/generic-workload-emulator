@@ -3,8 +3,8 @@
   tasks:
     - name: Print KubeConfig
       debug:
-        msg: "Value of kubeconfig {{ kubeconfig }}"
+        msg: "Value of kubeconfig {{ kubeconfig_path }}"
     - include_role:
         name: setup_edu
       vars:
-        kubeconfig_path: "{{ kubeconfig }}"
+        kubeconfig_path: "{{ kubeconfig_path }}"
