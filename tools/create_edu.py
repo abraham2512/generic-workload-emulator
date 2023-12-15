@@ -10,7 +10,7 @@ argparser = argparse.ArgumentParser(description='Create eDU manifests')
 argparser.add_argument('--destdir', '-d', required=True,
                        help='Directory to output eDU manifests')
 argparser.add_argument('--image', '-i', required=False,
-                       default='quay.io/rh_ee_apalanis/fedora-stress-ng',
+                       default='ghcr.io/abraham2512/fedora-stress-ng',
                        help='Container image to substitute in eDU manifests')
 argparser.add_argument('--prefix', '-p', required=False,
                        default='edu',
