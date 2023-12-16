@@ -34,7 +34,7 @@ deployments:
           - name: stress_vm
             value: '4'
           - name: stress_vm-bytes
-            value: '1024M'
+            value: '128M'
         livenessProbe:
           httpGet:
             path: /healthz
