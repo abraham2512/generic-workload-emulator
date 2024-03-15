@@ -253,10 +253,10 @@ for resourcetype in resources.keys():
     yamlout.close()
 
 # ansible role expects j2..? Yes it replaces spammer envs
-os.rename(
-    os.path.join(
-        args.destdir,
-        "deployment.yaml"),
-    os.path.join(
-        args.destdir,
-        "deployment.yaml.j2"))
+# os.rename(
+#     os.path.join(
+#         args.destdir,
+#         "deployment.yaml"),
+#     os.path.join(
+#         args.destdir,
+#         "deployment.yaml.j2"))

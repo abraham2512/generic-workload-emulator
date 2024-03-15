@@ -46,11 +46,11 @@
         state: directory
       register: temp_dir
 
-    - name: create file out of every jinja2 template
-      template:
-        src: "{{ item }}"
-        dest: "{{ temp_dir.path }}/{{ item | basename | regex_replace('.j2$','') }}"
-      with_fileglob: "{{ templates_path }}/*.j2"
+    # - name: create file out of every jinja2 template
+    #   template:
+    #     src: "{{ item }}"
+    #     dest: "{{ temp_dir.path }}/{{ item | basename | regex_replace('.j2$','') }}"
+    #   with_fileglob: "{{ templates_path }}/*.j2"
 
     - name: Create templated resources
       ansible.builtin.k8s:
@@ -67,7 +67,7 @@
       when: temp_dir.path is defined
 
 - name: Wait for all pods to come up
-  when: 
+  when:
     - setup_edu_ansible_verification is defined
     - setup_edu_ansible_verification == true
   block:
@@ -90,7 +90,7 @@
       ansible.builtin.command:
         cmd: "oc --kubeconfig {{ kubeconfig_path }} describe pods -n {{ namespace }}"
       register: pod_details
-    
+
     - name: Pod statuses
       ansible.builtin.debug:
         var: pod_status
@@ -106,6 +106,6 @@
         msg: |
           Workload has not come up correctly:
             {{ pod_status.stdout }}
-      when: 
+      when:
         - debug_mode is defined
         - debug_mode == true
