@@ -1,10 +1,10 @@
 - name: Install eDU
-  hosts: localhost
+  hosts: cluster
   tasks:
     - name: Print KubeConfig
       debug:
-        msg: "Value of kubeconfig {{ kubeconfig_path }}"
+        msg: "Value of kubeconfig {{ kubeconfig }}"
     - include_role:
         name: setup_edu
       vars:
-        kubeconfig_path: "{{ kubeconfig_path }}"
+        kubeconfig_path: "{{ kubeconfig }}"

@@ -1,8 +1,8 @@
 - name: Undeploy eDU
-  hosts: localhost
+  hosts: cluster
   tasks:
 
     - include_role:
         name: teardown_edu
       vars:
-          kubeconfig_path: "{{ hostvars['cluster'].kubeconfig_path }}"
+          kubeconfig_path: "{{ kubeconfig }}"
