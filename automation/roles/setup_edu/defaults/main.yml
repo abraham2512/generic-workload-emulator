@@ -1,9 +1,9 @@
 namespace: edu-namespace-0
 debug_mode: false
 setup_edu_ansible_verification: true
-spammer_per_mem_default: 50
-spammer_num_threads_default: 4
-spammer_per_cpu_default: 2
+# spammer_per_mem_default: 50
+# spammer_num_threads_default: 4
+# spammer_per_cpu_default: 2
 
 ## Networking
 networking:
@@ -62,4 +62,4 @@ pvs:
   - "pv.yaml"
 pvcs:
   - "pvc.yaml"
-deployments: "deployment.yaml.j2"
+deployments: "deployment.yaml"
