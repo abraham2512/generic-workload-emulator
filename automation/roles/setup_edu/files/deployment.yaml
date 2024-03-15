@@ -1,0 +1,137 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-0
+  name: edu-deployment-0
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-0
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-0
+    spec:
+      containers:
+      - env:
+        - name: stress_cpu
+          value: '4'
+        - name: LISTEN_PORT
+          value: '8080'
+        - name: LISTEN
+          value: '1'
+        image: ghcr.io/abraham2512/fedora-stress-ng:master
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+        name: edu-container-0
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
+          requests:
+            cpu: 1000m
+            memory: 1024Mi
+        volumeMounts: []
+      - env:
+        - name: stress_cpu
+          value: '4'
+        - name: LISTEN_PORT
+          value: '8080'
+        - name: LISTEN
+          value: '1'
+        image: ghcr.io/abraham2512/fedora-stress-ng:master
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+        name: edu-container-1
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
+          requests:
+            cpu: 1000m
+            memory: 1024Mi
+        volumeMounts: []
+      volumes:
+      - name: edu-volume-0
+        secret:
+          secretName: edu-secret-0
+      - configMap:
+          name: edu-configmap-0
+        name: edu-volume-1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: edu-deployment-1
+  name: edu-deployment-1
+  namespace: edu-namespace-0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: edu-deployment-1
+  template:
+    metadata:
+      labels:
+        app: edu-deployment-1
+    spec:
+      containers:
+      - env:
+        - name: stress_vm
+          value: '4'
+        - name: stress_vm-bytes
+          value: 128M
+        - name: LISTEN_PORT
+          value: '8080'
+        - name: LISTEN
+          value: '1'
+        image: ghcr.io/abraham2512/fedora-stress-ng:master
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+        name: edu-container-2
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
+          requests:
+            cpu: 1000m
+            memory: 1024Mi
+        volumeMounts: []
+      - env:
+        - name: stress_vm
+          value: '4'
+        - name: stress_vm-bytes
+          value: 128M
+        - name: LISTEN_PORT
+          value: '8080'
+        - name: LISTEN
+          value: '1'
+        image: ghcr.io/abraham2512/fedora-stress-ng:master
+        imagePullPolicy: Always
+        livenessProbe:
+          httpGet:
+            path: /healthz
+            port: 8080
+        name: edu-container-3
+        resources:
+          limits:
+            cpu: 1000m
+            memory: 1024Mi
+          requests:
+            cpu: 1000m
+            memory: 1024Mi
+        volumeMounts: []
+      volumes: []
