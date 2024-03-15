@@ -39,32 +39,41 @@
   loop_control:
     loop_var: pvc_file
 
-- name: Create all elements from Templates
-  block:
-    - name: Create temporary directory
-      tempfile:
-        state: directory
-      register: temp_dir
+- name: Create Deployments
+  ansible.builtin.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    state: present
+    src: "{{ files_path  }}/{{ dep_file }}"
+  loop: "{{ deployments }}"
+  loop_control:
+    loop_var: dep_file
 
-    # - name: create file out of every jinja2 template
-    #   template:
-    #     src: "{{ item }}"
-    #     dest: "{{ temp_dir.path }}/{{ item | basename | regex_replace('.j2$','') }}"
-    #   with_fileglob: "{{ templates_path }}/*.j2"
+# - name: Create all elements from Templates
+#   block:
+#     - name: Create temporary directory
+#       tempfile:
+#         state: directory
+#       register: temp_dir
 
-    - name: Create templated resources
-      ansible.builtin.k8s:
-        kubeconfig: "{{ kubeconfig_path }}"
-        state: present
-        src: "{{ item }}"
-      loop: "{{ lookup('fileglob', '{{ temp_dir.path }}/*', wantlist=True) }}"
+#     - name: create file out of every jinja2 template
+#       template:
+#         src: "{{ item }}"
+#         dest: "{{ temp_dir.path }}/{{ item | basename | regex_replace('.j2$','') }}"
+#       with_fileglob: "{{ templates_path }}/*.j2"
 
-  always:
-    - name: Remove the temporary directories
-      file:
-        path: "{{ temp_dir.path }}"
-        state: absent
-      when: temp_dir.path is defined
+#     - name: Create templated resources
+#       ansible.builtin.k8s:
+#         kubeconfig: "{{ kubeconfig_path }}"
+#         state: present
+#         src: "{{ item }}"
+#       loop: "{{ lookup('fileglob', '{{ temp_dir.path }}/*', wantlist=True) }}"
+
+#   always:
+#     - name: Remove the temporary directories
+#       file:
+#         path: "{{ temp_dir.path }}"
+#         state: absent
+#       when: temp_dir.path is defined
 
 - name: Wait for all pods to come up
   when:
