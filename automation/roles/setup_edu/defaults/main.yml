@@ -62,4 +62,5 @@ pvs:
   - "pv.yaml"
 pvcs:
   - "pvc.yaml"
-deployments: "deployment.yaml"
+deployments:
+  - "deployment.yaml"
