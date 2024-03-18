@@ -1,0 +1,31 @@
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: ztp-sriov-nw-du-fh
+  namespace: openshift-sriov-network-operator
+spec:
+  networkNamespace: test
+  resourceName: du_fh
+  vlan: 140
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: ztp-sriov-nw-du-mh
+  namespace: openshift-sriov-network-operator
+spec:
+  networkNamespace: test
+  resourceName: du_mh
+  vlan: 150
+---
+apiVersion: sriovnetwork.openshift.io/v1
+kind: SriovNetwork
+metadata:
+  name: ztp-sriov-net-f1
+  namespace: openshift-sriov-network-operator
+spec:
+  networkNamespace: test
+  resourceName: pci_sriov_net_f1
+  vlan: 160
+---

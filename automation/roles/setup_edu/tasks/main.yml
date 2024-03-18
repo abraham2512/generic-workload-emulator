@@ -24,6 +24,12 @@
   ansible.builtin.command:
     cmd: "oc --kubeconfig={{ kubeconfig_path }} adm policy add-scc-to-user privileged system:serviceaccount:test:mysvcacct"
 
+- name: Create Sriov networks
+  ansible.builtin.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    state: present
+    src: "{{ files_path }}/{{ sriov_networks }}"
+
 - name: Create Secrets
   ansible.builtin.k8s:
     kubeconfig: "{{ kubeconfig_path }}"

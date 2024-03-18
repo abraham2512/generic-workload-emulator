@@ -299,6 +299,6 @@ print(f"Directory '{SECRETS_SRC}' has been copied.")
 
 footprint_files = ['tools/pv.yaml', 'tools/pv1.yaml', 'tools/pv2.yaml',
                    'tools/pvc.yaml', 'tools/security.yaml',
-                   'tools/test-ns.yaml']
+                   'tools/test-ns.yaml', 'tools/sriov-networks.yaml']
 
 [shutil.copy(file, args.destdir) for file in footprint_files]

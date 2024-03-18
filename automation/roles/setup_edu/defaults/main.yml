@@ -55,6 +55,8 @@ networking:
 files_path: "{{ role_path }}/files"
 templates_path: "{{ role_path }}/templates"
 
+sriov_networks: sriov-networks.yaml
+
 namespaces:
   - "namespace.yaml"
   - "test-ns.yaml"
