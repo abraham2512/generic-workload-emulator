@@ -2,40 +2,59 @@
 - name: Remove entire eDU
   when: not remove_pods_only
   block:
-  - name: Remove entire {{ namespace }} namespace
-    ignore_errors: true
-    ansible.builtin.command:
-      cmd: "oc --kubeconfig={{ kubeconfig_path }} delete namespace {{ namespace }}"
+    - name: Remove entire {{ namespace }} namespace
+      ignore_errors: true
+      ansible.builtin.command:
+        cmd: "oc --kubeconfig={{ kubeconfig_path }} delete namespace {{ namespace }}"
 
-  - name: Wait for namespace to be terminated
-    ansible.builtin.k8s_info:
-      kubeconfig: "{{ kubeconfig_path }}"
-      kind: Namespace
-      name: "{{ namespace }}"
-    register: check_namespace
-    until: 
-      - check_namespace.resources is defined
-      - check_namespace.resources | length == 0
-    retries: 150
-    delay: 2
+    - name: Wait for namespace to be terminated
+      ansible.builtin.k8s_info:
+        kubeconfig: "{{ kubeconfig_path }}"
+        kind: Namespace
+        name: "{{ namespace }}"
+      register: check_namespace
+      until:
+        - check_namespace.resources is defined
+        - check_namespace.resources | length == 0
+      retries: 150
+      delay: 2
 
-- name: Remove eDU pods only
-  when: remove_pods_only | bool == true
+- name: Remove entire footprint
+  when: not remove_pods_only
   block:
-  - name: remove all Deployments
-    ansible.builtin.command:
-      cmd: "oc --kubeconfig={{ kubeconfig_path }} delete --all deployments --namespace {{ namespace }}"
+    - name: Remove entire {{ footprint }} namespace
+      ignore_errors: true
+      ansible.builtin.command:
+        cmd: "oc --kubeconfig={{ kubeconfig_path }} delete namespace {{ footprint }}"
 
-  - name: remove all StatefulSets
-    ansible.builtin.command:
-      cmd: "oc --kubeconfig={{ kubeconfig_path }} delete --all statefulsets --namespace {{ namespace }}"
+    - name: Wait for namespace to be terminated
+      ansible.builtin.k8s_info:
+        kubeconfig: "{{ kubeconfig_path }}"
+        kind: Namespace
+        name: "{{ footprint }}"
+      register: check_namespace
+      until:
+        - check_namespace.resources is defined
+        - check_namespace.resources | length == 0
+      retries: 150
+      delay: 2
+# - name: Remove eDU pods only
+#   when: remove_pods_only | bool == true
+#   block:
+#   - name: remove all Deployments
+#     ansible.builtin.command:
+#       cmd: "oc --kubeconfig={{ kubeconfig_path }} delete --all deployments --namespace {{ namespace }}"
 
-  - name: Wait for all pods to be terminated
-    k8s_info:
-      kubeconfig: "{{ kubeconfig_path }}"
-      kind: Pod
-      namespace: "{{ namespace }}"
-    register: check_pods
-    until: check_pods.resources | length == 0
-    retries: 150
-    delay: 2
+#   - name: remove all StatefulSets
+#     ansible.builtin.command:
+#       cmd: "oc --kubeconfig={{ kubeconfig_path }} delete --all statefulsets --namespace {{ namespace }}"
+
+#   - name: Wait for all pods to be terminated
+#     k8s_info:
+#       kubeconfig: "{{ kubeconfig_path }}"
+#       kind: Pod
+#       namespace: "{{ namespace }}"
+#     register: check_pods
+#     until: check_pods.resources | length == 0
+#     retries: 150
+#     delay: 2

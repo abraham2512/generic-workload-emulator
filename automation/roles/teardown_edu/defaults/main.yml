@@ -1,3 +1,4 @@
 namespace: edu-namespace-0
+footprint: test
 stop_execution_only: false
 remove_pods_only: false
