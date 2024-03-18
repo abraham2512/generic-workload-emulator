@@ -16,9 +16,13 @@
   ansible.builtin.command:
     cmd: "oc --kubeconfig={{ kubeconfig_path }} adm policy add-scc-to-user privileged system:serviceaccount:test:default"
 
-# - name: Create Secrets
-#   ansible.builtin.command:
-#     cmd: "oc --kubeconfig={{ kubeconfig_path }} create -f {{ files_path }}/{{ secrets }}"
+- name: Add serviceaccount
+  ansible.builtin.command:
+    cmd: "oc create serviceaccount mysvcacct -n test"
+
+- name: Add Privileges
+  ansible.builtin.command:
+    cmd: "oc adm policy add-scc-to-user privileged system:serviceaccount:test:mysvcacct"
 
 - name: Create Secrets
   ansible.builtin.k8s:
