@@ -1,0 +1,225 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test47-deployment
+  namespace: test
+  labels:
+    app: test47 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test47 
+  template:
+    metadata:
+      labels:
+        app: test47
+    spec: 
+      containers: 
+      - env:
+        - name: TZ
+          value: UTC
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: {{ registry_address }}:5000/test_images/spam_150_1_8001:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          tcpSocket:
+            port: 8001 
+          failureThreshold: 5 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: t47-1
+        readinessProbe:
+          tcpSocket:
+            port: 8001
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 15
+        resources:
+          limits:
+            cpu: 125m 
+            ephemeral-storage: 1Gi
+            memory: 400Mi
+          requests:
+            cpu: 100m
+            ephemeral-storage: 512Mi
+            memory: 200Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - KILL
+            - MKNOD
+          privileged: false
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /logs
+          name: log-shipper-storage-path
+        - mountPath: /run/secrets/proxy-srv-cert
+          name: proxy-server-certificates
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls  
+          failureThreshold: 10 
+          initialDelaySeconds: 20 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: t47-2
+        readinessProbe:
+          exec:
+            command:
+            - ls  
+          failureThreshold: 1 
+          initialDelaySeconds: 20 
+          periodSeconds: 3 
+          successThreshold: 2 
+          timeoutSeconds: 15
+        resources:
+          limits:
+            cpu: 125m 
+            ephemeral-storage: 1Gi
+            memory: 400Mi 
+          requests:
+            cpu: 100m
+            ephemeral-storage: 512Mi
+            memory: 200Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL 
+            - MKNOD
+          privileged: false
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: false
+        volumeMounts:
+        - mountPath: /logs
+          name: log-shipper-storage-path
+        - mountPath: /var/data
+          name: backupdir
+        - mountPath: /run/secrets/tls-int-ca-cert
+          name: trusted-ca
+          readOnly: true
+        - mountPath: /run/secrets/ldap-client-certificate
+          name: ldap-client-certificates
+        - mountPath: /run/secrets/br-agent-client-cert
+          name: br-agent-client-certificates
+      - env:
+        - name: MESSAGE_LEN
+          value: "240"
+        - name: LOG_PERIOD_SEC
+          value: "1/5"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+               fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/logging:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3 
+          initialDelaySeconds: 1 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 10 
+        name: sidecar-1 
+        resources:
+          limits:
+            cpu: 125m 
+            memory: 250Mi
+          requests:
+            cpu: 75m 
+            memory: 150Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL 
+            - MKNOD
+          privileged: false
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: true
+        volumeMounts: 
+        - mountPath: /logs
+          name: log-shipper-storage-path
+        - mountPath: /run/secrets/ca-certificates/
+          name: server-ca-certificate
+          readOnly: true
+        - mountPath: /run/secrets/certificates/
+          name: lt-client-cert
+          readOnly: true
+      volumes:
+      - emptyDir:
+          sizeLimit: 500Mi
+        name: log-shipper-storage-path
+      - name: server-ca-certificate
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s186-2 
+      - name: lt-client-cert
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s178-2
+      - emptyDir: {}
+        name: backupdir
+      - name: trusted-ca
+        secret:
+          defaultMode: 288
+          secretName: s186-2 
+      - name: ldap-client-certificates
+        secret:
+          defaultMode: 288
+          secretName: s177-2 
+      - name: br-agent-client-certificates
+        secret:
+          defaultMode: 288
+          secretName: s176-2 
+      - name: proxy-server-certificates
+        secret:
+          defaultMode: 288
+          secretName: s181-2 
+  

@@ -5,6 +5,9 @@ import os
 import copy
 import uuid
 import yaml
+from os import listdir
+import shutil
+from jinja2 import Environment, FileSystemLoader
 
 argparser = argparse.ArgumentParser(description='Create eDU manifests')
 argparser.add_argument('--destdir', '-d', required=True,
@@ -24,14 +27,14 @@ maps = {'configmap': {'iterator': 0, 'resources': {}},
         'container': {'iterator': 0, 'resources': {}},
         'deployment': {'iterator': 0, 'resources': {}},
         'namespace': {'iterator': 0, 'resources': {}},
-        'pvc': {'iterator': 0, 'resources': {}},
+        # 'pvc': {'iterator': 0, 'resources': {}},
         'secret': {'iterator': 0, 'resources': {}},
         'volume': {'iterator': 0, 'resources': {}}}
 
 resources = {'configmap': [],
              'namespace': [],
              'deployment': [],
-             'pvc': [],
+            #  'pvc': [],
              'secret': []}
 
 templates = {'configmap': {
@@ -252,11 +255,42 @@ for resourcetype in resources.keys():
         width=1000)
     yamlout.close()
 
-# ansible role expects j2..? Yes it replaces spammer envs
-# os.rename(
-#     os.path.join(
-#         args.destdir,
-#         "deployment.yaml"),
-#     os.path.join(
-#         args.destdir,
-#         "deployment.yaml.j2"))
+
+def generate_test_files(image_registry):
+    TEMPLATE_DIR = 'eDU/templates/'
+    TEMPLATE_SRC = 'tools/templates/'
+    SECRETS_DIR = 'eDU/secrets/'
+    SECRETS_SRC = 'tools/secrets'
+
+    if os.path.isdir(SECRETS_DIR):
+        shutil.rmtree(SECRETS_DIR)
+        print(f"Directory '{SECRETS_DIR}' has been deleted.")
+
+    shutil.copytree(SECRETS_SRC, SECRETS_DIR)
+    print(f"Directory '{SECRETS_SRC}' has been copied.")
+
+    if os.path.isdir(TEMPLATE_DIR):
+        shutil.rmtree(TEMPLATE_DIR)
+        print(f"Directory '{TEMPLATE_DIR}' has been deleted.")
+
+    shutil.copytree(TEMPLATE_SRC, TEMPLATE_DIR)
+    print(f"Directory '{TEMPLATE_SRC}' has been copied.")
+
+    template_filenames = listdir(TEMPLATE_DIR)
+    env = Environment(loader=FileSystemLoader(TEMPLATE_DIR))
+    try:
+        fec_accelerator = os.environ["FEC_ACCELERATOR"]
+    except KeyError:
+        fec_accelerator = 'none'
+
+    for template_file in template_filenames:
+        template = env.get_template(template_file)
+
+        content = template.render(registry_address=image_registry,
+                                  accelerator=fec_accelerator)
+
+        with open(TEMPLATE_DIR+template_file, mode='w', encoding='utf-8') as rendered_file:
+            rendered_file.write(content)
+
+
+generate_test_files('registry.testsno.com')

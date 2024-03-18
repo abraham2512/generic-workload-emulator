@@ -1,0 +1,18 @@
+apiVersion: "local.storage.openshift.io/v1"
+kind: "LocalVolume"
+metadata:
+  name: "local-disks1"
+  namespace: "openshift-local-storage"
+spec:
+  storageClassDevices:
+    - storageClassName: "local-sc1"
+      volumeMode: Filesystem
+      fstype: xfs
+      devicePaths:
+        - /dev/new_vol_group/vol21
+        - /dev/new_vol_group/vol22
+        - /dev/new_vol_group/vol23
+        - /dev/new_vol_group/vol24
+        - /dev/new_vol_group/vol25
+        - /dev/new_vol_group/vol26
+ 

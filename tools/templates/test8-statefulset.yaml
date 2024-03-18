@@ -1,0 +1,231 @@
+apiVersion: apps/v1
+kind: StatefulSet 
+metadata:
+  name: test8
+  namespace: test
+  labels:
+    app: test8 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test8 
+  template:
+    metadata:
+      labels:
+        app: test8
+    spec: 
+      containers: 
+      - env:
+        - name: TZ
+          value: UTC
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls 
+          failureThreshold: 3
+          initialDelaySeconds: 15 
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: t8-1
+        readinessProbe:
+          exec:
+            command:
+            - ls 
+          failureThreshold: 3
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 15
+        resources:
+          limits:
+            cpu: 157m 
+            memory: 300Mi 
+          requests:
+            cpu: 125m 
+            memory: 200Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - MKNOD
+              - all
+            privileged: false
+            readOnlyRootFilesystem: false
+            runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /logs
+          name: log-shipper-storage-path
+        - mountPath: /run/secrets/ca-certificates/
+          name: server-ca-certificate
+          readOnly: true
+        - mountPath: /run/secrets/certificates/
+          name: lt-client-cert
+          readOnly: true
+      - env:
+        - name: MESSAGE_LEN
+          value: "240"
+        - name: LOG_PERIOD_SEC
+          value: "1/5"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+               fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/logging:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: sidecar-1 
+        resources:
+          limits:
+            cpu: 125m
+            memory: 200Mi
+          requests:
+            cpu: 50m
+            memory: 150Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts: 
+        - mountPath: /data
+          name: data
+        - mountPath: /run/sec/certs/server/
+          name: server-cert
+        - mountPath: /run/sec/certs/peer
+          name: peer-client-cert
+        - mountPath: /run/sec/cas/bootstrap/
+          name: bootstrap-ca
+        - mountPath: /run/sec/cas/clientca/
+          name: client-ca
+        - mountPath: /run/sec/certs/client/
+          name: etcdctl-client-cert
+        - mountPath: /run/sec/certs/bro
+          name: etcd-bro-client-cert
+        - mountPath: /run/sec/cas/siptlsca/
+          name: siptls-ca
+        - mountPath: /run/sec/cas/pmca/
+          name: pmca
+        - mountPath: /logs
+          name: log-shipper-storage-path
+      initContainers:
+      - name: init
+        image: {{ registry_address }}:5000/ubi8/ubi
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 120m
+            memory: 125Mi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /sharedData
+          name: data
+        - mountPath: /logs
+          name: log-shipper-storage-path
+        - mountPath: /run/sec/certs/server/
+          name: server-cert
+        - mountPath: /run/sec/certs/peer
+          name: peer-client-cert
+        - mountPath: /run/sec/cas/bootstrap/
+          name: bootstrap-ca
+        - mountPath: /run/sec/cas/clientca/
+          name: client-ca
+        - mountPath: /run/sec/certs/client/
+          name: etcdctl-client-cert
+        - mountPath: /run/sec/certs/bro
+          name: etcd-bro-client-cert
+        - mountPath: /run/sec/cas/siptlsca/
+          name: siptls-ca
+        - mountPath: /run/sec/cas/pmca/
+          name: pmca
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: datadir-data-1
+      - emptyDir:
+          sizeLimit: 500Mi
+        name: log-shipper-storage-path
+      - name: server-ca-certificate
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s186-2 
+      - name: lt-client-cert
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s33-2 
+      - name: siptls-ca
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s186-2 
+      - name: bootstrap-ca
+        secret:
+          defaultMode: 420
+          optional: true
+#fix me
+          secretName: s185-2 
+      - name: client-ca
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s6-1 
+      - name: server-cert
+        secret:
+          defaultMode: 420
+          secretName: s30-2
+      - name: peer-client-cert
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s34-2
+      - name: etcdctl-client-cert
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s32-2 
+      - name: pmca
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s20-1
+      - name: etcd-bro-client-cert
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s31-2
+

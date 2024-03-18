@@ -1,0 +1,174 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test4-deployment
+  namespace: test
+  labels:
+    app: test4 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test4 
+  template:
+    metadata:
+      labels:
+        app: test4
+    spec: 
+      containers: 
+      - env:
+        - name: SERVICE_NAME
+          value: t4 
+        - name: CONTAINER_NAME
+          value: t4 
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls 
+          failureThreshold: 3
+          initialDelaySeconds: 7
+          periodSeconds: 17
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: t4
+        resources:
+          limits:
+            cpu: 200m 
+            memory: 512Mi
+            ephemeral-storage: 250Mi 
+          requests:
+            cpu: 160m
+            memory: 256Mi
+            ephemeral-storage: 200Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - KILL
+              - MKNOD
+              - SETGID
+              - SETUID
+              - all
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /service
+          name: service-volume
+        - mountPath: /tmp
+          name: tmp-volume
+        - mountPath: /etc/sip-tls
+          name: tls-server-cert-volumemount
+          readOnly: true
+        - mountPath: /etc/sip-tls-ca
+          name: tls-trusted-ca-cert-volumemount
+          readOnly: true
+        - mountPath: /etc/sip-tls-client-ca
+          name: tls-client-ca-cert-volumemount
+          readOnly: true
+        - mountPath: /etc/sip-tls-client
+          name: tls-client-cert-volumemount
+          readOnly: true
+        - mountPath: /etc/sip-tls-document-db-client
+          name: tls-document-db-client-cert-volumemount
+          readOnly: true
+        - mountPath: /etc/sip-tls-pm-client-ca
+          name: tls-pm-client-ca-cert-volumemount
+          readOnly: true
+        - mountPath: /etc/sip-tls-cm-backend-client
+          name: tls-cm-backend-client-cert-volumemount
+      initContainers:
+      - env:
+        - name: TZ
+          value: UTC
+        image: {{ registry_address }}:5000/ubi8/ubi
+        imagePullPolicy: IfNotPresent
+        name: t4-init-container
+        resources:
+          limits:
+            cpu: 100m
+            ephemeral-storage: 10Mi
+            memory: 32Mi
+          requests:
+            cpu: 50m
+            ephemeral-storage: 10Mi
+            memory: 16Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - KILL
+            - MKNOD
+            - SETGID
+            - SETUID
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp-volume
+      volumes:
+      - emptyDir: {}
+        name: service-volume
+      - emptyDir:
+          medium: Memory
+        name: tmp-volume
+      - name: tls-server-cert-volumemount
+        secret:
+          defaultMode: 420
+          secretName: s8-2 
+      - name: tls-trusted-ca-cert-volumemount
+        secret:
+          defaultMode: 420
+          secretName: s186-2 
+      - name: tls-client-ca-cert-volumemount
+        secret:
+          defaultMode: 420
+          secretName: s2-1 
+      - name: tls-client-cert-volumemount
+        secret:
+          defaultMode: 420
+          secretName: s7-2 
+      - name: tls-document-db-client-cert-volumemount
+        secret:
+          defaultMode: 420
+          secretName: s5-2 
+      - name: tls-document-db-admin-cert-volumemount
+        secret:
+          defaultMode: 420
+          secretName: s4-2 
+      - name: tls-pm-client-ca-cert-volumemount
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s20-1 
+      - name: tls-cm-backend-client-cert-volumemount
+        secret:
+          defaultMode: 420
+          secretName: s3-2 
+ 

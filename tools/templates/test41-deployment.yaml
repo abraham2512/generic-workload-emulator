@@ -1,0 +1,180 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test41-deployment
+  namespace: test
+  labels:
+    app: test41 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test41 
+  template:
+    metadata:
+      labels:
+        app: test41
+    spec: 
+      containers: 
+      - env:
+        - name: TZ
+          value: UTC
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: {{ registry_address }}:5000/test_images/spam_150_1_8001:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8001
+          failureThreshold: 3
+          initialDelaySeconds: 900 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: t41-1
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8001
+          failureThreshold: 3
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1" 
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /tmp/cores
+          name: shared-cores
+        - mountPath: /etc/certs/fm
+          name: fm-certs
+          readOnly: true
+        - mountPath: /etc/certs/redis
+          name: redis-certs
+          readOnly: true
+        - mountPath: /etc/certs/cmbackend
+          name: cmbackend-certs
+          readOnly: true
+        - mountPath: /etc/certs/cmtransformation
+          name: cmtransformation-certs
+          readOnly: true
+        - mountPath: /etc/certs/cmyangprovider
+          name: cmyangprovider-certs
+          readOnly: true
+        - mountPath: /etc/certs/lt
+          name: lt-certs
+          readOnly: true
+        - mountPath: /etc/certs/ca
+          name: ca
+          readOnly: true
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/spam_150_2_8002:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          tcpSocket:
+            port: 8002
+          failureThreshold: 6 
+          initialDelaySeconds: 5 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 7 
+        name: t41-2
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+             - MKNOD
+             - all
+          privileged: false
+          readOnlyRootFilesystem: true 
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /tmp/cores
+          name: shared-cores
+        - mountPath: /data
+          name: data
+      volumes:
+      - emptyDir: {}
+        name: shared-cores
+      - name: data
+        persistentVolumeClaim:
+          claimName: datadir-data-7
+      - name: fm-certs
+        secret:
+          defaultMode: 420
+          secretName: s155-2 
+      - name: lt-certs
+        secret:
+          defaultMode: 420
+          secretName: s156-2 
+      - name: redis-certs
+        secret:
+          defaultMode: 420
+          secretName: s157-2 
+      - name: cmbackend-certs
+        secret:
+          defaultMode: 420
+          secretName: s152-2 
+      - name: cmtransformation-certs
+        secret:
+          defaultMode: 420
+          secretName: s153-2 
+      - name: cmyangprovider-certs
+        secret:
+          defaultMode: 420
+          secretName: s154-2
+      - name: ca
+        secret:
+          defaultMode: 420
+          secretName: s186-2 
+
+

@@ -4,6 +4,9 @@
     kubeconfig: "{{ kubeconfig_path }}"
     state: present
     src: "{{ files_path }}/{{ ns }}"
+  loop: "{{ namespaces }}"
+  loop_control:
+    loop_var: ns
 
 - name: Change security pods
   ansible.builtin.command:
@@ -13,9 +16,18 @@
   ansible.builtin.command:
     cmd: "oc --kubeconfig={{ kubeconfig_path }} adm policy add-scc-to-user privileged system:serviceaccount:test:default"
 
+# - name: Create Secrets
+#   ansible.builtin.command:
+#     cmd: "oc --kubeconfig={{ kubeconfig_path }} create -f {{ files_path }}/{{ secrets }}"
+
 - name: Create Secrets
-  ansible.builtin.command:
-    cmd: "oc --kubeconfig={{ kubeconfig_path }} create -f {{ files_path }}/{{ secrets }}"
+  ansible.builtin.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
+    state: present
+    src: "{{ files_path }}/{{ secret_file }}"
+  loop: "{{ secrets }}"
+  loop_control:
+    loop_var: secret_file
 
 - name: Create ConfigMaps
   ansible.builtin.command:

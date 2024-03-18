@@ -1,0 +1,444 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test38-deployment
+  namespace: test
+  labels:
+    app: test38 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test38 
+  template:
+    metadata:
+      labels:
+        app: test38
+    spec: 
+      containers: 
+      - env:
+        - name: TZ
+          value: UTC
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls  
+          failureThreshold: 3
+          initialDelaySeconds: 30 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: t38-1
+        resources:
+          limits:
+            cpu: "2" 
+            memory: 512Mi
+          requests:
+            cpu: "1" 
+            memory: 512Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+            - MKNOD
+          privileged: false
+          readOnlyRootFilesystem: true 
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /dev/shm
+          name: dshm
+        - mountPath: /var/log
+          name: var-log
+        - mountPath: /var/pmd
+          name: var-pmd
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /tmp/cores
+          name: shared-cores
+        - mountPath: /var/run/lttng
+          name: lttng-unix-socket
+        - mountPath: /tmp/lttng
+          name: lttng-runtime
+        - mountPath: /mnt/lttng
+          name: shared-pid-file
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3 
+          initialDelaySeconds: 30 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: t38-2
+        resources:
+          limits:
+            cpu: "2" 
+            memory: 512Mi 
+          requests:
+            cpu: "1" 
+            memory: 512Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+             - MKNOD
+             - all
+          privileged: false
+          readOnlyRootFilesystem: true 
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /dev/shm
+          name: dshm
+        - mountPath: /var/log
+          name: var-log
+        - mountPath: /var/pmd
+          name: var-pmd
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /tmp/cores
+          name: shared-cores
+        - mountPath: /var/run/lttng
+          name: lttng-unix-socket
+        - mountPath: /tmp/lttng
+          name: lttng-runtime
+        - mountPath: /mnt/lttng
+          name: shared-pid-file
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: t38-3
+        resources:
+          limits:
+            cpu: "2"
+            memory: 512Mi
+          requests:
+            cpu: 100m 
+            memory: 512Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+             - ALL 
+             - MKNOD
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /dev/shm
+          name: dshm
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /tmp/cores
+          name: shared-cores
+        - mountPath: /var/run/lttng
+          name: lttng-unix-socket
+        - mountPath: /tmp/lttng
+          name: lttng-runtime
+        - mountPath: /mnt/lttng
+          name: shared-pid-file
+        - mountPath: /etc/certs/ca
+          name: root-ca
+          readOnly: true
+        - mountPath: /etc/certs/cm
+          name: cm-cert
+          readOnly: true
+        - mountPath: /etc/certs/cmtransformation
+          name: cmtransformation-certs
+          readOnly: true
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/spam_150_1_8001:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          tcpSocket:
+            port: 8001
+          failureThreshold: 6 
+          initialDelaySeconds: 5 
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 7 
+        name: t38-4
+        resources:
+          limits:
+            cpu: "2"
+            memory: 512Mi
+          requests:
+            cpu: 100m 
+            memory: 512Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+             - MKNOD
+             - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        volumeMounts: 
+        - mountPath: /dev/shm
+          name: dshm
+        - mountPath: /tmp
+          name: tmp
+        - mountPath: /tmp/cores
+          name: shared-cores
+        - mountPath: /var/run/lttng
+          name: lttng-unix-socket
+        - mountPath: /tmp/lttng
+          name: lttng-runtime
+        - mountPath: /mnt/lttng
+          name: shared-pid-file
+        - mountPath: /etc/certs/pm-adapter/server/ca
+          name: pm-adapter-server-ca
+        - mountPath: /etc/certs/pm-adapter/server
+          name: pm-adapter-server-cert
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3 
+          initialDelaySeconds: 30 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 1 
+        name: t38-5
+        resources:
+          limits:
+            cpu: "2"
+            memory: 512Mi
+          requests:
+            cpu: 100m 
+            memory: 512Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+             - ALL
+             - MKNOD
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /tmp/cores
+          name: shared-cores
+        - mountPath: /data 
+          name: data 
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 5 
+          initialDelaySeconds: 5
+          periodSeconds: 20 
+          successThreshold: 1
+          timeoutSeconds: 5 
+        name: t38-6
+        resources:
+          limits:
+            cpu: "2"
+            memory: 384Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+             - ALL
+             - MKNOD
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /var/run/lttng
+          name: lttng-unix-socket
+        - mountPath: /tmp/lttng
+          name: lttng-runtime
+        - mountPath: /dev/shmem
+          name: shmem
+        - mountPath: /mnt/lttng
+          name: shared-pid-file
+        - mountPath: /data
+          name: data
+      - env:
+        - name: MESSAGE_LEN
+          value: "240"
+        - name: LOG_PERIOD_SEC
+          value: "1/5"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+               fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/logging:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 30 
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: sidecar-1 
+        resources:
+          limits:
+            cpu: 125m
+            memory: 50Mi
+          requests:
+            cpu: 35m
+            memory: 18Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+      volumes:
+      - emptyDir:
+          medium: Memory
+        name: dshm
+      - emptyDir: {}
+        name: var-log
+      - emptyDir: {}
+        name: var-pmd
+      - emptyDir: {}
+        name: tmp
+      - emptyDir: {}
+        name: lttng-unix-socket
+      - emptyDir: {}
+        name: lttng-runtime
+      - emptyDir: {}
+        name: shared-pid-file
+      - emptyDir: {}
+        name: shared-cores
+      - emptyDir: {}
+        name: shmem
+      - name: data
+        persistentVolumeClaim:
+          claimName: datadir-data-7
+      - name: root-ca
+        projected:
+          defaultMode: 420
+          sources:
+          - secret:
+              name: s186-2 
+      - name: cm-cert
+        secret:
+          defaultMode: 420
+          secretName: s143-2 
+      - name: cmtransformation-certs
+        secret:
+          defaultMode: 420
+          secretName: s144-2 
+      - name: pm-adapter-server-ca
+        secret:
+          defaultMode: 420
+          secretName: s20-1 
+      - name: pm-adapter-server-cert
+        secret:
+          defaultMode: 420
+          secretName: s146-2 

@@ -1,0 +1,120 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test18-deployment
+  namespace: test
+  labels:
+    app: test18 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test18 
+  template:
+    metadata:
+      labels:
+        app: test18
+    spec: 
+      containers: 
+      - env:
+        - name: SERVICE_NAME
+          value: t18 
+        - name: CONTAINER_NAME
+          value: t18 
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        image: {{ registry_address }}:5000/test_images/spam_150_1_8001:latest
+#        command: ["/bin/sh"]
+#        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+           path: /
+           port: 8001
+          periodSeconds: 40 
+          successThreshold: 1
+          timeoutSeconds: 30 
+        name: t18 
+        ports:
+        - containerPort: 8001
+        readinessProbe:
+          failureThreshold: 6
+          httpGet:
+            path: /
+            port: 8001 
+          periodSeconds: 40 
+          successThreshold: 1
+          timeoutSeconds: 30 
+        resources:
+          limits:
+            cpu: 125m 
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 64Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: true
+        volumeMounts: 
+        - mountPath: /etc/certs
+          name: certs
+          readOnly: true
+        - mountPath: /etc/cacerts
+          name: cacerts
+          readOnly: true
+        - mountPath: /etc/backendcerts
+          name: backendcerts
+          readOnly: true
+        - mountPath: /etc/cmyangcerts
+          name: cmyangcerts
+          readOnly: true
+        - mountPath: /etc/rootcerts
+          name: rootcerts
+          readOnly: true
+      volumes:
+      - name: certs
+        secret:
+        defaultMode: 416
+        secretName: s70-2 
+      - name: cacerts
+        secret:
+          defaultMode: 416
+          secretName: s12-1
+      - name: backendcerts
+        secret:
+          defaultMode: 416
+          secretName: s69-2 
+      - name: cmyangcerts
+        secret:
+          defaultMode: 416
+          secretName: s71-2 
+      - name: rootcerts
+        secret:
+          defaultMode: 416
+          secretName: s186-2 
+

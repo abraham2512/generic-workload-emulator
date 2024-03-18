@@ -1,0 +1,107 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test40-deployment
+  namespace: test
+  labels:
+    app: test40 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test40 
+  template:
+    metadata:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: '[{"name": "ztp-sriov-nw-du-mh", "namespace": "test" }, {"name": "ztp-sriov-net-f1", "namespace": "test" }]'
+      labels:
+        app: test40
+    spec: 
+      containers: 
+      - env:
+        - name: TZ
+          value: UTC
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        name: t40-1
+        resources:
+          limits:
+            cpu: "1" 
+            memory: 256Mi
+            openshift.io/du_mh: 1 
+            openshift.io/pci_sriov_net_f1: "1"
+          requests:
+            cpu: 100m
+            memory: 256Mi
+            openshift.io/du_mh: 1 
+            openshift.io/pci_sriov_net_f1: "1"
+        privileged: true
+        securityContext:
+          allowPrivilegeEscalation: true 
+          capabilities:
+#            add: 
+#            - NET_BIND_SERVICE
+            drop:
+            - MKNOD
+            - all
+          privileged: false 
+#fix me  
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: false
+      initContainers:  
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/ubi8/ubi
+        imagePullPolicy: IfNotPresent
+        name: t40-init
+        resources:
+          limits:
+            cpu: "1" 
+            memory: 256Mi
+          requests:
+            cpu: 300m
+            memory: 128Mi 
+        securityContext:
+          allowPrivilegeEscalation: true 
+          capabilities:
+#            add: 
+#            - NET_ADMIN
+            drop:
+             - MKNOD
+             - all
+#          privileged: false 
+# fix me 
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: false 
+

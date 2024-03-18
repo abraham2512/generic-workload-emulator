@@ -1,0 +1,333 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test28-deployment
+  namespace: test
+  labels:
+    app: test28 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test28 
+  template:
+    metadata:
+      labels:
+        app: test28
+    spec: 
+      containers: 
+      - env:
+        - name: MESSAGE_LEN
+          value: "240"
+        - name: LOG_PERIOD_SEC
+          value: "1/5"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+               fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/logging:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: sidecar-1 
+        resources:
+          limits:
+            cpu: 125m
+            memory: 100Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /logs
+          name: log-shipper-storage-path
+        - mountPath: /run/secrets/ca-certificates/
+          name: server-ca-certificate
+          readOnly: true
+        - mountPath: /run/secrets/certificates/
+          name: lt-client-cert
+          readOnly: true
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/spam_150_1_8001:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8001
+          failureThreshold: 3
+          initialDelaySeconds: 30 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 15 
+        name: t28-2
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8001
+          failureThreshold: 3 
+          initialDelaySeconds: 30 
+          periodSeconds: 10  
+          successThreshold: 1
+          timeoutSeconds: 30 
+        resources:
+          limits:
+            cpu: 344m
+            ephemeral-storage: 2Gi 
+            memory: 2Gi 
+          requests:
+            cpu: 275m
+            ephemeral-storage: 512Mi 
+            memory: 512Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - MKNOD
+              - all
+            privileged: false
+            readOnlyRootFilesystem: false 
+            runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /logs
+          name: log-shipper-storage-path
+        - mountPath: /data
+          name: data  
+        - mountPath: /run/secrets/pmca
+          name: pmca
+        - mountPath: /run/secrets/clicert
+          name: clicert
+        - mountPath: /run/secrets/pm-int-rw-ca
+          name: pm-int-rw-ca
+        - mountPath: /run/secrets/int-rw-clicert
+          name: int-rw-clicert
+        - mountPath: /run/secrets/cacert
+          name: cacert
+      - env:
+        - name: TZ
+          value: UTC
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command: 
+            - ls  
+          failureThreshold: 3 
+          initialDelaySeconds: 15
+          periodSeconds: 15 
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: t28-3
+        readinessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3 
+          initialDelaySeconds: 5  
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 15
+        resources:
+          limits:
+            cpu: 200m
+            ephemeral-storage: 500Mi 
+            memory: 128Mi
+          requests:
+            cpu: 160m
+            ephemeral-storage: 8Mi 
+            memory: 32Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true 
+          runAsNonRoot: true
+        volumeMounts:
+         - mountPath: /run/secrets/pmqryca
+           name: pmqryca
+         - mountPath: /logs
+           name: log-shipper-storage-path
+         - mountPath: /run/secrets/cert
+           name: cert
+      - env:
+        - name: TZ
+          value: UTC
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: {{ registry_address }}:5000/test_images/spam_150_2_8002:latest        
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 25m
+            ephemeral-storage: 500Mi
+            memory: 100Mi
+          requests:
+            cpu: 25m
+            ephemeral-storage: 8Mi
+            memory: 8Mi
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8002
+          failureThreshold: 3
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: t28-4
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8002
+          failureThreshold: 3
+          initialDelaySeconds: 15
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 15
+      - env:
+        - name: TZ
+          value: UTC
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        name: t28-5
+        resources:
+          limits:
+            cpu: 25m 
+            memory: 32Mi
+            ephemeral-storage: 500Mi
+          requests:
+            cpu: 25m
+            memory: 8Mi
+            ephemeral-storage: 8Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /logs
+          name: log-shipper-storage-path
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: datadir-data-9 
+      - emptyDir:
+          sizeLimit: 1Gi
+        name: log-shipper-storage-path
+      - name: server-ca-certificate
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s186-2 
+      - name: lt-client-cert
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s110-2
+      - name: pmca
+        secret:
+          defaultMode: 420
+          secretName: s20-1
+      - name: clicert
+        secret:
+          defaultMode: 420
+          secretName: s108-2 
+      - name: pm-int-rw-ca
+        secret:
+          defaultMode: 420
+          secretName: s21-1 
+      - name: int-rw-clicert
+        secret:
+          defaultMode: 420
+          secretName: s109-2 
+      - name: cacert
+        secret:
+          defaultMode: 420
+          secretName: s186-2
+      - name: cert
+        secret:
+          defaultMode: 420
+          secretName: s107-2 
+      - name: pme-cert
+        secret:
+          defaultMode: 420
+          secretName: s111-2
+      - name: pmqryca
+        secret:
+          defaultMode: 420
+          secretName: s22-1
+
+      

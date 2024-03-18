@@ -1,0 +1,120 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test21-deployment
+  namespace: test
+  labels:
+    app: test21 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test21 
+  template:
+    metadata:
+      labels:
+        app: test21
+    spec: 
+      containers: 
+      - env:
+        - name: SERVICE_NAME
+          value: t21 
+        - name: CONTAINER_NAME
+          value: t21 
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        image: {{ registry_address }}:5000/test_images/spam_150_1_8001:latest 
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+           path: /
+           port: 8001
+          initialDelaySeconds: 5
+          periodSeconds: 30 
+          successThreshold: 1
+          timeoutSeconds: 20 
+        name: t21 
+        ports:
+        - containerPort: 8001
+        readinessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /
+            port: 8001 
+          initialDelaySeconds: 5
+          periodSeconds: 30 
+          successThreshold: 1
+          timeoutSeconds: 20 
+        resources:
+          limits:
+            cpu: 100m 
+            memory: 128Mi
+            ephemeral-storage: 4608Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+            ephemeral-storage: 100Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - ALL
+            - KILL
+            - MKNOD
+            - SETGID
+            - SETUID
+          privileged: false
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /etc/certs/secrets/rest-api/server
+          name: rest-api-server-cert
+        - mountPath: /etc/certs/secrets/rest-api/ca
+          name: event-exporter-client-ca
+        - mountPath: /etc/certs/secrets/rest-api/client
+          name: rest-api-client-cert
+        - mountPath: /etc/certs/secrets/sip-tls/ca
+          name: sip-tls-root-ca
+        - mountPath: /etc/certs/secrets/kafka/client
+          name: kafka-client-cert
+      volumes:
+      - name: kafka-client-cert
+        secret:
+          defaultMode: 420
+          secretName: s81-2 
+      - name: sip-tls-root-ca
+        secret:
+          defaultMode: 420
+          secretName: s186-2 
+      - name: rest-api-server-cert
+        secret:
+          defaultMode: 420
+          secretName: s83-2 
+      - name: rest-api-client-cert
+        secret:
+          defaultMode: 420
+          secretName: s82-2
+      - name: event-exporter-client-ca
+        secret:
+          defaultMode: 420
+          secretName: s14-1 
+

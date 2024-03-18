@@ -1,0 +1,459 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test5-deployment
+  namespace: test
+  labels:
+    app: test5 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test5 
+  template:
+    metadata:
+      labels:
+        app: test5
+    spec: 
+      containers: 
+      - env:
+        - name: TZ
+          value: UTC
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls  
+          failureThreshold: 10 
+          initialDelaySeconds: 120 
+          periodSeconds: 20 
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: t5-1
+        readinessProbe:
+          exec:
+            command:
+            - ls  
+          failureThreshold: 3
+          initialDelaySeconds: 2  
+          periodSeconds: 5 
+          successThreshold: 1
+          timeoutSeconds: 15
+        resources:
+          limits:
+            cpu: "4" 
+            memory: 2Gi
+          requests:
+            cpu:  250m 
+            memory: 500Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: true
+        volumeMounts: 
+        - mountPath: /models-from-db/fxs
+          name: models-from-db
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3 
+          initialDelaySeconds: 60 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: t5-2
+        readinessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 3
+          periodSeconds: 5 
+          successThreshold: 1
+          timeoutSeconds: 15
+        resources:
+          limits:
+            cpu: 125m 
+            memory: 250Mi 
+          requests:
+            cpu: 100m 
+            memory: 50Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+             - MKNOD
+             - all
+          privileged: false
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: true
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/spam_150_1_8001
+        imagePullPolicy: IfNotPresent 
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8001
+          failureThreshold: 3
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: t5-3
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8001
+          failureThreshold: 3
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "2"
+            memory: 2000Mi
+          requests:
+            cpu: 100m 
+            memory: 200Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+             - MKNOD
+             - all
+          privileged: false
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: true
+        volumeMounts:
+         - mountPath: /models-from-db/fxs
+           name: models-from-db
+         - mountPath: /models-from-db/json
+           name: models-json-from-db
+         - mountPath: /yang-file-cache
+           name: yang-file-cache
+         - mountPath: /run/secrets/tls-int-ca-certs
+           name: trusted-ca
+         - mountPath: /run/secrets/client-certs
+           name: client-certs
+         - mountPath: /run/secrets/transformer-client-certs
+           name: transformer-client-cert
+         - mountPath: /run/secrets/cm-backend-client-certs
+           name: cm-backend-client-cert
+         - mountPath: /run/secrets/admin-server-certs
+           name: admin-server-certicate
+         - mountPath: /run/secrets/admin-client-ca
+           name: admin-ca
+         - mountPath: /run/secrets/ddb-client-cert
+           name: ddb-client-cert
+         - mountPath: /run/secrets/pm-sever-certs
+           name: pms-server-certicate
+         - mountPath: /run/secrets/pm-client-ca
+           name: pm-ca
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/spam_150_2_8002:latest
+        imagePullPolicy: IfNotPresent 
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8002
+          failureThreshold: 3
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: t5-4
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8002
+          failureThreshold: 3
+          initialDelaySeconds: 3  
+          periodSeconds: 5 
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 157m 
+            memory: 1200Mi
+          requests:
+            cpu: 125m 
+            memory: 50Mi
+#fix me
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+             - MKNOD
+             - all
+          privileged: false
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: true
+        volumeMounts: 
+        - mountPath: /etc/ssh
+          name: ssh-host-keys
+        - mountPath: /run/secrets/tls-int-ca-certs
+          name: trusted-ca
+        - mountPath: /run/secrets/ddb-client-cert
+          name: ddb-client-cert
+        - mountPath: /run/secrets/ldap-client-cert
+          name: ldap-client-certificate
+        - mountPath: /run/secrets/tls-ext-server-cert
+          name: tls-ext-server
+        - mountPath: /run/secrets/tls-ext-server-cert-ca
+          name: tls-ext-server-ca
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/spam_150_3_8003:latest
+        imagePullPolicy: IfNotPresent 
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8003
+          failureThreshold: 3
+          initialDelaySeconds: 60 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: t5-5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8003
+          failureThreshold: 3
+          initialDelaySeconds: 6 
+          periodSeconds: 2 
+          successThreshold: 1
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: 125m 
+            memory: 250Mi
+          requests:
+            cpu: 100m 
+            memory: 50Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+             - MKNOD
+             - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        volumeMounts: 
+        - mountPath: /run/secrets/tls-int-ca-certs
+          name: trusted-ca
+        - mountPath: /run/secrets/pm-query-client-cert
+          name: pm-query-client-certificate
+          readOnly: true
+        - mountPath: /run/secrets/transformer-client-certs
+          name: transformer-client-cert
+        - mountPath: /run/secrets/cm-backend-client-certs
+          name: cm-backend-client-cert
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/spam_150_4_8004:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8004
+          failureThreshold: 3
+          initialDelaySeconds: 60 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: t5-6 
+      - env:
+        - name: MESSAGE_LEN
+          value: "240"
+        - name: LOG_PERIOD_SEC
+          value: "1/5"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+               fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/logging:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 1 
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: sidecar-1 
+        resources:
+          limits:
+            cpu: 125m
+            memory: 100Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+      volumes: 
+      - emptyDir: {}
+        name: models-from-db
+      - emptyDir: {}
+        name: models-json-from-db
+      - emptyDir: {}
+        name: yang-file-cache
+      - emptyDir: {}
+        name: ssh-host-keys
+      - name: trusted-ca
+        secret:
+          defaultMode: 416
+          secretName: s186-2 
+      - name: ldap-client-certificate
+        secret:
+          defaultMode: 416
+          secretName: s13-2 
+      - name: cmmobs-ca-certificate
+        secret:
+          defaultMode: 416
+          secretName: s186-2
+      - name: client-certificate-default
+        secret:
+          defaultMode: 416
+          secretName: s14-2 
+      - name: ddb-client-cert
+        secret:
+          defaultMode: 416
+          secretName: s18-2 
+      - name: client-certs
+        secret:
+          defaultMode: 416
+          secretName: s15-2 
+      - name: pm-query-client-certificate
+        secret:
+          defaultMode: 416
+          secretName: s20-2 
+      - name: transformer-client-cert
+        secret:
+          defaultMode: 416
+          secretName: s23-2 
+      - name: cm-backend-client-cert
+        secret:
+          defaultMode: 416
+          secretName: s16-2 
+      - name: admin-server-certicate
+        secret:
+          defaultMode: 416
+          secretName: s11-2 
+      - name: admin-ca
+        secret:
+          defaultMode: 416
+          secretName: s12-2 
+      - name: pms-server-certicate
+        secret:
+          defaultMode: 416
+          secretName: s21-2 
+      - name: pm-ca
+        secret:
+          defaultMode: 416
+          secretName: s20-1 
+      - emptyDir: {}
+        name: schema-notifs
+      - name: tls-ext-server
+        secret:
+          defaultMode: 416
+          optional: true
+          secretName: s22-2 
+      - name: tls-ext-server-ca
+        secret:
+          defaultMode: 416
+          optional: true
+          secretName: s22-2 

@@ -1,0 +1,168 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: test46
+  namespace: test
+  labels:
+    app: test46 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test46 
+  template:
+    metadata:
+      labels:
+        app: test46
+    spec: 
+      containers: 
+      - env:
+        - name: TZ
+          value: UTC
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: {{ registry_address }}:5000/test_images/spam_150_1_8001:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          tcpSocket:
+            port: 8001 
+          failureThreshold: 10 
+          initialDelaySeconds: 10 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: t46-1
+        readinessProbe:
+          tcpSocket:
+            port: 8001
+          failureThreshold: 10
+          initialDelaySeconds: 5 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 15
+        resources:
+          limits:
+            cpu: 200m 
+            ephemeral-storage: 2Gi
+            memory: 500Mi
+          requests:
+            cpu: 100m
+            ephemeral-storage: 1Gi
+            memory: 200Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /data
+          name: data
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls  
+          failureThreshold: 3 
+          initialDelaySeconds: 1 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: t46-2
+        resources:
+          limits:
+            cpu: 100m 
+            memory: 100Mi 
+          requests:
+            cpu: 50m
+            memory: 50Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /data
+          name: data
+      initContainers:  
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/ubi8/ubi
+        imagePullPolicy: IfNotPresent
+        name: t46-init
+        resources:
+          limits:
+            cpu: "3"
+            ephemeral-storage: 2Gi
+            memory: 2036Mi
+          requests:
+            cpu: 300m 
+            ephemeral-storage: 1Gi
+            memory: 512Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: true
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "local-sc"
+      resources:
+        requests:
+          storage: 10Gi
+
