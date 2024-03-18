@@ -22,6 +22,8 @@ argparser.add_argument('--prefix', '-p', required=False,
 argparser.add_argument('--config', '-c', required=False,
                        default='tools/configs.yaml',
                        help='Config yaml with pod specs')
+argparser.add_argument('--registry', '-r', required=True,
+                       help='Registry with ran test images')
 args = argparser.parse_args()
 
 maps = {'configmap': {'iterator': 0, 'resources': {}},
@@ -285,7 +287,7 @@ def generate_test_files(image_registry):
             rendered_file.write(content)
 
 
-generate_test_files('registry.testsno.com')
+generate_test_files(args.registry)
 
 SECRETS_DIR = args.destdir+'/secrets/'
 SECRETS_SRC = 'tools/secrets'
