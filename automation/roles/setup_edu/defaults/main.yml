@@ -55,7 +55,7 @@ networking:
 files_path: "{{ role_path }}/files"
 templates_path: "{{ role_path }}/templates"
 
-ns:
+namespaces:
   - "namespace.yaml"
   - "test-ns.yaml"
 
