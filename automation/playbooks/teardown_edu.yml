@@ -1,5 +1,5 @@
 - name: Undeploy eDU
-  hosts: cluster
+  hosts: localhost
   tasks:
 
     - include_role:

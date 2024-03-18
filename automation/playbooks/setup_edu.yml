@@ -1,5 +1,5 @@
 - name: Install eDU
-  hosts: cluster
+  hosts: localhost
   tasks:
     - name: Print KubeConfig
       debug:
