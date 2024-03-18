@@ -10,8 +10,9 @@ import shutil
 from jinja2 import Environment, FileSystemLoader
 
 argparser = argparse.ArgumentParser(description='Create eDU manifests')
-argparser.add_argument('--destdir', '-d', required=True,
-                       help='Directory to output eDU manifests')
+argparser.add_argument('--destdir', '-d', required=False,
+                       help='Directory to output eDU manifests',
+                       default='automation/roles/setup_edu/files')
 argparser.add_argument('--image', '-i', required=False,
                        default='ghcr.io/abraham2512/fedora-stress-ng:master',
                        help='Container image to substitute in eDU manifests')
@@ -257,17 +258,8 @@ for resourcetype in resources.keys():
 
 
 def generate_test_files(image_registry):
-    TEMPLATE_DIR = 'eDU/templates/'
+    TEMPLATE_DIR = args.destdir+'/templates/'
     TEMPLATE_SRC = 'tools/templates/'
-    SECRETS_DIR = 'eDU/secrets/'
-    SECRETS_SRC = 'tools/secrets'
-
-    if os.path.isdir(SECRETS_DIR):
-        shutil.rmtree(SECRETS_DIR)
-        print(f"Directory '{SECRETS_DIR}' has been deleted.")
-
-    shutil.copytree(SECRETS_SRC, SECRETS_DIR)
-    print(f"Directory '{SECRETS_SRC}' has been copied.")
 
     if os.path.isdir(TEMPLATE_DIR):
         shutil.rmtree(TEMPLATE_DIR)
@@ -294,3 +286,19 @@ def generate_test_files(image_registry):
 
 
 generate_test_files('registry.testsno.com')
+
+SECRETS_DIR = args.destdir+'/secrets/'
+SECRETS_SRC = 'tools/secrets'
+
+if os.path.isdir(SECRETS_DIR):
+    shutil.rmtree(SECRETS_DIR)
+    print(f"Directory '{SECRETS_DIR}' has been deleted.")
+
+shutil.copytree(SECRETS_SRC, SECRETS_DIR)
+print(f"Directory '{SECRETS_SRC}' has been copied.")
+
+footprint_files = ['tools/pv.yaml', 'tools/pv1.yaml', 'tools/pv2.yaml',
+                   'tools/pvc.yaml', 'tools/security.yaml',
+                   'tools/test-ns.yaml']
+
+[shutil.copy(file, args.destdir) for file in footprint_files]
