@@ -450,7 +450,7 @@ pvs:
 pvcs:
   - "pvc.yaml"
 deployments:
-  # - "deployment.yaml"
+  - "deployment.yaml"
   - "templates/test1-deployment.yaml"
   - "templates/test10-1-deployment.yaml"
   - "templates/test10-statefulset.yaml"
