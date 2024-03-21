@@ -8,6 +8,7 @@ import yaml
 from os import listdir
 import shutil
 from jinja2 import Environment, FileSystemLoader
+from template import templates
 
 argparser = argparse.ArgumentParser(description='Create eDU manifests')
 argparser.add_argument('--destdir', '-d', required=False,
@@ -39,79 +40,6 @@ resources = {'configmap': [],
              'deployment': [],
             #  'pvc': [],
              'secret': []}
-
-templates = {'configmap': {
-    'apiVersion': 'v1',
-    'kind': 'ConfigMap',
-    'metadata': {
-        'name': '',
-        'namespace': ''},
-    'data': {
-        'property1': 'value1',
-        'property2': 'value2',
-        'property3': 'value3'}},
-    'container': {
-    'name': '',
-    'image': args.image,
-    'imagePullPolicy': 'IfNotPresent',
-    'env': [],
-    'volumeMounts': []},
-    'deployment': {
-    'apiVersion': 'apps/v1',
-    'kind': 'Deployment',
-    'metadata': {
-        'name': '',
-        'namespace': '',
-        'labels': {
-            'app': 'test1'}},
-    'spec': {
-        'replicas': 1,
-        'selector': {
-            'matchLabels': {
-                'app': ''}},
-        'template': {
-            'metadata': {
-                'labels': {
-                    'app': 'test1'}},
-            'spec': {
-                'containers': [],
-                'volumes': []}}}},
-    'namespace': {
-    'apiVersion': 'v1',
-    'kind': 'Namespace',
-    'metadata': {
-        'name': '',
-        'labels': {
-            'pod-security.kubernetes.io/enforce': 'privileged',
-            'pod-security.kubernetes.io/audit': 'privileged',
-            'pod-security.kubernetes.io/warn': 'privileged'}}},
-    'pvc': {
-    'kind': 'PersistentVolumeClaim',
-    'apiVersion': 'v1',
-    'metadata': {
-        'name': '',
-        'namespace': ''},
-    'spec': {
-        'accessModes': ['ReadWriteOnce'],
-        'volumeMode': 'Filesystem',
-        'resources': {
-            'requests': {
-                'storage': '1Gi'}},
-        'storageClassName': 'general'}},
-    'secret': {
-    'apiVersion': 'v1',
-    'kind': 'Secret',
-    'metadata': {
-        'name': '',
-        'namespace': ''},
-    'type': 'Opaque',
-    'data': {
-        'secret1': 'YmxhaGJsYWgK',
-                   'secret2': 'ZXRjZXRjCg==',
-                   'secret3': 'eWFkYXlhZGEK'}},
-    'volume': {
-    'name': ''}}
-
 
 def resourceref(resourcetype, resourcename):
     if (resourcename not in maps[resourcetype]['resources']):
