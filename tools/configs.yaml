@@ -11,12 +11,12 @@ deployments:
 
     pods:
       - name: pod_vm_stress
-        repeat: 2
+        repeat: 1
         env:
           - name: stress_vm
-            value: "4"
+            value: "1"
           - name: stress_vm-bytes
-            value: "128M"
+            value: "16M"
         livenessProbe:
           httpGet:
             path: /healthz
