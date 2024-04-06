@@ -1,0 +1,164 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test50-deployment
+  namespace: test
+  labels:
+    app: test50 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test50 
+  template:
+    metadata:
+      labels:
+        app: test50
+    spec: 
+      containers: 
+      - env:
+        - name: TZ
+          value: UTC
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: {{ registry_address }}:5000/test_images/spam_150_1_8001:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8001
+          failureThreshold: 30 
+          initialDelaySeconds: 20 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 5 
+        name: t50-1
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8001
+          failureThreshold: 3 
+          initialDelaySeconds: 20 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 5 
+        resources:
+          limits:
+            cpu: 50m
+            ephemeral-storage: 2Gi
+            memory: 70Mi
+          requests:
+            cpu: 30m
+            ephemeral-storage: 2Gi
+            memory: 30Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - KILL
+            - MKNOD
+            - SETGID
+            - SETUID
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts:   
+        - mountPath: /logs
+          name: log-shipper-storage-path
+        - mountPath: /tmp
+          name: tmp-volume
+        - mountPath: /run/secrets/sip-tls-ca/
+          name: tls-trusted-ca-cert
+          readOnly: true
+        - mountPath: /certm/config/deployment-configuration/
+          name: deployment-configuration
+          readOnly: true
+        - mountPath: /run/secrets/certm-server-cert/
+          name: certm-server-cert
+          readOnly: true
+        - mountPath: /run/secrets/cmm-client-cert/
+          name: cmm-client-cert
+          readOnly: true
+        - mountPath: /run/secrets/cmm-ca-cert/
+          name: cmm-ca-cert
+          readOnly: true
+        - mountPath: /run/secrets/mb-client-cert/
+          name: mb-client-cert
+          readOnly: true
+        - mountPath: /run/secrets/certm-restapi-ca-cert/
+          name: certm-restapi-ca-cert
+          readOnly: true
+        - mountPath: /run/secrets/cmyp-ca-cert/
+          name: cmyp-ca-cert
+          readOnly: true
+      volumes:
+      - emptyDir:
+          medium: Memory
+          sizeLimit: 100Mi
+        name: log-shipper-storage-path
+      - name: server-ca-certificate
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s186-2 
+      - name: lt-client-cert
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s169-2 
+      - emptyDir:
+          medium: Memory
+        name: tmp-volume
+      - name: tls-trusted-ca-cert
+        secret:
+          defaultMode: 420
+          secretName: s186-2 
+      - name: deployment-configuration
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s158-2 
+      - name: certm-server-cert
+        secret:
+          defaultMode: 420
+          secretName: s171-2 
+      - name: cmm-client-cert
+        secret:
+          defaultMode: 420
+          secretName: s168-2 
+      - name: cmm-ca-cert
+        secret:
+          defaultMode: 420
+          secretName: s2-1 
+      - name: certm-restapi-ca-cert
+        secret:
+          defaultMode: 420
+          secretName: s27-1
+      - name: mb-client-cert
+        secret:
+          defaultMode: 420
+          secretName: s170-2 
+      - name: cmyp-ca-cert
+        secret:
+          defaultMode: 420
+          secretName: s12-2 
+

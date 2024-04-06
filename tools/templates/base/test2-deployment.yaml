@@ -1,0 +1,197 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test2-deployment
+  namespace: test
+  labels:
+    app: test2 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test2 
+  template:
+    metadata:
+      labels:
+        app: test2
+    spec: 
+      containers: 
+      - env:
+        - name: SERVICE_NAME
+          value: t2 
+        - name: CONTAINER_NAME
+          value: t2 
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls 
+          failureThreshold: 3
+          initialDelaySeconds: 7
+          periodSeconds: 17
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: t2
+        readinessProbe:
+          exec:
+            command:
+            - ls 
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        resources:
+          limits:
+            cpu: 400m 
+            memory: 512Mi
+            ephemeral-storage: 500Mi 
+          requests:
+            cpu: 320m
+            memory: 350Mi
+            ephemeral-storage: 250Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - KILL
+              - MKNOD
+              - SETGID
+              - SETUID
+              - all
+            privileged: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /service
+          name: service-volume
+        - mountPath: /tmp
+          name: tmp-volume
+        - mountPath: /etc/t2-1
+          name: t2-1 
+          readOnly: true
+        - mountPath: /etc/t2-2
+          name: t2-2 
+          readOnly: true
+        - mountPath: /etc/t2-3
+          name: t2-3
+          readOnly: true
+        - mountPath: /etc/t2-4
+          name: t2-4
+          readOnly: true
+        - mountPath: /etc/t2-5
+          name: t2-5
+          readOnly: true
+        - mountPath: /etc/t2-6
+          name: t2-6
+          readOnly: true
+        - mountPath: /etc/t2-7
+          name: t2-7
+          readOnly: true
+        - mountPath: /etc/t2-8
+          name: t2-8
+          readOnly: true
+        - mountPath: /etc/t2-9
+          name: t2-9
+          readOnly: true
+      initContainers:
+      - env:
+        - name: TZ
+          value: UTC
+        image: {{ registry_address }}:5000/ubi8/ubi
+        imagePullPolicy: IfNotPresent
+        name: t2-init-container
+        resources:
+          limits:
+            cpu: 100m
+            ephemeral-storage: 10Mi
+            memory: 32Mi
+          requests:
+            cpu: 50m
+            ephemeral-storage: 10Mi
+            memory: 16Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - KILL
+            - MKNOD
+            - SETGID
+            - SETUID
+            - all
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp-volume
+      volumes:
+      - emptyDir: {}
+        name: service-volume
+      - emptyDir:
+          medium: Memory
+        name: tmp-volume
+      - name: t2-1
+        secret:
+          defaultMode: 420
+          secretName: s8-2 
+      - name: t2-2 
+        secret:
+          defaultMode: 420
+          secretName: s186-2 
+      - name: t2-3
+        secret:
+          defaultMode: 420
+          secretName: s2-1 
+      - name: t2-4
+        secret:
+          defaultMode: 420
+          secretName: s7-2 
+      - name: t2-5
+        secret:
+          defaultMode: 420
+          secretName: s5-2 
+      - name: t2-6
+        secret:
+          defaultMode: 420
+          secretName: s4-2 
+      - name: t2-7 
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s20-1 
+      - name: t2-8
+        secret:
+          defaultMode: 420
+          secretName: s3-2 
+      - name: t2-9
+        secret:
+          defaultMode: 420
+          secretName: s9-2 
+      - name: t2-10 
+        secret:
+          defaultMode: 420
+          secretName: s10-2  

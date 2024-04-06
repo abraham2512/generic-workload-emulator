@@ -1,0 +1,188 @@
+apiVersion: apps/v1
+kind: StatefulSet 
+metadata:
+  name: test14
+  namespace: test
+  labels:
+    app: test14 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test14 
+  template:
+    metadata:
+      labels:
+        app: test14
+    spec: 
+      containers: 
+      - env:
+        - name: TZ
+          value: UTC
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        image: {{ registry_address }}:5000/test_images/spam_150_1_8001:latest 
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 3 
+          initialDelaySeconds: 90 
+          periodSeconds: 60 
+          successThreshold: 1
+          tcpSocket:
+            port: 8001
+          timeoutSeconds: 30 
+        name: t14-1
+        readinessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 60
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 15 
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1332Mi 
+          requests:
+            cpu: 400m
+            memory: 850Mi 
+        securityContext:
+          allowPrivilegeEscalation: false 
+          capabilities:
+            drop:
+              - MKNOD
+              - all
+          privileged: false
+          readOnlyRootFilesystem: false 
+          runAsNonRoot: true
+        volumeMounts:
+         - mountPath: /sharedData
+           name: data
+         - mountPath: /logs
+           name: log-shipper-storage-path
+         - mountPath: /run/kafka/secrets/dczkclientcert
+           name: dczk-client-cert
+         - mountPath: /run/kafka/secrets/siptlsca
+           name: siptls-ca
+         - mountPath: /run/kafka/secrets/servercert
+           name: server-cert
+         - mountPath: /run/kafka/secrets/clientca
+           name: client-ca
+         - mountPath: /run/kafka/secrets/client/clientca
+           name: client-client-ca
+      - env:
+        - name: MESSAGE_LEN
+          value: "240"
+        - name: LOG_PERIOD_SEC
+          value: "1/5"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+               fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/logging:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 300
+          periodSeconds: 30
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: sidecar-1 
+        resources:
+          limits:
+            cpu: 125m
+            memory: 200Mi
+          requests:
+            cpu: 50m
+            memory: 100Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /logs
+          name: log-shipper-storage-path
+        - mountPath: /run/secrets/ca-certificates/
+          name: server-ca-certificate
+          readOnly: true
+        - mountPath: /run/secrets/certificates/
+          name: lt-client-cert
+          readOnly: true
+
+      initContainers:
+      - name: init-test14
+        image: {{ registry_address }}:5000/ubi8/ubi
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            cpu: 200m 
+            memory: 1000Mi 
+          requests:
+            cpu: 160m
+            memory: 500Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /run/kafka/secrets/dczkclientcert
+          name: dczk-client-cert
+        - mountPath: /run/kafka/secrets/siptlsca
+          name: siptls-ca
+        - mountPath: /logs
+          name: log-shipper-storage-path
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: datadir-data-6
+      - emptyDir:
+          sizeLimit: 500Mi
+        name: log-shipper-storage-path
+      - name: server-ca-certificate
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s186-2 
+      - name: lt-client-cert
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s58-2 
+      - name: dczk-client-cert
+        secret:
+          defaultMode: 420
+          secretName: s60-2 
+      - name: server-cert
+        secret:
+          defaultMode: 420
+          secretName: s59-2 
+      - name: siptls-ca
+        secret:
+          defaultMode: 420
+          secretName: s186-2
+      - name: client-ca
+        secret:
+          defaultMode: 420
+          secretName: s11-1 
+      - name: client-client-ca
+        secret:
+          defaultMode: 420
+          secretName: s12-1 

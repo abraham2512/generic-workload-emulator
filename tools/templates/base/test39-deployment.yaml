@@ -1,0 +1,215 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test39-deployment
+  namespace: test
+  labels:
+    app: test39 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test39 
+  template:
+    metadata:
+      annotations:
+        k8s.v1.cni.cncf.io/networks: '[{"name": "ztp-sriov-nw-du-fh", "namespace": "test" }, {"name": "ztp-sriov-nw-du-mh", "namespace": "test" }]'
+      labels:
+        app: test39
+    spec: 
+      containers: 
+      - env:
+        - name: TZ
+          value: UTC
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: {{ registry_address }}:5000/test_images/spam_150_1_8001:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls  
+          failureThreshold: 3
+          initialDelaySeconds: 5 
+          periodSeconds: 5 
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: t39-1
+        resources:
+          limits:
+            cpu: "2" 
+            memory: 2Gi
+            openshift.io/du_fh: 1
+            openshift.io/du_mh: 1
+          requests:
+            cpu: "1" 
+            memory: 1Gi
+            openshift.io/du_fh: 1
+            openshift.io/du_mh: 1
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /tmp/
+          name: tmp-volume
+        - mountPath: /tmp/cores
+          name: shared-cores
+        - mountPath: /etc/trustedcerts
+          name: trustedcerts
+          readOnly: true
+        - mountPath: /etc/clientcerts
+          name: clientcerts
+          readOnly: true
+        - mountPath: /etc/backendcerts
+          name: backendcerts
+          readOnly: true
+        - mountPath: /logs
+          name: log-shipper-storage-path
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/spam_150_2_8002:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          tcpSocket:
+            port: 8002
+          failureThreshold: 6 
+          initialDelaySeconds: 5 
+          periodSeconds: 10 
+          successThreshold: 1
+          timeoutSeconds: 7 
+        name: t39-2
+        resources:
+          limits:
+            cpu: "2" 
+            memory: 2Gi
+          requests:
+            cpu: "1" 
+            memory: 1Gi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+             - MKNOD
+             - all
+          privileged: false
+          readOnlyRootFilesystem: true 
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /tmp/cores
+          name: shared-cores
+        - mountPath: /data
+          name: data
+        - mountPath: /logs
+          name: log-shipper-storage-path
+      - env:
+        - name: MESSAGE_LEN
+          value: "240"
+        - name: LOG_PERIOD_SEC
+          value: "1/5"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+               fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/logging:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: sidecar-1 
+        resources:
+          limits:
+            cpu: 125m
+            memory: 100Mi
+          requests:
+            cpu: 20m
+            memory: 50Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts: 
+        - mountPath: /logs
+          name: log-shipper-storage-path
+        - mountPath: run/secrets/ca-certificates/
+          name: server-ca-certificate
+        - mountPath: /run/secrets/certificates/
+          name: lt-client-cert 
+      volumes:
+      - emptyDir: {}
+        name: tmp-volume
+      - name: data
+        persistentVolumeClaim:
+          claimName: datadir-data-7
+      - emptyDir: {}
+        name: shared-cores
+      - name: trustedcerts
+        secret:
+          defaultMode: 420
+          secretName: s23-1 
+      - name: clientcerts
+        secret:
+          defaultMode: 420
+          secretName: s147-2 
+      - name: backendcerts
+        secret:
+          defaultMode: 416
+          secretName: s148-2 
+      - emptyDir:
+          sizeLimit: 50Mi
+        name: log-shipper-storage-path
+      - name: server-ca-certificate
+        secret: 
+          defaultMode: 420
+          secretName: s186-2 
+      - name: lt-client-cert
+        secret: 
+          defaultMode: 420
+          secretName: s150-2 
+ 
+ 
+    
+

@@ -1,0 +1,146 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test29-deployment
+  namespace: test
+  labels:
+    app: test29 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test29 
+  template:
+    metadata:
+      labels:
+        app: test29
+    spec: 
+      containers: 
+      - env:
+        - name: TZ
+          value: UTC
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: {{ registry_address }}:5000/test_images/spam_150_1_8001:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8001
+          failureThreshold: 3
+          initialDelaySeconds: 5
+          periodSeconds: 5 
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: t29-1
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /tmp/cores
+          name: shared-cores
+        - mountPath: /var/log
+          name: var-log
+        - mountPath: /etc/certs/lt
+          name: lt-certs
+          readOnly: true
+        - mountPath: /etc/certs/secrets
+          name: cert
+          readOnly: true
+        - mountPath: /etc/certs/ca
+          name: cacert
+          readOnly: true
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/spam_150_2_8002:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          tcpSocket:
+            port: 8002
+          failureThreshold: 6 
+          initialDelaySeconds: 5 
+          periodSeconds: 5 
+          successThreshold: 1
+          timeoutSeconds: 7 
+        name: t29-2
+        resources:
+          limits:
+            cpu: 100
+            memory: 128Mi 
+          requests:
+            cpu: 100m
+            memory: 128Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+             - MKNOD
+             - all
+          privileged: false
+          readOnlyRootFilesystem: true 
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /tmp/cores
+          name: shared-cores
+        - mountPath: /data
+          name: data 
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: datadir-data-7
+      - emptyDir: {}
+        name: var-log
+      - emptyDir: {}
+        name: shared-cores
+      - name: lt-certs
+        secret:
+          defaultMode: 420
+          secretName: s113-2 
+      - name: cert
+        secret:
+          defaultMode: 420
+          secretName: s112-2 
+      - name: cacert
+        secret:
+          defaultMode: 420
+          secretName: s186-2 

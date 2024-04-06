@@ -1,0 +1,296 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test26-deployment
+  namespace: test
+  labels:
+    app: test26 
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: test26 
+  template:
+    metadata:
+      labels:
+        app: test26
+    spec: 
+      containers: 
+      - env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/spam_150_1_8001:latest 
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 8001
+          failureThreshold: 3
+          initialDelaySeconds: 15 
+          periodSeconds: 15 
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: t26-1
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8001
+          failureThreshold: 3 
+          initialDelaySeconds: 5 
+          periodSeconds: 15  
+          successThreshold: 1
+          timeoutSeconds: 15
+        resources:
+          limits:
+            cpu: 125m
+            ephemeral-storage: 500Mi
+            memory: 400Mi 
+          requests:
+            cpu: 100m
+            ephemeral-storage: 50Mi
+            memory: 150Mi 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+              - MKNOD
+              - all
+            privileged: false
+            readOnlyRootFilesystem: false 
+            runAsNonRoot: true
+        volumeMounts: 
+        - mountPath: /data
+          name: data
+        - mountPath: /run/secrets/cacert
+          name: cacert
+        - mountPath: /run/secrets/cm
+          name: cm-client-certificate
+        - mountPath: /run/secrets/pms
+          name: pms-client-certificate
+        - mountPath: /run/secrets/obs
+          name: obs-client-certificate
+        - mountPath: /logs
+          name: log-shipper-storage-path
+      - env:
+        - name: TZ
+          value: UTC
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NODE_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: {{ registry_address }}:5000/ubi8/ubi
+        command: ["/bin/sh"]
+        args: ["-c", "while true; do sleep 10;done"]
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command: 
+            - ls  
+          failureThreshold: 3 
+          initialDelaySeconds: 15
+          periodSeconds: 20
+          successThreshold: 1
+          timeoutSeconds: 15
+        name: t26-2
+        readinessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3 
+          initialDelaySeconds: 5  
+          periodSeconds: 15
+          successThreshold: 1
+          timeoutSeconds: 15
+        resources:
+          limits:
+            cpu: 100m
+            ephemeral-storage: 500Mi 
+            memory: 200Mi
+          requests:
+            cpu: 80m
+            ephemeral-storage: 50Mi
+            memory: 50Mi
+#fix me 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - KILL
+            - MKNOD
+            - SETGID
+            - SETUID
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /logs
+          name: log-shipper-storage-path
+        - mountPath: /data
+          name: data
+        - mountPath: /run/secrets/ldap-client-cert
+          name: ldap-client-certificate
+        - mountPath: /run/secrets/cacert
+          name: cacert
+      - env:
+        - name: MESSAGE_LEN
+          value: "240"
+        - name: LOG_PERIOD_SEC
+          value: "1/5"
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+               fieldPath: metadata.name
+        image: {{ registry_address }}:5000/test_images/logging:latest
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - ls
+          failureThreshold: 3
+          initialDelaySeconds: 1
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        name: sidecar-1 
+        resources:
+          limits:
+            cpu: 125m
+            memory: 100Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
+#fix me 
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /logs
+          name: log-shipper-storage-path
+        - mountPath: /run/secrets/ca-certificates/
+          name: server-ca-certificate
+          readOnly: true
+        - mountPath: /run/secrets/certificates/
+          name: lt-client-cert
+          readOnly: true
+      initContainers:
+      - env:
+        - name: TZ
+          value: UTC
+        - name: POD_NAME
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.name
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.namespace
+        - name: POD_UID
+          valueFrom:
+            fieldRef:
+              apiVersion: v1
+              fieldPath: metadata.uid
+        - name: NODE_NAME
+          valueFrom:     
+            fieldRef:
+              apiVersion: v1
+              fieldPath: spec.nodeName
+        image: {{ registry_address }}:5000/ubi8/ubi
+        imagePullPolicy: IfNotPresent
+        name: t26-init
+        resources:
+          limits:
+            cpu: "1" 
+            memory: 200Mi
+          requests:
+            cpu: 50m
+            memory: 50Mi
+#fix me
+        securityContext:
+          allowPrivilegeEscalation: false
+          capabilities:
+            drop:
+            - MKNOD
+            - all
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+        volumeMounts:
+        - mountPath: /data
+          name: data
+        - mountPath: /logs
+          name: log-shipper-storage-path
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: datadir-data-8 
+      - name: cm-client-certificate
+        secret:
+          defaultMode: 420
+          secretName: s99-2 
+      - name: pms-client-certificate
+        secret:
+          defaultMode: 420
+          secretName: s104-2
+      - name: ldap-client-certificate
+        secret:
+          defaultMode: 420
+          secretName: s101-2 
+      - name: message-bus-client-certificate
+        secret:
+          defaultMode: 420
+          secretName: s99-2 
+#fix me 
+      - name: obs-client-certificate
+        secret:
+          defaultMode: 420
+          secretName: s103-2 
+      - name: cacert
+        secret:
+          defaultMode: 420
+          secretName: s186-2
+      - emptyDir:
+          sizeLimit: 1Gi
+        name: log-shipper-storage-path
+      - name: server-ca-certificate
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s186-2 
+      - name: lt-client-cert
+        secret:
+          defaultMode: 420
+          optional: true
+          secretName: s102-2 
