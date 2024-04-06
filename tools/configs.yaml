@@ -2,10 +2,10 @@
 
 deployments:
   - volumes:
-      - name: volume-1
-        configMap: 1
-      - name: volume-2
-        secret: 1
+      # - name: volume-1
+      #   configMap: 1
+      # - name: volume-2
+      #   secret: 1
       # - name: volume-3
       #   persistentVolumeClaim: 1
 

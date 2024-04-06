@@ -23,7 +23,8 @@ argparser.add_argument('--prefix', '-p', required=False,
 argparser.add_argument('--config', '-c', required=False,
                        default='tools/configs.yaml',
                        help='Config yaml with pod specs')
-argparser.add_argument('--registry', '-r', required=True,
+argparser.add_argument('--registry', '-r', required=False,
+                       default='localhost:5000',
                        help='Registry with ran test images')
 args = argparser.parse_args()
 
@@ -35,11 +36,13 @@ maps = {'configmap': {'iterator': 0, 'resources': {}},
         'secret': {'iterator': 0, 'resources': {}},
         'volume': {'iterator': 0, 'resources': {}}}
 
-resources = {'configmap': [],
-             'namespace': [],
-             'deployment': [],
-            #  'pvc': [],
-             'secret': []}
+resources = {
+    'configmap': [],
+    'namespace': [],
+    'deployment': [],
+    #  'pvc': [],
+    'secret': []
+    }
 
 
 def resourceref(resourcetype, resourcename):
@@ -239,3 +242,6 @@ footprint_files = ['tools/pv.yaml', 'tools/pv1.yaml', 'tools/pv2.yaml',
                    'tools/test-ns.yaml', 'tools/sriov-networks.yaml']
 
 [shutil.copy(file, args.destdir) for file in footprint_files]
+
+shutil.copy(args.destdir+'/deployment.yaml',
+            args.destdir+'/templates/overlays/stressCPU/patch.yaml')
