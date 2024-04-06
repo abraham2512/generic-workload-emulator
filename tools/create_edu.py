@@ -41,6 +41,7 @@ resources = {'configmap': [],
             #  'pvc': [],
              'secret': []}
 
+
 def resourceref(resourcetype, resourcename):
     if (resourcename not in maps[resourcetype]['resources']):
         maps[resourcetype]['resources'][resourcename] = '-'.join([args.prefix, resourcetype,
@@ -188,9 +189,8 @@ for resourcetype in resources.keys():
 
 
 def generate_test_files(image_registry):
-    TEMPLATE_DIR = args.destdir+'/templates/'
-    TEMPLATE_SRC = 'tools/templates/'
-
+    TEMPLATE_DIR = args.destdir+'/templates/base/'
+    TEMPLATE_SRC = 'tools/templates/base/'
     if os.path.isdir(TEMPLATE_DIR):
         shutil.rmtree(TEMPLATE_DIR)
         print(f"Directory '{TEMPLATE_DIR}' has been deleted.")
@@ -217,15 +217,22 @@ def generate_test_files(image_registry):
 
 generate_test_files(args.registry)
 
+
+def copy_resource(src, dest):
+    if os.path.isdir(dest):
+        shutil.rmtree(dest)
+        print(f"Directory '{dest}' has been deleted.")
+    shutil.copytree(src, dest)
+    print(f"Directory '{dest}' has been copied.")
+
+
 SECRETS_DIR = args.destdir+'/secrets/'
 SECRETS_SRC = 'tools/secrets'
+OVERLAYS_DIR = args.destdir+'/templates/overlays/'
+OVERLAYS_SRC = 'tools/templates/overlays'
 
-if os.path.isdir(SECRETS_DIR):
-    shutil.rmtree(SECRETS_DIR)
-    print(f"Directory '{SECRETS_DIR}' has been deleted.")
-
-shutil.copytree(SECRETS_SRC, SECRETS_DIR)
-print(f"Directory '{SECRETS_SRC}' has been copied.")
+copy_resource(SECRETS_SRC, SECRETS_DIR)
+copy_resource(OVERLAYS_SRC, OVERLAYS_DIR)
 
 footprint_files = ['tools/pv.yaml', 'tools/pv1.yaml', 'tools/pv2.yaml',
                    'tools/pvc.yaml', 'tools/security.yaml',

@@ -1,28 +1,6 @@
 # eDU Workload Emulator Variant
 
-A synthetic workload generator intended to emulate a RAN vDU implementation on OpenShift. Based on [vdu-workload-emulator](https://gitlab.consulting.redhat.com/telco-solutions/cloudran/vdu-workload-emulator).
-
-## Prerequisites
-
-- Single-Node OpenShift (SNO) >= 4.10
-- SR-IOV Network Operator
-- SR-IOV Operator for Wireless FEC Accelerators
-- Local Storage Operator
-
-## Structure
-
-- **automation**
-
-  Ansible playbooks and roles to deploy and teardown the eDU
-
-- **eDU**
-
-  OpenShift manifests describing the eDU implementation
-
-- **tools**
-
-  Python script to generate eDU manifests
-  Config yaml to describe the eDU
+A synthetic workload generator intended to emulate a RAN vDU/vCU implementation on OpenShift.
 
 ## Usage
 
