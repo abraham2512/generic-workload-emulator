@@ -39,9 +39,9 @@
   loop_control:
     loop_var: secret_file
 
-- name: Create ConfigMaps
-  ansible.builtin.command:
-    cmd: "oc --kubeconfig={{ kubeconfig_path }} create -f {{ files_path }}/{{ configmaps }}"
+# - name: Create ConfigMaps
+#   ansible.builtin.command:
+#     cmd: "oc --kubeconfig={{ kubeconfig_path }} create -f {{ files_path }}/{{ configmaps }}"
 
 - name: Create Volumes
   ansible.builtin.k8s:
@@ -61,14 +61,14 @@
   loop_control:
     loop_var: pvc_file
 
-- name: Create Deployments
-  ansible.builtin.k8s:
-    kubeconfig: "{{ kubeconfig_path }}"
-    state: present
-    src: "{{ files_path  }}/{{ dep_file }}"
-  loop: "{{ deployments }}"
-  loop_control:
-    loop_var: dep_file
+# - name: Create Deployments
+#   ansible.builtin.k8s:
+#     kubeconfig: "{{ kubeconfig_path }}"
+#     state: present
+#     src: "{{ files_path  }}/{{ dep_file }}"
+#   loop: "{{ deployments }}"
+#   loop_control:
+#     loop_var: dep_file
 
 - name: Run lookup using kustomize
   set_fact:
