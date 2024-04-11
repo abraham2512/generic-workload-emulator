@@ -30,14 +30,14 @@
 #     state: present
 #     src: "{{ files_path }}/{{ sriov_networks }}"
 
-- name: Create Secrets
-  ansible.builtin.k8s:
-    kubeconfig: "{{ kubeconfig_path }}"
-    state: present
-    src: "{{ files_path }}/{{ secret_file }}"
-  loop: "{{ secrets }}"
-  loop_control:
-    loop_var: secret_file
+# - name: Create Secrets
+#   ansible.builtin.k8s:
+#     kubeconfig: "{{ kubeconfig_path }}"
+#     state: present
+#     src: "{{ files_path }}/{{ secret_file }}"
+#   loop: "{{ secrets }}"
+#   loop_control:
+#     loop_var: secret_file
 
 # - name: Create ConfigMaps
 #   ansible.builtin.command:
