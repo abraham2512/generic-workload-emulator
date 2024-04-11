@@ -79,8 +79,12 @@
 #     resources: "{{ lookup('kubernetes.core.kustomize', binary_path='/usr/local/bin/kubectl') }}"
 
 - name: Create kubernetes resources for lookup output
+  set_fact:
+    kustomize_resources: "{{ lookup('kubernetes.core.kustomize', binary_path='/home/kni/abraham/kustomize'), dir='{{ files_path }}/templates/overlays/stressCPU') }}"
+
+- name: Apply Kubernetes resources
   k8s:
-    definition: "{{ lookup('kubernetes.core.kustomize', binary_path='/home/kni/abraham/kustomize'), dir='{{ files_path }}/templates/overlays/stressCPU') }}"
+    definition: "{{ kustomize_resources }}"
 
 # - name: Create all elements from Templates
 #   block:
