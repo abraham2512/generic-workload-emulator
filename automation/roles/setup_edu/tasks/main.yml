@@ -79,7 +79,7 @@
 #     resources: "{{ lookup('kubernetes.core.kustomize', binary_path='/usr/local/bin/kubectl') }}"
 
 - name: set filespath
-  setup_fact:
+  set_fact:
     files_path: "{{ files_path }}"
 
 - name: Run lookup using kustomize
