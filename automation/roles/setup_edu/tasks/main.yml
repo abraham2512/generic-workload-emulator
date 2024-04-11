@@ -78,6 +78,10 @@
 #   set_fact:
 #     resources: "{{ lookup('kubernetes.core.kustomize', binary_path='/usr/local/bin/kubectl') }}"
 
+- name: set filespath
+  setup_fact:
+    files_path: "{{ files_path }}"
+
 - name: Run lookup using kustomize
   set_fact:
     resources: "{{ lookup('kubernetes.core.kustomize', binary_path='/home/kni/abraham/kustomize'), dir='{{ files_path }}/templates/overlays/stressCPU') }}"
