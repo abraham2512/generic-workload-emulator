@@ -84,11 +84,11 @@
 
 - name: Run lookup using kustomize
   set_fact:
-    resources: "{{ lookup('kubernetes.core.kustomize', binary_path='/home/kni/abraham/kustomize'), dir='{{ files_path }}/templates/overlays/stressCPU') }}"
+    resources: "{{ lookup('kubernetes.core.kustomize', binary_path='/home/kni/abraham/kustomize'), dir=files_path + '/templates/overlays/stressCPU') }}"
 
 - name: Create kubernetes resources for lookup output
   k8s:
-    definition: "{{ lookup('kubernetes.core.kustomize', dir='{{ files_path }}/templates/overlays/stressCPU') }}"
+    definition: "{{ lookup('kubernetes.core.kustomize', dir=files_path + '/templates/overlays/stressCPU') }}"
 
 # - name: Create all elements from Templates
 #   block:
