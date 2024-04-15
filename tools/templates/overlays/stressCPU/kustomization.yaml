@@ -6,4 +6,4 @@ resources:
     - ../../base/test2-deployment.yaml
 
 patches:
-    - patch.yaml
+    - path: patch.yaml
