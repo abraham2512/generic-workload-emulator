@@ -5,5 +5,5 @@ resources:
     - ../../base/test1-deployment.yaml
     - ../../base/test2-deployment.yaml
 
-patchesStrategicMerge:
+patches:
     - patch.yaml
