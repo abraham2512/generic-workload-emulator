@@ -82,12 +82,13 @@
   set_fact:
     files_path: "{{ files_path }}"
 
-- name: Run lookup using kustomize
-  set_fact:
-    resources: "{{ lookup('kubernetes.core.kustomize', binary_path='/home/kni/abraham/kustomize') }}"
+# - name: Run lookup using kustomize
+#   set_fact:
+#     resources: "{{ lookup('kubernetes.core.kustomize', binary_path='/home/kni/abraham/kustomize') }}"
 
 - name: Create kubernetes resources for lookup output
-  k8s:
+  ansible.builtin.k8s:
+    kubeconfig: "{{ kubeconfig_path }}"
     definition: "{{ lookup('kubernetes.core.kustomize', dir=files_path + '/templates/overlays/stressCPU') }}"
 
 # - name: Create all elements from Templates
