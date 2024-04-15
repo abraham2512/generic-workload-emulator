@@ -1,0 +1,3 @@
+resources:
+- test1-deployment.yaml
+- test2-deployment.yaml
