@@ -82,9 +82,9 @@
   set_fact:
     files_path: "{{ files_path }}"
 
-# - name: Run lookup using kustomize
-#   set_fact:
-#     resources: "{{ lookup('kubernetes.core.kustomize', binary_path='/home/kni/abraham/kustomize') }}"
+- name: Run lookup using kustomize
+  set_fact:
+    resources: "{{ lookup('kubernetes.core.kustomize', binary_path='/home/kni/abraham/kustomize') }}"
 
 - name: Create kubernetes resources for lookup output
   ansible.builtin.k8s:
