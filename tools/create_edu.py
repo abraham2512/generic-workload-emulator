@@ -192,8 +192,8 @@ for resourcetype in resources.keys():
 
 
 def generate_test_files(image_registry):
-    TEMPLATE_DIR = args.destdir+'/templates/base/'
-    TEMPLATE_SRC = 'tools/templates/base/'
+    TEMPLATE_DIR = args.destdir+'/templates/base/footprint'
+    TEMPLATE_SRC = 'tools/templates/base/footprint'
     if os.path.isdir(TEMPLATE_DIR):
         shutil.rmtree(TEMPLATE_DIR)
         print(f"Directory '{TEMPLATE_DIR}' has been deleted.")
