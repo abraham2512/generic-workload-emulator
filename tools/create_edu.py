@@ -243,5 +243,7 @@ footprint_files = ['tools/pv.yaml', 'tools/pv1.yaml', 'tools/pv2.yaml',
 
 [shutil.copy(file, args.destdir) for file in footprint_files]
 
+shutil.copy('tools/templates/kustomization.yaml',
+            args.destdir+'/templates/kustomization.yaml')
 shutil.copy(args.destdir+'/deployment.yaml',
             args.destdir+'/templates/overlays/stressCPU/patch.yaml')
