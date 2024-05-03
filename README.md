@@ -24,4 +24,35 @@ The `automation` directory holds pieces of automation that will automate parts o
                 - kustomization.yaml
                 - patch.yaml
         - kustomization.yaml   
-    - create_edu.py # Python script to generate [fedora-stress-ng](https://github.com/abraham2512/fedora-stress-ng) based Kustomize overlays
+    - create_edu.py 
+
+
+├── automation
+│   ├── README.md
+│   ├── ansible.cfg
+│   ├── playbooks
+│   │   ├── create_partitions.yml #Create logical volumes
+│   │   ├── setup_edu.yml #Setup workload on the SNO
+│   │   └── teardown_edu.yml #Destroy workload from the SNO
+│   └── roles
+│       ├── setup_edu
+│       ├── setup_lvs
+│       └── teardown_edu
+└── tools
+    ├── configs.yaml #stress-ng configs
+    ├── template.py
+    ├── create_edu.py #python script to generate [fedora-stress-ng](https://github.com/abraham2512/fedora-stress-ng) based Kustomize overlays
+    ├── pv.yaml
+    ├── pvc.yaml
+    ├── secrets
+    ├── templates #Root Kustomization folder for overlays
+    │   ├── base
+    │   │   └── footprint
+    │   │       ├── kustomization.yaml
+    │   │       └── test1-deployment.yaml
+    │   ├── kustomization.yaml
+    │   └── overlays
+    │       └── stressCPU
+    │           ├── kustomization.yaml
+    │           └── patch.yaml
+    └── test-ns.yaml
